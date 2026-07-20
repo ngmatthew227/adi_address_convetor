@@ -20,7 +20,7 @@ MYSQL_PASS = 'xYzBbIjku!56'
 MYSQL_HOST = '172.18.0.22'
 MYSQL_DB   = 'EADI100'
 mysql_engine = create_engine(f'mysql+pymysql://{MYSQL_USER}:{MYSQL_PASS}@{MYSQL_HOST}:3306/{MYSQL_DB}')
-sqlite_engine = create_engine('sqlite:///Address_Final_Data.sqlite')
+sqlite_engine = create_engine('sqlite:///adi_address.sqlite')
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 SUB_DISTRICT_MAP_DDL = SCRIPT_DIR / 'sub_district_map.sql'
@@ -755,7 +755,7 @@ def run_sync_and_verify():
     df = transform_to_output_schema(raw_df)
     print(f"✅ 轉換完成，準備寫入 {len(df)} 筆。")
 
-    print("💾 正在將資料寫入 SQLite (Address_Final_Data.sqlite)...")
+    print("💾 正在將資料寫入 SQLite (adi_address.sqlite)...")
     write_address_table(sqlite_engine, df)
 
     print("⚙️ 正在建立 Address_Flattened 索引...")
