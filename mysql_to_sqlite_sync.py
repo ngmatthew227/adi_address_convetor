@@ -147,6 +147,11 @@ _BUILDING_NO_SLASH_RANGE_RE = re.compile(
 )
 _BUILDING_DIGITS_RE = re.compile(r'^([0-9]+)')
 
+_DEBUG_BUILDING_NO = {
+    'OFF_input': 0,
+    'OFF_output': 0,
+}
+
 
 def _normalize_building_no(value):
     """修正門牌起訖被錯誤串成「{from}{to}-{to}」的情況。
@@ -164,6 +169,15 @@ def _normalize_building_no(value):
     if text is None:
         return None
 
+    orig = text
+    if orig.upper() == 'OFF':
+        _DEBUG_BUILDING_NO['OFF_input'] += 1
+
+    def _ret(out):
+        if out is not None and str(out).upper() == 'OFF':
+            _DEBUG_BUILDING_NO['OFF_output'] += 1
+        return out
+
     # 修正 a/b-b 與 a/b-c 類型（含字母）
     # 例:
     #   1/13-13     -> 1-13
@@ -174,25 +188,25 @@ def _normalize_building_no(value):
     if slash_m:
         left, mid, right = slash_m.group(1), slash_m.group(2), slash_m.group(3)
         if mid == right:
-            return f'{left}-{right}'
+            return _ret(f'{left}-{right}')
         # 允許中段僅提供右段尾碼（如 B -> 123B）
         if right.endswith(mid):
             left_digits = _BUILDING_DIGITS_RE.match(left)
             right_digits = _BUILDING_DIGITS_RE.match(right)
             if left_digits and right_digits and left_digits.group(1) == right_digits.group(1):
-                return f'{left}-{right}'
+                return _ret(f'{left}-{right}')
 
     m = _BUILDING_NO_RANGE_RE.match(text)
     if not m:
-        return text
+        return _ret(text)
 
     left, right = m.group(1), m.group(2)
     if left == right or not left.endswith(right):
-        return text
+        return _ret(text)
 
     cand = left[: -len(right)]
     if not cand or not re.match(r'^[0-9]+[A-Za-z]*$', cand):
-        return text
+        return _ret(text)
 
     left_digits = _BUILDING_DIGITS_RE.match(cand)
     right_digits = _BUILDING_DIGITS_RE.match(right)
@@ -200,9 +214,9 @@ def _normalize_building_no(value):
         return text
     # 起號數字位數應 ≥ 訖號（串錯時長度相近；120-20 → cand=1 會被擋）
     if len(left_digits.group(1)) < len(right_digits.group(1)):
-        return text
+        return _ret(text)
 
-    return f'{cand}-{right}'
+    return _ret(f'{cand}-{right}')
 
 
 def _to_sc(value):
@@ -824,6 +838,32 @@ def run_sync_and_verify():
     else:
         for row in rows:
             print(f"   - {row[0]}")
+
+    print("\n🔎 tc_street_no='OFF' 診斷：")
+    with sqlite_engine.connect() as conn:
+        off_n = conn.execute(text("""
+            SELECT COUNT(*) FROM Address_Flattened
+            WHERE tc_street_no = 'OFF'
+        """)).scalar()
+        if off_n and off_n > 0:
+            sample = conn.execute(text("""
+                SELECT id, tc_region, tc_district, tc_street_name, tc_street_no, tc_full_addr
+                FROM Address_Flattened
+                WHERE tc_street_no = 'OFF'
+                ORDER BY id
+                LIMIT 10
+            """)).fetchall()
+            print(f"   - Address_Flattened tc_street_no='OFF' 數量: {off_n}")
+            for r in sample:
+                print(f"   - id={r[0]} tc_street_name={r[3]!r} tc_full_addr={r[5]!r}")
+        else:
+            print("   - (沒有 tc_street_no='OFF' 的資料)")
+
+    if _DEBUG_BUILDING_NO['OFF_input'] or _DEBUG_BUILDING_NO['OFF_output']:
+        print(
+            "   - normalize_building_no 觀察: "
+            f"OFF_input={_DEBUG_BUILDING_NO['OFF_input']} OFF_output={_DEBUG_BUILDING_NO['OFF_output']}"
+        )
 
     return verified
 
