@@ -51,7 +51,8 @@ FROM (
     SELECT
         a.ADDRESS2DID, a.REFCSUID, d.REGION,
         d.NAMECHI AS District_Name_Chi, d.NAMEENG AS District_Name_Eng,
-        snl.CHIFULLNAME AS Street_Full_Name_Chi, snl.ENGFULLNAME AS Street_Full_Name_Eng,
+        COALESCE(sn.CHINAME, snl.CHIFULLNAME) AS Street_Full_Name_Chi,
+        COALESCE(sn.ENGNAME, snl.ENGFULLNAME) AS Street_Full_Name_Eng,
         sn.CHITYPE AS Street_Type_Chi, sn.ENGTYPE AS Street_Type_Eng,
         NULLIF(CONCAT(
             IFNULL(a.BUILDINGNUMFROM, ''),
@@ -74,10 +75,9 @@ FROM (
 ) t;
 """
 
-TC_REGION = {'NT': '新界', 'KL': '九龍', 'HK': '香港'}
-SC_REGION = {'NT': '新界', 'KL': '九龙', 'HK': '香港'}
-EN_REGION = {'NT': 'NEW TERRITORIES', 'KL': 'KOWLOON', 'HK': 'HONG KONG'}
-
+TC_REGION = {'NT': '新界', 'KLN': '九龍', 'HK': '香港'}
+SC_REGION = {'NT': '新界', 'KLN': '九龙', 'HK': '香港'}
+EN_REGION = {'NT': 'NEW TERRITORIES', 'KLN': 'KOWLOON', 'HK': 'HONG KONG'}
 OUTPUT_COLUMNS = [
     'id',
     'ref_csuid',
