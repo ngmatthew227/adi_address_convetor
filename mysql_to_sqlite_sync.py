@@ -140,7 +140,7 @@ def _clean(value):
 
 
 _BUILDING_NO_RANGE_RE = re.compile(
-    r'^([0-9]+[A-Za-z]*)-([0-9]+[A-Za-z]*)$'
+    r'^([0-9][0-9A-Za-z]*)-([0-9][0-9A-Za-z]*)$'
 )
 _BUILDING_NO_SLASH_RANGE_RE = re.compile(
     r'^([0-9]+[A-Za-z]*)/([0-9A-Za-z]+)-([0-9]+[A-Za-z]*)$'
