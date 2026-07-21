@@ -142,7 +142,9 @@ def _clean(value):
 _BUILDING_NO_RANGE_RE = re.compile(
     r'^([0-9]+[A-Za-z]*)-([0-9]+[A-Za-z]*)$'
 )
-_BUILDING_NO_SLASH_RANGE_RE = re.compile(r'^([0-9]+)/([0-9]+)-([0-9]+)$')
+_BUILDING_NO_SLASH_RANGE_RE = re.compile(
+    r'^([0-9]+[A-Za-z]*)/([0-9A-Za-z]+)-([0-9]+[A-Za-z]*)$'
+)
 _BUILDING_DIGITS_RE = re.compile(r'^([0-9]+)')
 
 
@@ -162,12 +164,23 @@ def _normalize_building_no(value):
     if text is None:
         return None
 
-    # 修正 a/b-b 類型：如 1/13-13 -> 1-13
+    # 修正 a/b-b 與 a/b-c 類型（含字母）
+    # 例:
+    #   1/13-13     -> 1-13
+    #   1/1A-1A     -> 1-1A
+    #   103F/103H-103H -> 103F-103H
+    #   123A/B-123B -> 123A-123B
     slash_m = _BUILDING_NO_SLASH_RANGE_RE.match(text)
     if slash_m:
         left, mid, right = slash_m.group(1), slash_m.group(2), slash_m.group(3)
-        if mid == right and int(left) < int(mid):
+        if mid == right:
             return f'{left}-{right}'
+        # 允許中段僅提供右段尾碼（如 B -> 123B）
+        if right.endswith(mid):
+            left_digits = _BUILDING_DIGITS_RE.match(left)
+            right_digits = _BUILDING_DIGITS_RE.match(right)
+            if left_digits and right_digits and left_digits.group(1) == right_digits.group(1):
+                return f'{left}-{right}'
 
     m = _BUILDING_NO_RANGE_RE.match(text)
     if not m:
