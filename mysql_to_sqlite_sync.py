@@ -366,7 +366,6 @@ def transform_to_output_schema(df: pd.DataFrame) -> pd.DataFrame:
             f"{group_n} 組不重複內容，將多移除 {extra_n} 筆。"
         )
         print("—— 重複列（整列相同）——")
-        print(exact_dups[['id', 'tc_full_addr']].to_string(index=False))
         print("—— 以上 ——")
         out = out.drop_duplicates(keep='first')
     else:
@@ -382,7 +381,6 @@ def transform_to_output_schema(df: pd.DataFrame) -> pd.DataFrame:
             f"（共 {len(id_conflicts)} 列）。這些不會被當重複刪除。"
         )
         print("—— 同 id、內容不同 ——")
-        print(id_conflicts[['id', 'tc_full_addr']].to_string(index=False))
         print("—— 以上 ——")
         out.attrs['id_unique'] = False
     else:
