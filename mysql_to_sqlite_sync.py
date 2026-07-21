@@ -143,6 +143,7 @@ _BUILDING_NO_RANGE_RE = re.compile(
     r'^([0-9]+[A-Za-z]*)-([0-9]+[A-Za-z]*)$'
 )
 _BUILDING_DIGITS_RE = re.compile(r'^([0-9]+)')
+_BUILDING_NO_SLASH_DUP_RE = re.compile(r'^([0-9]+)/([0-9]+)-([0-9]+)$')
 
 
 def _normalize_building_no(value):
@@ -160,6 +161,14 @@ def _normalize_building_no(value):
     text = _clean(value)
     if text is None:
         return None
+
+    slash_dup = _BUILDING_NO_SLASH_DUP_RE.match(text)
+    if slash_dup:
+        first = int(slash_dup.group(1))
+        slash_second = slash_dup.group(2)
+        dash_second = slash_dup.group(3)
+        if slash_second == dash_second and first < int(slash_second):
+            return f'{first}/{slash_second}'
 
     m = _BUILDING_NO_RANGE_RE.match(text)
     if not m:
@@ -787,7 +796,24 @@ def run_sync_and_verify():
     print("   SELECT a.* FROM Address_FTS f")
     print("   JOIN Address_Flattened a ON a.id = f.id")
     print(f"   WHERE Address_FTS MATCH '{example_q}';")
-    return verify_sqlite_db(sqlite_engine, expect_rows=len(df))
+    verified = verify_sqlite_db(sqlite_engine, expect_rows=len(df))
+
+    print("\n🔎 tc_street_name 含空格清單：")
+    with sqlite_engine.connect() as conn:
+        rows = conn.execute(text("""
+            SELECT DISTINCT tc_street_name
+            FROM Address_Flattened
+            WHERE tc_street_name IS NOT NULL
+              AND tc_street_name LIKE '% %'
+            ORDER BY tc_street_name
+        """)).fetchall()
+    if not rows:
+        print("   (沒有符合條件的 street name)")
+    else:
+        for row in rows:
+            print(f"   - {row[0]}")
+
+    return verified
 
 
 if __name__ == '__main__':
