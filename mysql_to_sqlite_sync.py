@@ -142,8 +142,8 @@ def _clean(value):
 _BUILDING_NO_RANGE_RE = re.compile(
     r'^([0-9]+[A-Za-z]*)-([0-9]+[A-Za-z]*)$'
 )
+_BUILDING_NO_SLASH_RANGE_RE = re.compile(r'^([0-9]+)/([0-9]+)-([0-9]+)$')
 _BUILDING_DIGITS_RE = re.compile(r'^([0-9]+)')
-_BUILDING_NO_SLASH_DUP_RE = re.compile(r'^([0-9]+)/([0-9]+)-([0-9]+)$')
 
 
 def _normalize_building_no(value):
@@ -162,13 +162,12 @@ def _normalize_building_no(value):
     if text is None:
         return None
 
-    slash_dup = _BUILDING_NO_SLASH_DUP_RE.match(text)
-    if slash_dup:
-        first = int(slash_dup.group(1))
-        slash_second = slash_dup.group(2)
-        dash_second = slash_dup.group(3)
-        if slash_second == dash_second and first < int(slash_second):
-            return f'{first}/{slash_second}'
+    # 修正 a/b-b 類型：如 1/13-13 -> 1-13
+    slash_m = _BUILDING_NO_SLASH_RANGE_RE.match(text)
+    if slash_m:
+        left, mid, right = slash_m.group(1), slash_m.group(2), slash_m.group(3)
+        if mid == right and int(left) < int(mid):
+            return f'{left}-{right}'
 
     m = _BUILDING_NO_RANGE_RE.match(text)
     if not m:
