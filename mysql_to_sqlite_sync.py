@@ -125,6 +125,13 @@ _FTS_TEXT_COLS = (
 )
 
 
+_STREET_CHI_PATCH = {
+    'CHUT SHUI WAN': '出水灣',
+    'MUK WO STREET': '沐和街',
+    'OLYMPIC AVENUE': '世運道',
+}
+
+
 def _clean(value):
     if value is None or (isinstance(value, float) and pd.isna(value)):
         return None
@@ -249,6 +256,8 @@ def _is_village(row) -> bool:
 def _build_tc_parts(row):
     district = _clean(row.get('District_Name_Chi'))
     street = _clean(row.get('Street_Full_Name_Chi'))
+    if street:
+        street = _STREET_CHI_PATCH.get(street.upper(), street)
     street_no = _normalize_building_no(row.get('Building_No'))
     estate = _clean(row.get('Estate_Name_Chi'))
     phase = _clean(row.get('Phase_Name_Chi'))
@@ -265,8 +274,12 @@ def _build_tc_parts(row):
         if building:
             estate_part = f'{estate_part} {building}' if estate_part else building
 
-    # label: 不含 region / district = Street + No號 + estate_part
-    label = ''.join(p for p in [street, no_with_unit, estate_part] if p) or None
+    # label: 不含 region / district，格式為 <street><no號> <estate/phase/building>
+    if street and no_with_unit:
+        street_and_no = f'{street}{no_with_unit}'
+    else:
+        street_and_no = street or no_with_unit
+    label = ' '.join(p for p in [street_and_no, estate_part] if p) or None
 
     # value:
     # - 一般: 不含 region / district / street / street_no (= estate_part)
