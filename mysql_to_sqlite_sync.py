@@ -209,15 +209,58 @@ def _normalize_building_no(value):
     return f'{cand}-{right}'
 
 
-# 正規化後仍視為「正常門牌」的格式，例如: 12 / 12A / 12-14 / 7A-7C
-_NORMAL_STREET_NO_RE = re.compile(
-    r'^[0-9]+[A-Za-z]*(?:-[0-9]+[A-Za-z]*)?$'
-)
+# 單一門牌段：1–5 位數字（不可前導 0）+ 最多 1 個英文字母
+_STREET_NO_PART_RE = re.compile(r'^([1-9][0-9]{0,4})([A-Za-z]?)$')
+
+
+def _is_normal_street_no(value) -> bool:
+    """判斷門牌是否「正常」。
+
+    正常例子: 12 / 12A / 12-14 / 7A-7C
+    異常例子: 012 / 12AB / 181919 / 7C-7A / 1/13 / LOT / 12-12
+    """
+    text = _clean(value)
+    if text is None:
+        return True  # 空值不算異常門牌格式
+
+    # 單段或起訖兩段
+    parts = text.split('-')
+    if len(parts) not in (1, 2):
+        return False
+
+    parsed = []
+    for part in parts:
+        m = _STREET_NO_PART_RE.match(part)
+        if not m:
+            return False
+        num = int(m.group(1))
+        letter = m.group(2).upper()
+        parsed.append((num, letter))
+
+    if len(parsed) == 1:
+        return True
+
+    left_num, left_letter = parsed[0]
+    right_num, right_letter = parsed[1]
+
+    # 起訖相同（整段相等）不合理，如 12-12 / 12A-12A
+    if left_num == right_num and left_letter == right_letter:
+        return False
+
+    # 起號不得大於訖號；同號時字母必須遞增（A < C）
+    if left_num > right_num:
+        return False
+    if left_num == right_num and left_letter >= right_letter:
+        return False
+
+    return True
 
 
 def print_strange_street_nos(engine):
     """列出正規化後仍不像一般門牌的 tc_street_no（含筆數）。"""
-    print("\n🔎 異常 tc_street_no 清單（不符合 12 / 12A / 12-14 / 7A-7C）：")
+    print("\n🔎 異常 tc_street_no 清單（嚴格規則）：")
+    print("   正常: 1–5位數字(無前導0) + 最多1字母；起訖需遞增")
+    print("   例正常: 12 / 12A / 12-14 / 7A-7C")
     with engine.connect() as conn:
         rows = conn.execute(text("""
             SELECT tc_street_no, COUNT(*) AS cnt
@@ -230,7 +273,7 @@ def print_strange_street_nos(engine):
 
     strange = [
         (no, cnt) for no, cnt in rows
-        if not _NORMAL_STREET_NO_RE.match(str(no))
+        if not _is_normal_street_no(no)
     ]
     if not strange:
         print("   (沒有異常 street_no)")
