@@ -57,7 +57,9 @@ FROM (
         NULLIF(CONCAT(
             IFNULL(a.BUILDINGNUMFROM, ''),
             IFNULL(a.BUILDINGNUMFROMALPHA, ''),
-            -- EXT 若已等於 FROMALPHA 末尾字元，不再重複拼接（如 A1 + 1 → 不拼 1）
+            -- EXT 拼接規則：
+            -- 1) 若已等於 FROMALPHA 末尾字元，不拼（如 A1 + 1 → 不拼 1）
+            -- 2) 若等於 TO_A，不拼到起號（如 8 + EXT10 + TO 10 → 8-10，而非 810-10）
             IF(
                 a.BUILDINGNUMEXT IS NOT NULL
                 AND a.BUILDINGNUMEXT != ''
@@ -65,6 +67,10 @@ FROM (
                     a.BUILDINGNUMFROMALPHA IS NULL
                     OR RIGHT(a.BUILDINGNUMFROMALPHA, CHAR_LENGTH(a.BUILDINGNUMEXT))
                        != a.BUILDINGNUMEXT
+                )
+                AND (
+                    a.BUILDINGNUMTO_A IS NULL
+                    OR CAST(a.BUILDINGNUMTO_A AS CHAR) != a.BUILDINGNUMEXT
                 ),
                 a.BUILDINGNUMEXT,
                 ''
