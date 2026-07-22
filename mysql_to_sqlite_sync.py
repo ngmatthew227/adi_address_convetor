@@ -57,7 +57,18 @@ FROM (
         NULLIF(CONCAT(
             IFNULL(a.BUILDINGNUMFROM, ''),
             IFNULL(a.BUILDINGNUMFROMALPHA, ''),
-            IFNULL(a.BUILDINGNUMEXT, ''),
+            -- EXT 若已等於 FROMALPHA 末尾字元，不再重複拼接（如 A1 + 1 → 不拼 1）
+            IF(
+                a.BUILDINGNUMEXT IS NOT NULL
+                AND a.BUILDINGNUMEXT != ''
+                AND (
+                    a.BUILDINGNUMFROMALPHA IS NULL
+                    OR RIGHT(a.BUILDINGNUMFROMALPHA, CHAR_LENGTH(a.BUILDINGNUMEXT))
+                       != a.BUILDINGNUMEXT
+                ),
+                a.BUILDINGNUMEXT,
+                ''
+            ),
             IF(a.BUILDINGNUMTO_A IS NOT NULL,
                CONCAT('-', a.BUILDINGNUMTO_A, IFNULL(a.BUILDINGNUMTOALPHA_A, '')), '')
         ), '') AS Building_No,
