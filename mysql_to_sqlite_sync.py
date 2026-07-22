@@ -209,6 +209,38 @@ def _normalize_building_no(value):
     return f'{cand}-{right}'
 
 
+# 正規化後仍視為「正常門牌」的格式，例如: 12 / 12A / 12-14 / 7A-7C
+_NORMAL_STREET_NO_RE = re.compile(
+    r'^[0-9]+[A-Za-z]*(?:-[0-9]+[A-Za-z]*)?$'
+)
+
+
+def print_strange_street_nos(engine):
+    """列出正規化後仍不像一般門牌的 tc_street_no（含筆數）。"""
+    print("\n🔎 異常 tc_street_no 清單（不符合 12 / 12A / 12-14 / 7A-7C）：")
+    with engine.connect() as conn:
+        rows = conn.execute(text("""
+            SELECT tc_street_no, COUNT(*) AS cnt
+            FROM Address_Flattened
+            WHERE tc_street_no IS NOT NULL
+              AND tc_street_no != ''
+            GROUP BY tc_street_no
+            ORDER BY cnt DESC, tc_street_no
+        """)).fetchall()
+
+    strange = [
+        (no, cnt) for no, cnt in rows
+        if not _NORMAL_STREET_NO_RE.match(str(no))
+    ]
+    if not strange:
+        print("   (沒有異常 street_no)")
+        return
+
+    print(f"   共 {len(strange)} 種異常值（總筆數 {sum(c for _, c in strange)}）:")
+    for no, cnt in strange:
+        print(f"   - {no!r}  ({cnt})")
+
+
 def _to_sc(value):
     text = _clean(value)
     if text is None:
@@ -828,6 +860,8 @@ def run_sync_and_verify():
     else:
         for row in rows:
             print(f"   - {row[0]}")
+
+    print_strange_street_nos(sqlite_engine)
 
     return verified
 
