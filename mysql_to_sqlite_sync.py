@@ -370,6 +370,30 @@ def _is_village(row) -> bool:
     return False
 
 
+def _village_display_name_chi(row) -> str | None:
+    """鄉村中文顯示名：街名 + 類型（如 坪洋新 + 村 → 坪洋新村）。"""
+    street = _clean(row.get('Street_Full_Name_Chi'))
+    if street:
+        street = _STREET_CHI_PATCH.get(street.upper(), street)
+    type_chi = _clean(row.get('Street_Type_Chi'))
+    if street and type_chi:
+        if street.endswith(type_chi):
+            return street
+        return f'{street}{type_chi}'
+    return street or type_chi
+
+
+def _village_display_name_eng(row) -> str | None:
+    """鄉村英文顯示名：街名 + 類型（如 PING YEUNG NEW + VILLAGE）。"""
+    street = _clean(row.get('Street_Full_Name_Eng'))
+    type_eng = _clean(row.get('Street_Type_Eng'))
+    if street and type_eng:
+        if street.casefold().endswith(type_eng.casefold()):
+            return street
+        return f'{street} {type_eng}'
+    return street or type_eng
+
+
 def _build_tc_parts(row):
     district = _clean(row.get('District_Name_Chi'))
     street = _clean(row.get('Street_Full_Name_Chi'))
@@ -379,6 +403,17 @@ def _build_tc_parts(row):
     estate = _clean(row.get('Estate_Name_Chi'))
     phase = _clean(row.get('Phase_Name_Chi'))
     building = _clean(row.get('Building_Name_Chi'))
+    is_village = _is_village(row)
+
+    # 鄉村不當作街道：street 欄留空；顯示名拼上類型（村／圍／新村…）
+    if is_village:
+        display_street = _village_display_name_chi(row)
+        out_street = None
+        out_street_no = None
+    else:
+        display_street = street
+        out_street = street
+        out_street_no = street_no
 
     no_with_unit = f'{street_no}號' if street_no else None
 
@@ -392,23 +427,23 @@ def _build_tc_parts(row):
             estate_part = f'{estate_part} {building}' if estate_part else building
 
     # label: 不含 region / district，格式為 <street><no號> <estate/phase/building>
-    if street and no_with_unit:
-        street_and_no = f'{street}{no_with_unit}'
+    if display_street and no_with_unit:
+        street_and_no = f'{display_street}{no_with_unit}'
     else:
-        street_and_no = street or no_with_unit
+        street_and_no = display_street or no_with_unit
     label = ' '.join(p for p in [street_and_no, estate_part] if p) or None
 
     # value:
     # - 一般: 不含 region / district / street / street_no (= estate_part)
-    # - 鄉村: 不含 region / district (= label)
-    if _is_village(row):
+    # - 鄉村: 不含 region / district (= label，已含村名+類型)
+    if is_village:
         value = label
     else:
         value = estate_part
 
     # full: district + label（舊格式不含 region 字面）
     full = ''.join(p for p in [district, label] if p) or None
-    return district, street, street_no, full, label, value
+    return district, out_street, out_street_no, full, label, value
 
 
 def _build_en_parts(row, en_region, en_district):
@@ -417,26 +452,37 @@ def _build_en_parts(row, en_region, en_district):
     estate = _clean(row.get('Estate_Name_Eng'))
     phase = _clean(row.get('Phase_Name_Eng'))
     building = _clean(row.get('Building_Name_Eng'))
+    is_village = _is_village(row)
+
+    # 鄉村不當作街道：street 欄留空；顯示名拼上類型（VILLAGE / TSUEN…）
+    if is_village:
+        display_street = _village_display_name_eng(row)
+        out_street = None
+        out_street_no = None
+    else:
+        display_street = street
+        out_street = street
+        out_street_no = street_no
 
     estate_part = ', '.join(p for p in [building, phase, estate] if p) or None
 
-    if street_no and street:
-        street_part = f'{street_no} {street}'
+    if street_no and display_street:
+        street_part = f'{street_no} {display_street}'
     else:
-        street_part = street_no or street
+        street_part = street_no or display_street
 
     # label: 不含 region / district
     label = ', '.join(p for p in [building, phase, estate, street_part] if p) or None
 
-    # value: 鄉村保留 street/no；一般則不含
-    if _is_village(row):
+    # value: 鄉村保留 village/no；一般則不含
+    if is_village:
         value = label
     else:
         value = estate_part
 
     # full: label + district + region
     full = ', '.join(p for p in [label, en_district, en_region] if p) or None
-    return street, street_no, full, label, value
+    return out_street, out_street_no, full, label, value
 
 
 def transform_to_output_schema(df: pd.DataFrame) -> pd.DataFrame:
