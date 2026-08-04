@@ -624,7 +624,14 @@ def call_identify_api(easting: float, northing: float, lang: str = 'zh'):
         'y': f'{northing:.3f}',
         'lang': lang,
     })
-    return _http_get_json(f'{IDENTIFY_API_URL}?{qs}')
+    payload = _http_get_json(f'{IDENTIFY_API_URL}?{qs}')
+    blocks = payload.get('results') or []
+    building_only = [
+        block for block in blocks
+        if (block.get('eheader') or '').strip() == 'Building Information'
+    ]
+    payload['results'] = building_only
+    return payload
 
 
 def fetch_identify_for_missing_streets(targets, output_path=None, lang='zh'):
@@ -671,6 +678,114 @@ def fetch_identify_for_missing_streets(targets, output_path=None, lang='zh'):
     err_n = sum(1 for r in results if r.get('error'))
     print(f'✅ Identify 結果已寫入 {output_path}（成功 {ok_n}，失敗/缺座標 {err_n}）')
     return results
+
+
+def _first_identify_address_info(entry):
+    identify = entry.get('identify') or {}
+    results = identify.get('results') or []
+    if not results:
+        return None, None
+    first_result = results[0]
+    infos = first_result.get('addressInfo') or []
+    if not infos:
+        return first_result, None
+    return first_result, infos[0]
+
+
+def apply_identify_json_to_address_table(engine, json_path=None):
+    """將 Identify JSON 回填到 Address_Flattened（同表同欄位）。
+
+    規則:
+    1) identify.results 為空 → 刪除該列
+    2) identify.results 非空，且第一筆 addressInfo.bdcsuid == ref_csuid
+       → full/label/value 以 caddress/eaddress 回填（含繁轉簡）
+    """
+    path = Path(json_path or IDENTIFY_RESULT_JSON)
+    if not path.is_file():
+        print(f'ℹ️ 找不到 Identify JSON，略過回填：{path}')
+        return
+
+    data = json.loads(path.read_text(encoding='utf-8'))
+    delete_rows = []
+    update_rows = []
+
+    for entry in data:
+        row_id = entry.get('id')
+        ref_csuid = _clean(entry.get('ref_csuid'))
+        if row_id is None or ref_csuid is None:
+            continue
+
+        first_result, first_info = _first_identify_address_info(entry)
+        if first_result is None:
+            delete_rows.append({'id': row_id, 'ref_csuid': ref_csuid})
+            continue
+        if first_info is None:
+            continue
+
+        bdcsuid = _clean(first_info.get('bdcsuid'))
+        if bdcsuid != ref_csuid:
+            continue
+
+        tc_district = _clean(entry.get('tc_district'))
+        sc_district = _to_sc(tc_district)
+        en_district = _clean(entry.get('en_district'))
+        caddress = _clean(first_info.get('caddress'))
+        eaddress = _clean(first_info.get('eaddress'))
+        sc_address = _to_sc(caddress)
+
+        tc_full = ''.join(p for p in [tc_district, caddress] if p) or None
+        sc_full = ''.join(p for p in [sc_district, sc_address] if p) or None
+        en_full = ', '.join(p for p in [en_district, eaddress] if p) or None
+
+        update_rows.append({
+            'id': row_id,
+            'ref_csuid': ref_csuid,
+            'tc_full_addr': tc_full,
+            'tc_building_field_label': caddress,
+            'tc_building_field_value': caddress,
+            'sc_full_addr': sc_full,
+            'sc_building_field_label': sc_address,
+            'sc_building_field_value': sc_address,
+            'en_full_addr': en_full,
+            'en_building_field_label': eaddress,
+            'en_building_field_value': eaddress,
+        })
+
+    with engine.begin() as conn:
+        if delete_rows:
+            conn.execute(
+                text("""
+                    DELETE FROM Address_Flattened
+                    WHERE id = :id
+                      AND ref_csuid = :ref_csuid
+                """),
+                delete_rows,
+            )
+
+        if update_rows:
+            conn.execute(
+                text("""
+                    UPDATE Address_Flattened
+                    SET
+                        tc_full_addr = :tc_full_addr,
+                        tc_building_field_label = :tc_building_field_label,
+                        tc_building_field_value = :tc_building_field_value,
+                        sc_full_addr = :sc_full_addr,
+                        sc_building_field_label = :sc_building_field_label,
+                        sc_building_field_value = :sc_building_field_value,
+                        en_full_addr = :en_full_addr,
+                        en_building_field_label = :en_building_field_label,
+                        en_building_field_value = :en_building_field_value
+                    WHERE id = :id
+                      AND ref_csuid = :ref_csuid
+                """),
+                update_rows,
+            )
+
+    print(
+        f'✅ Identify 回填完成：刪除 {len(delete_rows)} 筆，'
+        f'更新 {len(update_rows)} 筆。'
+    )
 
 
 def transform_to_output_schema(df: pd.DataFrame) -> pd.DataFrame:
@@ -1171,15 +1286,16 @@ def run_sync_and_verify():
     print("⚙️ 正在建立 Address_Flattened 索引...")
     create_address_indexes(sqlite_engine)
 
-    print("🔍 正在建立 FTS5 虛擬表 Address_FTS...")
-    build_fts5_index(sqlite_engine)
-
     print("🗺️ 正在建立 sub_district_map 並匯入資料...")
     write_sub_district_map_table(sqlite_engine)
 
     # 有門牌、無街名 → Identify API，結果寫獨立 JSON
     identify_targets = df.attrs.get('identify_targets') or []
     fetch_identify_for_missing_streets(identify_targets, IDENTIFY_RESULT_JSON)
+    apply_identify_json_to_address_table(sqlite_engine, IDENTIFY_RESULT_JSON)
+
+    print("🔍 正在建立 FTS5 虛擬表 Address_FTS...")
+    build_fts5_index(sqlite_engine)
 
     example_q = to_fts_match_query('旺角')
     print("🎉 轉移完美結束！您的 SQLite 資料庫已準備就緒。")
