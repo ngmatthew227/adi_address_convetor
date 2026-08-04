@@ -185,6 +185,10 @@ def _normalize_building_no(value):
     if text.upper() == 'OFF':
         return None
 
+    # 「*」為來源佔位門牌（會變成 *號），非有效地址，由上游直接丟棄整列。
+    if text == '*':
+        return None
+
     # 修正 a/b-b 與 a/b-c 類型（含字母）
     # 例:
     #   1/13-13     -> 1-13
@@ -370,8 +374,8 @@ def _is_village(row) -> bool:
     return False
 
 
-def _village_display_name_chi(row) -> str | None:
-    """鄉村中文顯示名：街名 + 類型（如 坪洋新 + 村 → 坪洋新村）。"""
+def _street_display_name_chi(row) -> str | None:
+    """中文街名顯示：街名 + 類型（如 坪洋新+村、彌敦+道）；已含類型結尾則不重複拼。"""
     street = _clean(row.get('Street_Full_Name_Chi'))
     if street:
         street = _STREET_CHI_PATCH.get(street.upper(), street)
@@ -383,8 +387,8 @@ def _village_display_name_chi(row) -> str | None:
     return street or type_chi
 
 
-def _village_display_name_eng(row) -> str | None:
-    """鄉村英文顯示名：街名 + 類型（如 PING YEUNG NEW + VILLAGE）。"""
+def _street_display_name_eng(row) -> str | None:
+    """英文街名顯示：街名 + 類型（如 PING YEUNG NEW + VILLAGE）；已含類型結尾則不重複拼。"""
     street = _clean(row.get('Street_Full_Name_Eng'))
     type_eng = _clean(row.get('Street_Type_Eng'))
     if street and type_eng:
@@ -396,23 +400,19 @@ def _village_display_name_eng(row) -> str | None:
 
 def _build_tc_parts(row):
     district = _clean(row.get('District_Name_Chi'))
-    street = _clean(row.get('Street_Full_Name_Chi'))
-    if street:
-        street = _STREET_CHI_PATCH.get(street.upper(), street)
     street_no = _normalize_building_no(row.get('Building_No'))
     estate = _clean(row.get('Estate_Name_Chi'))
     phase = _clean(row.get('Phase_Name_Chi'))
     building = _clean(row.get('Building_Name_Chi'))
     is_village = _is_village(row)
 
-    # 鄉村不當作街道：street 欄留空；顯示名拼上類型（村／圍／新村…）
+    # 一律拼上類型（村／道／街…）；鄉村不寫入 street 欄
+    display_street = _street_display_name_chi(row)
     if is_village:
-        display_street = _village_display_name_chi(row)
         out_street = None
         out_street_no = None
     else:
-        display_street = street
-        out_street = street
+        out_street = display_street
         out_street_no = street_no
 
     no_with_unit = f'{street_no}號' if street_no else None
@@ -447,21 +447,19 @@ def _build_tc_parts(row):
 
 
 def _build_en_parts(row, en_region, en_district):
-    street = _clean(row.get('Street_Full_Name_Eng'))
     street_no = _normalize_building_no(row.get('Building_No'))
     estate = _clean(row.get('Estate_Name_Eng'))
     phase = _clean(row.get('Phase_Name_Eng'))
     building = _clean(row.get('Building_Name_Eng'))
     is_village = _is_village(row)
 
-    # 鄉村不當作街道：street 欄留空；顯示名拼上類型（VILLAGE / TSUEN…）
+    # 一律拼上類型（VILLAGE / ROAD…）；鄉村不寫入 street 欄
+    display_street = _street_display_name_eng(row)
     if is_village:
-        display_street = _village_display_name_eng(row)
         out_street = None
         out_street_no = None
     else:
-        display_street = street
-        out_street = street
+        out_street = display_street
         out_street_no = street_no
 
     estate_part = ', '.join(p for p in [building, phase, estate] if p) or None
@@ -485,10 +483,41 @@ def _build_en_parts(row, en_region, en_district):
     return out_street, out_street_no, full, label, value
 
 
+def _is_placeholder_building_no(value) -> bool:
+    """來源門牌為佔位符（如 *）→ 整列地址無效。"""
+    text = _clean(value)
+    return text == '*'
+
+
+def _is_district_only_addr(tc_district, tc_full, en_district, en_full, en_region) -> bool:
+    """只有行政區、無街名／樓宇等細節 → 無效地址。
+
+    中文: tc_district == tc_full_addr（如「北區」）
+    英文: en_full 僅為 district，或 district + region
+          （如「NORTH DISTRICT, NEW TERRITORIES」）
+    """
+    if not (tc_district and tc_full and tc_district == tc_full):
+        return False
+    if not en_district or not en_full:
+        return True
+    if en_full == en_district:
+        return True
+    if en_region and en_full == f'{en_district}, {en_region}':
+        return True
+    return False
+
+
 def transform_to_output_schema(df: pd.DataFrame) -> pd.DataFrame:
     """把 MySQL 扁平結果轉成目標輸出欄位。"""
     rows = []
+    skipped_placeholder = 0
+    skipped_district_only = 0
     for raw in df.to_dict(orient='records'):
+        # 門牌為「*」會產出 *號，非有效地址，直接略過整列
+        if _is_placeholder_building_no(raw.get('Building_No')):
+            skipped_placeholder += 1
+            continue
+
         region_code = _clean(raw.get('REGION'))
         tc_region = TC_REGION.get(region_code, region_code)
         sc_region = SC_REGION.get(region_code, _to_sc(region_code) if region_code else None)
@@ -499,6 +528,11 @@ def transform_to_output_schema(df: pd.DataFrame) -> pd.DataFrame:
         en_street, en_street_no, en_full, en_label, en_value = _build_en_parts(
             raw, en_region, en_district
         )
+
+        # 只有區名、無實際地址細節 → 略過
+        if _is_district_only_addr(tc_district, tc_full, en_district, en_full, en_region):
+            skipped_district_only += 1
+            continue
 
         rows.append({
             'id': raw.get('ADDRESS2DID'),
@@ -527,6 +561,10 @@ def transform_to_output_schema(df: pd.DataFrame) -> pd.DataFrame:
             'coordinates': _clean(raw.get('Coordinates')),
         })
 
+    if skipped_placeholder:
+        print(f'⚠️ 已略過門牌為「*」的無效地址 {skipped_placeholder} 筆。')
+    if skipped_district_only:
+        print(f'⚠️ 已略過僅有行政區、無實際地址的列 {skipped_district_only} 筆。')
     out = pd.DataFrame(rows, columns=OUTPUT_COLUMNS)
     out['id'] = pd.to_numeric(out['id'], errors='coerce').astype('Int64')
     # ref_csuid / REFCSUID 為文字，勿轉成整數
