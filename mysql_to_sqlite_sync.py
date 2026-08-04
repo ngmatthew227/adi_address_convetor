@@ -1,4 +1,9 @@
+import json
 import re
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
 from pathlib import Path
 
 import pandas as pd
@@ -10,6 +15,11 @@ except ImportError as exc:  # pragma: no cover
     raise ImportError(
         "需要 zhconv 做繁簡轉換，請先執行: pip install zhconv"
     ) from exc
+
+try:
+    from pyproj import Transformer
+except ImportError:  # pragma: no cover
+    Transformer = None
 
 # ==========================================
 # MySQL to SQLite 自動轉移腳本 (乾淨修正版)
@@ -25,6 +35,10 @@ sqlite_engine = create_engine('sqlite:///adi_address.sqlite')
 SCRIPT_DIR = Path(__file__).resolve().parent
 SUB_DISTRICT_MAP_DDL = SCRIPT_DIR / 'sub_district_map.sql'
 SUB_DISTRICT_MAP_DATA = SCRIPT_DIR / 'sub_district_map_data.sql'
+IDENTIFY_RESULT_JSON = SCRIPT_DIR / 'missing_street_identify.json'
+IDENTIFY_API_URL = 'https://www.map.gov.hk/gs/api/v1.0.0/identify'
+GEODETIC_TRANSFORM_URL = 'https://www.geodetic.gov.hk/transform/v2/'
+IDENTIFY_REQUEST_INTERVAL_SEC = 0.35
 
 # 已經完全清除隱藏字元與非法空格的 SQL 語句
 sql_query = """
@@ -539,9 +553,130 @@ def _is_district_and_no_only_addr(
     return False
 
 
+def _parse_lon_lat(coordinates):
+    """解析 'lon,lat' 字串 → (lon, lat)；失敗回 None。"""
+    text = _clean(coordinates)
+    if not text or ',' not in text:
+        return None
+    left, right = text.split(',', 1)
+    try:
+        lon = float(left.strip())
+        lat = float(right.strip())
+    except ValueError:
+        return None
+    return lon, lat
+
+
+def _http_get_json(url: str, timeout: float = 30):
+    req = urllib.request.Request(
+        url,
+        headers={
+            'User-Agent': 'adi-address-convertor/1.0',
+            'Accept': 'application/json',
+        },
+    )
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        raw = resp.read().decode('utf-8')
+    return json.loads(raw)
+
+
+_HK80_TRANSFORMER = None
+
+
+def _get_hk80_transformer():
+    global _HK80_TRANSFORMER
+    if Transformer is None:
+        return None
+    if _HK80_TRANSFORMER is None:
+        _HK80_TRANSFORMER = Transformer.from_crs(
+            'EPSG:4326', 'EPSG:2326', always_xy=True,
+        )
+    return _HK80_TRANSFORMER
+
+
+def wgs84_to_hk80(lon: float, lat: float):
+    """WGS84 lon/lat → HK1980 Grid (easting, northing)。
+
+    優先 pyproj；否則改打 LandsD transform API。
+    """
+    transformer = _get_hk80_transformer()
+    if transformer is not None:
+        easting, northing = transformer.transform(lon, lat)
+        return float(easting), float(northing)
+
+    qs = urllib.parse.urlencode({
+        'inSys': 'wgsgeog',
+        'outSys': 'hkgrid',
+        'lat': f'{lat:.8f}',
+        'long': f'{lon:.8f}',
+    })
+    data = _http_get_json(f'{GEODETIC_TRANSFORM_URL}?{qs}')
+    return float(data['hkE']), float(data['hkN'])
+
+
+def call_identify_api(easting: float, northing: float, lang: str = 'zh'):
+    """呼叫 CSDI Identify API（HK80 easting/northing）。
+
+    文件: https://portal.csdi.gov.hk/csdi-webpage/apidoc/IdentifyAPI
+    """
+    qs = urllib.parse.urlencode({
+        'x': f'{easting:.3f}',
+        'y': f'{northing:.3f}',
+        'lang': lang,
+    })
+    return _http_get_json(f'{IDENTIFY_API_URL}?{qs}')
+
+
+def fetch_identify_for_missing_streets(targets, output_path=None, lang='zh'):
+    """對「有 street_no、無 street_name」地址呼叫 Identify，寫入 JSON。"""
+    output_path = Path(output_path or IDENTIFY_RESULT_JSON)
+    results = []
+    total = len(targets)
+    if total == 0:
+        output_path.write_text('[]', encoding='utf-8')
+        print('ℹ️ 沒有「有門牌、無街名」的地址需要呼叫 Identify API。')
+        return results
+
+    print(f'🛰️ 開始呼叫 Identify API：共 {total} 筆（間隔 {IDENTIFY_REQUEST_INTERVAL_SEC}s）...')
+    for i, target in enumerate(targets, start=1):
+        entry = {
+            **target,
+            'hk80': None,
+            'identify': None,
+            'error': None,
+        }
+        coords = _parse_lon_lat(target.get('coordinates'))
+        if coords is None:
+            entry['error'] = 'missing_or_invalid_coordinates'
+            results.append(entry)
+            continue
+        lon, lat = coords
+        try:
+            easting, northing = wgs84_to_hk80(lon, lat)
+            entry['hk80'] = {'x': easting, 'y': northing}
+            entry['identify'] = call_identify_api(easting, northing, lang=lang)
+        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, KeyError, ValueError, json.JSONDecodeError) as exc:
+            entry['error'] = str(exc)
+        results.append(entry)
+        if i % 20 == 0 or i == total:
+            print(f'   … Identify 進度 {i}/{total}')
+        if i < total:
+            time.sleep(IDENTIFY_REQUEST_INTERVAL_SEC)
+
+    output_path.write_text(
+        json.dumps(results, ensure_ascii=False, indent=2),
+        encoding='utf-8',
+    )
+    ok_n = sum(1 for r in results if r.get('identify') is not None)
+    err_n = sum(1 for r in results if r.get('error'))
+    print(f'✅ Identify 結果已寫入 {output_path}（成功 {ok_n}，失敗/缺座標 {err_n}）')
+    return results
+
+
 def transform_to_output_schema(df: pd.DataFrame) -> pd.DataFrame:
     """把 MySQL 扁平結果轉成目標輸出欄位。"""
     rows = []
+    identify_targets = []
     skipped_placeholder = 0
     skipped_district_only = 0
     skipped_district_no_only = 0
@@ -561,6 +696,22 @@ def transform_to_output_schema(df: pd.DataFrame) -> pd.DataFrame:
         en_street, en_street_no, en_full, en_label, en_value = _build_en_parts(
             raw, en_region, en_district
         )
+
+        # 有門牌、無街名 → 稍後呼叫 Identify API（即使最終不寫入主表也收集）
+        if not tc_street and tc_street_no:
+            identify_targets.append({
+                'id': raw.get('ADDRESS2DID'),
+                'ref_csuid': _clean(raw.get('REFCSUID')),
+                'tc_region': tc_region,
+                'tc_district': tc_district,
+                'tc_street_no': tc_street_no,
+                'tc_full_addr': tc_full,
+                'tc_building_field_label': tc_label,
+                'en_district': en_district,
+                'en_street_no': en_street_no,
+                'en_full_addr': en_full,
+                'coordinates': _clean(raw.get('Coordinates')),
+            })
 
         # 只有區名、無實際地址細節 → 略過
         if _is_district_only_addr(tc_district, tc_full, en_district, en_full, en_region):
@@ -608,8 +759,12 @@ def transform_to_output_schema(df: pd.DataFrame) -> pd.DataFrame:
         print(f'⚠️ 已略過僅有行政區、無實際地址的列 {skipped_district_only} 筆。')
     if skipped_district_no_only:
         print(f'⚠️ 已略過僅有區+門牌號、無街名的列 {skipped_district_no_only} 筆。')
+    if identify_targets:
+        print(f'📌 發現有門牌、無街名地址 {len(identify_targets)} 筆，稍後呼叫 Identify API。')
+
     out = pd.DataFrame(rows, columns=OUTPUT_COLUMNS)
     out['id'] = pd.to_numeric(out['id'], errors='coerce').astype('Int64')
+    out.attrs['identify_targets'] = identify_targets
     # ref_csuid / REFCSUID 為文字，勿轉成整數
 
     # 只有「所有欄位完全相同」才算重複
@@ -1022,11 +1177,16 @@ def run_sync_and_verify():
     print("🗺️ 正在建立 sub_district_map 並匯入資料...")
     write_sub_district_map_table(sqlite_engine)
 
+    # 有門牌、無街名 → Identify API，結果寫獨立 JSON
+    identify_targets = df.attrs.get('identify_targets') or []
+    fetch_identify_for_missing_streets(identify_targets, IDENTIFY_RESULT_JSON)
+
     example_q = to_fts_match_query('旺角')
     print("🎉 轉移完美結束！您的 SQLite 資料庫已準備就緒。")
     print("   - Address_Flattened : tc/sc/en 地址輸出表")
     print("   - Address_FTS       : FTS5 全文搜尋虛擬表（中文已拆字）")
     print("   - sub_district_map  : 分區／小區對照表")
+    print(f"   - Identify JSON    : {IDENTIFY_RESULT_JSON.name}")
     print("   查詢範例:")
     print("   SELECT a.* FROM Address_FTS f")
     print("   JOIN Address_Flattened a ON a.id = f.id")
