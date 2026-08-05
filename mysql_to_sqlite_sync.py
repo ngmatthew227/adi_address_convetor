@@ -36,6 +36,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 SUB_DISTRICT_MAP_DDL = SCRIPT_DIR / 'sub_district_map.sql'
 SUB_DISTRICT_MAP_DATA = SCRIPT_DIR / 'sub_district_map_data.sql'
 IDENTIFY_RESULT_JSON = SCRIPT_DIR / 'missing_street_identify.json'
+STREET_NAMES_JSON = SCRIPT_DIR / 'street_names.json'
 IDENTIFY_API_URL = 'https://www.map.gov.hk/gs/api/v1.0.0/identify'
 GEODETIC_TRANSFORM_URL = 'https://www.geodetic.gov.hk/transform/v2/'
 IDENTIFY_REQUEST_INTERVAL_SEC = 0.35
@@ -692,22 +693,195 @@ def _first_identify_address_info(entry):
     return first_result, infos[0]
 
 
+def _normalize_street_key(value: str | None) -> str | None:
+    """街名比對用：去空白、統一橫線、英文轉大寫。"""
+    text = _clean(value)
+    if text is None:
+        return None
+    text = re.sub(r'[\s\u3000]+', '', text)
+    text = text.replace('－', '-').replace('‐', '-').replace('–', '-').replace('—', '-')
+    return text.casefold()
+
+
+_STREET_NAME_INDEX = None
+
+
+def _load_street_name_index(path=None):
+    """載入 street_names.json → {norm_chi/norm_eng: (chi, eng)}。"""
+    global _STREET_NAME_INDEX
+    if _STREET_NAME_INDEX is not None:
+        return _STREET_NAME_INDEX
+
+    json_path = Path(path or STREET_NAMES_JSON)
+    index = {}
+    if not json_path.is_file():
+        print(f'⚠️ 找不到街名表 {json_path}，Identify 回填將無法核對街名。')
+        _STREET_NAME_INDEX = index
+        return index
+
+    rows = json.loads(json_path.read_text(encoding='utf-8'))
+    for row in rows:
+        chi = _clean(row.get('chi_street_name'))
+        eng = _clean(row.get('eng_street_name'))
+        if chi:
+            index[_normalize_street_key(chi)] = (chi, eng)
+        if eng:
+            index[_normalize_street_key(eng)] = (chi, eng)
+    _STREET_NAME_INDEX = index
+    print(f'📘 已載入街名表 {len(rows)} 筆（索引 {len(index)} 個 key）。')
+    return index
+
+
+def _strip_chi_street_no(caddress: str | None, street_no: str | None) -> str | None:
+    """從中文地址去掉門牌號，例: 沙頭角公路－龍躍頭段192號 → 沙頭角公路－龍躍頭段。"""
+    text = _clean(caddress)
+    if text is None:
+        return None
+    no = _clean(street_no)
+    if no:
+        for suffix in (f'{no}號', no):
+            if text.endswith(suffix):
+                return _clean(text[: -len(suffix)])
+    m = re.search(r'(.+?)([0-9][0-9A-Za-z]*(?:-[0-9][0-9A-Za-z]*)?)號$', text)
+    if m:
+        return _clean(m.group(1))
+    return text
+
+
+def _strip_en_street_no(eaddress: str | None, street_no: str | None) -> str | None:
+    """從英文地址去掉門牌號，例: 192 SHA TAU KOK ROAD - LUNG YEUK TAU → SHA TAU..."""
+    text = _clean(eaddress)
+    if text is None:
+        return None
+    no = _clean(street_no)
+    if no:
+        prefix = f'{no} '
+        if text.upper().startswith(prefix.upper()):
+            return _clean(text[len(prefix):])
+        if text.upper() == no.upper():
+            return None
+    m = re.match(r'^([0-9][0-9A-Za-z]*(?:-[0-9][0-9A-Za-z]*)?)\s+(.+)$', text)
+    if m:
+        return _clean(m.group(2))
+    return text
+
+
+def _lookup_street_names(caddress, eaddress, street_no, street_index):
+    """用 street_names.json 核對：命中則回 (chi, eng)，否則 (None, None)。"""
+    chi_cand = _strip_chi_street_no(caddress, street_no)
+    eng_cand = _strip_en_street_no(eaddress, street_no)
+
+    for cand in (chi_cand, eng_cand):
+        key = _normalize_street_key(cand)
+        if key and key in street_index:
+            return street_index[key]
+    return None, None
+
+
+def _build_identify_update_row(entry, first_info, street_index):
+    """依街名表核對結果，組出 Address_Flattened 更新內容。"""
+    row_id = entry.get('id')
+    ref_csuid = _clean(entry.get('ref_csuid'))
+    tc_district = _clean(entry.get('tc_district'))
+    en_district = _clean(entry.get('en_district'))
+    tc_region = _clean(entry.get('tc_region'))
+    en_region = None
+    for code, name in TC_REGION.items():
+        if name == tc_region:
+            en_region = EN_REGION.get(code)
+            break
+
+    street_no = _clean(entry.get('tc_street_no')) or _clean(entry.get('en_street_no'))
+    caddress = _clean(first_info.get('caddress'))
+    eaddress = _clean(first_info.get('eaddress'))
+    cname = _clean(first_info.get('cname'))
+    ename = _clean(first_info.get('ename'))
+
+    matched_chi, matched_eng = _lookup_street_names(
+        caddress, eaddress, street_no, street_index,
+    )
+    is_street = bool(matched_chi or matched_eng)
+
+    if is_street:
+        # 在街名表內 → 填 street_name；樓宇用 cname/ename
+        tc_street = matched_chi
+        en_street = matched_eng
+        out_street_no = street_no
+
+        if tc_street and out_street_no:
+            tc_street_and_no = f'{tc_street}{out_street_no}號'
+        else:
+            tc_street_and_no = caddress or (
+                f'{out_street_no}號' if out_street_no else tc_street
+            )
+
+        if out_street_no and en_street:
+            en_street_and_no = f'{out_street_no} {en_street}'
+        else:
+            en_street_and_no = eaddress or out_street_no or en_street
+
+        tc_value = cname
+        en_value = ename
+        tc_label = ' '.join(p for p in [tc_street_and_no, cname] if p) or None
+        en_label = ', '.join(p for p in [ename, en_street_and_no] if p) or None
+        tc_full = ''.join(p for p in [tc_district, tc_label] if p) or None
+        en_full = ', '.join(p for p in [en_label, en_district, en_region] if p) or None
+    else:
+        # 不在街名表 → 不當 street，整段當 building
+        tc_street = None
+        en_street = None
+        out_street_no = None
+
+        tc_label = caddress
+        en_label = eaddress
+        tc_value = caddress
+        en_value = eaddress
+        tc_full = ''.join(p for p in [tc_district, tc_label] if p) or None
+        en_full = ', '.join(p for p in [en_label, en_district, en_region] if p) or None
+
+    return {
+        'id': row_id,
+        'ref_csuid': ref_csuid,
+        'tc_street_name': tc_street,
+        'tc_street_no': out_street_no,
+        'tc_full_addr': tc_full,
+        'tc_building_field_label': tc_label,
+        'tc_building_field_value': tc_value,
+        'sc_street_name': _to_sc(tc_street),
+        'sc_street_no': _to_sc(out_street_no),
+        'sc_full_addr': _to_sc(tc_full),
+        'sc_building_field_label': _to_sc(tc_label),
+        'sc_building_field_value': _to_sc(tc_value),
+        'en_street_name': en_street,
+        'en_street_no': out_street_no,
+        'en_full_addr': en_full,
+        'en_building_field_label': en_label,
+        'en_building_field_value': en_value,
+        '_matched_street': is_street,
+    }
+
+
 def apply_identify_json_to_address_table(engine, json_path=None):
     """將 Identify JSON 回填到 Address_Flattened（同表同欄位）。
 
     規則:
     1) identify.results 為空 → 刪除該列
-    2) identify.results 非空，且第一筆 addressInfo.bdcsuid == ref_csuid
-       → full/label/value 以 caddress/eaddress 回填（含繁轉簡）
+    2) bdcsuid == ref_csuid 時：
+       - 先用 street_names.json 核對 caddress/eaddress（去掉門牌後）
+       - 命中街名 → 填 street_name/street_no；cname/ename 填 building
+       - 未命中 → 不填 street；caddress/eaddress 填 building
     """
     path = Path(json_path or IDENTIFY_RESULT_JSON)
     if not path.is_file():
         print(f'ℹ️ 找不到 Identify JSON，略過回填：{path}')
         return
 
+    street_index = _load_street_name_index()
     data = json.loads(path.read_text(encoding='utf-8'))
     delete_rows = []
     update_rows = []
+    matched_n = 0
+    building_n = 0
 
     for entry in data:
         row_id = entry.get('id')
@@ -726,30 +900,12 @@ def apply_identify_json_to_address_table(engine, json_path=None):
         if bdcsuid != ref_csuid:
             continue
 
-        tc_district = _clean(entry.get('tc_district'))
-        sc_district = _to_sc(tc_district)
-        en_district = _clean(entry.get('en_district'))
-        caddress = _clean(first_info.get('caddress'))
-        eaddress = _clean(first_info.get('eaddress'))
-        sc_address = _to_sc(caddress)
-
-        tc_full = ''.join(p for p in [tc_district, caddress] if p) or None
-        sc_full = ''.join(p for p in [sc_district, sc_address] if p) or None
-        en_full = ', '.join(p for p in [en_district, eaddress] if p) or None
-
-        update_rows.append({
-            'id': row_id,
-            'ref_csuid': ref_csuid,
-            'tc_full_addr': tc_full,
-            'tc_building_field_label': caddress,
-            'tc_building_field_value': caddress,
-            'sc_full_addr': sc_full,
-            'sc_building_field_label': sc_address,
-            'sc_building_field_value': sc_address,
-            'en_full_addr': en_full,
-            'en_building_field_label': eaddress,
-            'en_building_field_value': eaddress,
-        })
+        row = _build_identify_update_row(entry, first_info, street_index)
+        if row.pop('_matched_street', False):
+            matched_n += 1
+        else:
+            building_n += 1
+        update_rows.append(row)
 
     with engine.begin() as conn:
         if delete_rows:
@@ -767,12 +923,18 @@ def apply_identify_json_to_address_table(engine, json_path=None):
                 text("""
                     UPDATE Address_Flattened
                     SET
+                        tc_street_name = :tc_street_name,
+                        tc_street_no = :tc_street_no,
                         tc_full_addr = :tc_full_addr,
                         tc_building_field_label = :tc_building_field_label,
                         tc_building_field_value = :tc_building_field_value,
+                        sc_street_name = :sc_street_name,
+                        sc_street_no = :sc_street_no,
                         sc_full_addr = :sc_full_addr,
                         sc_building_field_label = :sc_building_field_label,
                         sc_building_field_value = :sc_building_field_value,
+                        en_street_name = :en_street_name,
+                        en_street_no = :en_street_no,
                         en_full_addr = :en_full_addr,
                         en_building_field_label = :en_building_field_label,
                         en_building_field_value = :en_building_field_value
@@ -784,7 +946,8 @@ def apply_identify_json_to_address_table(engine, json_path=None):
 
     print(
         f'✅ Identify 回填完成：刪除 {len(delete_rows)} 筆，'
-        f'更新 {len(update_rows)} 筆。'
+        f'更新 {len(update_rows)} 筆'
+        f'（街名命中 {matched_n}，當 building {building_n}）。'
     )
 
 
