@@ -700,6 +700,53 @@ def _load_street_name_index(path=None):
     return index
 
 
+def _load_official_tc_street_keys(path=None):
+    """street_names.json 官方繁中街名（正規化 key 集合）。"""
+    json_path = Path(path or STREET_NAMES_JSON)
+    if not json_path.is_file():
+        return set()
+    keys = set()
+    for row in json.loads(json_path.read_text(encoding='utf-8')):
+        chi = _clean(row.get('chi_street_name'))
+        if chi:
+            keys.add(_normalize_street_key(chi))
+    return keys
+
+
+def print_tc_streets_not_in_official_list(engine, path=None):
+    """列出 DB 中 tc_street_name 不在 street_names.json 的街名（含筆數）。"""
+    print('\n🔎 tc_street_name 不在 street_names.json 清單：')
+    official_keys = _load_official_tc_street_keys(path)
+    if not official_keys:
+        print(f'   ⚠️ 找不到或無法讀取 {STREET_NAMES_JSON.name}')
+        return
+
+    with engine.connect() as conn:
+        rows = conn.execute(text("""
+            SELECT tc_street_name, COUNT(*) AS cnt
+            FROM Address_Flattened
+            WHERE tc_street_name IS NOT NULL
+              AND TRIM(tc_street_name) != ''
+            GROUP BY tc_street_name
+            ORDER BY cnt DESC, tc_street_name
+        """)).fetchall()
+
+    missing = [
+        (name, cnt) for name, cnt in rows
+        if _normalize_street_key(name) not in official_keys
+    ]
+    if not missing:
+        print('   (全部 tc_street_name 都在 street_names.json 內)')
+        return
+
+    total_rows = sum(cnt for _, cnt in missing)
+    print(
+        f'   共 {len(missing)} 種街名不在官方表內'
+        f'（總筆數 {total_rows}）：'
+    )
+    for name, cnt in missing:
+        print(f'   - {name}  ({cnt})')
+
 def _strip_chi_street_no(caddress: str | None, street_no: str | None) -> str | None:
     """從中文地址去掉門牌號，例: 沙頭角公路－龍躍頭段192號 → 沙頭角公路－龍躍頭段。"""
     text = _clean(caddress)
@@ -1635,6 +1682,7 @@ def run_sync_and_verify(skip_identify_api: bool = False):
             print(f"   - {row[0]}")
 
     print_strange_street_nos(sqlite_engine)
+    print_tc_streets_not_in_official_list(sqlite_engine)
 
     return verified
 
