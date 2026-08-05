@@ -37,6 +37,7 @@ SUB_DISTRICT_MAP_DDL = SCRIPT_DIR / 'sub_district_map.sql'
 SUB_DISTRICT_MAP_DATA = SCRIPT_DIR / 'sub_district_map_data.sql'
 IDENTIFY_RESULT_JSON = SCRIPT_DIR / 'missing_street_identify.json'
 STREET_NAMES_JSON = SCRIPT_DIR / 'street_names.json'
+UNOFFICIAL_TC_STREETS_JSON = SCRIPT_DIR / 'unofficial_tc_streets.json'
 IDENTIFY_API_URL = 'https://www.map.gov.hk/gs/api/v1.0.0/identify'
 GEODETIC_TRANSFORM_URL = 'https://www.geodetic.gov.hk/transform/v2/'
 IDENTIFY_REQUEST_INTERVAL_SEC = 0.35
@@ -713,13 +714,18 @@ def _load_official_tc_street_keys(path=None):
     return keys
 
 
-def print_tc_streets_not_in_official_list(engine, path=None):
-    """列出 DB 中 tc_street_name 不在 street_names.json 的街名（含筆數）。"""
+def export_tc_streets_not_in_official_list(
+    engine, street_names_path=None, output_path=None,
+):
+    """列出並匯出 DB 中 tc_street_name 不在 street_names.json 的街名。"""
+    official_path = Path(street_names_path or STREET_NAMES_JSON)
+    out_path = Path(output_path or UNOFFICIAL_TC_STREETS_JSON)
     print('\n🔎 tc_street_name 不在 street_names.json 清單：')
-    official_keys = _load_official_tc_street_keys(path)
+
+    official_keys = _load_official_tc_street_keys(official_path)
     if not official_keys:
-        print(f'   ⚠️ 找不到或無法讀取 {STREET_NAMES_JSON.name}')
-        return
+        print(f'   ⚠️ 找不到或無法讀取 {official_path.name}')
+        return []
 
     with engine.connect() as conn:
         rows = conn.execute(text("""
@@ -732,20 +738,33 @@ def print_tc_streets_not_in_official_list(engine, path=None):
         """)).fetchall()
 
     missing = [
-        (name, cnt) for name, cnt in rows
+        {'tc_street_name': name, 'count': int(cnt)}
+        for name, cnt in rows
         if _normalize_street_key(name) not in official_keys
     ]
+
+    out_path.write_text(
+        json.dumps(missing, ensure_ascii=False, indent=2),
+        encoding='utf-8',
+    )
+
     if not missing:
         print('   (全部 tc_street_name 都在 street_names.json 內)')
-        return
+        print(f'   ✅ 已寫入空清單：{out_path}')
+        return missing
 
-    total_rows = sum(cnt for _, cnt in missing)
+    total_rows = sum(item['count'] for item in missing)
     print(
         f'   共 {len(missing)} 種街名不在官方表內'
         f'（總筆數 {total_rows}）：'
     )
-    for name, cnt in missing:
-        print(f'   - {name}  ({cnt})')
+    for item in missing[:20]:
+        print(f"   - {item['tc_street_name']}  ({item['count']})")
+    if len(missing) > 20:
+        print(f'   … 另有 {len(missing) - 20} 種，詳見 {out_path.name}')
+    print(f'   ✅ 已寫入 {out_path}')
+    return missing
+
 
 def _strip_chi_street_no(caddress: str | None, street_no: str | None) -> str | None:
     """從中文地址去掉門牌號，例: 沙頭角公路－龍躍頭段192號 → 沙頭角公路－龍躍頭段。"""
@@ -1660,6 +1679,7 @@ def run_sync_and_verify(skip_identify_api: bool = False):
     print("   - Address_FTS       : FTS5 全文搜尋虛擬表（中文已拆字）")
     print("   - sub_district_map  : 分區／小區對照表")
     print(f"   - Identify JSON    : {IDENTIFY_RESULT_JSON.name}")
+    print(f"   - 非官方街名清單   : {UNOFFICIAL_TC_STREETS_JSON.name}")
     print("   查詢範例:")
     print("   SELECT a.* FROM Address_FTS f")
     print("   JOIN Address_Flattened a ON a.id = f.id")
@@ -1682,7 +1702,7 @@ def run_sync_and_verify(skip_identify_api: bool = False):
             print(f"   - {row[0]}")
 
     print_strange_street_nos(sqlite_engine)
-    print_tc_streets_not_in_official_list(sqlite_engine)
+    export_tc_streets_not_in_official_list(sqlite_engine)
 
     return verified
 
