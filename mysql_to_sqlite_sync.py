@@ -522,38 +522,6 @@ def _is_district_only_addr(tc_district, tc_full, en_district, en_full, en_region
     return False
 
 
-def _is_district_and_no_only_addr(
-    tc_district, tc_street, tc_street_no, tc_full,
-    en_district, en_street, en_street_no, en_full, en_region,
-) -> bool:
-    """只有區 + 門牌號、無街名 → 無效地址。
-
-    中文例: 北區83號
-    英文例: 83, NORTH DISTRICT, NEW TERRITORIES
-    """
-    if tc_street or en_street:
-        return False
-    if not tc_street_no or not tc_full:
-        return False
-
-    expected_tc = (
-        f'{tc_district}{tc_street_no}號' if tc_district else f'{tc_street_no}號'
-    )
-    if tc_full != expected_tc:
-        return False
-
-    # 英文: 門牌 + district + region（或僅 district）
-    if not en_street_no or not en_full:
-        return True
-    expected_en_parts = [en_street_no, en_district, en_region]
-    expected_en = ', '.join(p for p in expected_en_parts if p)
-    if en_full == expected_en:
-        return True
-    if en_district and en_full == f'{en_street_no}, {en_district}':
-        return True
-    return False
-
-
 def _parse_lon_lat(coordinates):
     """解析 'lon,lat' 字串 → (lon, lat)；失敗回 None。"""
     text = _clean(coordinates)
@@ -1134,7 +1102,6 @@ def transform_to_output_schema(df: pd.DataFrame) -> pd.DataFrame:
     identify_targets = []
     skipped_placeholder = 0
     skipped_district_only = 0
-    skipped_district_no_only = 0
     for raw in df.to_dict(orient='records'):
         # 門牌為「*」會產出 *號，非有效地址，直接略過整列
         if _is_placeholder_building_no(raw.get('Building_No')):
@@ -1173,14 +1140,6 @@ def transform_to_output_schema(df: pd.DataFrame) -> pd.DataFrame:
             skipped_district_only += 1
             continue
 
-        # 只有區 + 門牌號、無街名（如 北區83號 / 83, NORTH DISTRICT, …）→ 略過
-        if _is_district_and_no_only_addr(
-            tc_district, tc_street, tc_street_no, tc_full,
-            en_district, en_street, en_street_no, en_full, en_region,
-        ):
-            skipped_district_no_only += 1
-            continue
-
         rows.append({
             'id': raw.get('ADDRESS2DID'),
             'ref_csuid': _clean(raw.get('REFCSUID')),
@@ -1212,8 +1171,6 @@ def transform_to_output_schema(df: pd.DataFrame) -> pd.DataFrame:
         print(f'⚠️ 已略過門牌為「*」的無效地址 {skipped_placeholder} 筆。')
     if skipped_district_only:
         print(f'⚠️ 已略過僅有行政區、無實際地址的列 {skipped_district_only} 筆。')
-    if skipped_district_no_only:
-        print(f'⚠️ 已略過僅有區+門牌號、無街名的列 {skipped_district_no_only} 筆。')
     if identify_targets:
         print(f'📌 發現有門牌、無街名地址 {len(identify_targets)} 筆，稍後呼叫 Identify API。')
 
