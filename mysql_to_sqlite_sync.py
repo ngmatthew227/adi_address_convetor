@@ -767,7 +767,11 @@ def _strip_en_street_no(eaddress: str | None, street_no: str | None) -> str | No
 
 
 def _lookup_street_names(caddress, eaddress, street_no, street_index):
-    """用 street_names.json 核對：命中則回 (chi, eng)，否則 (None, None)。"""
+    """用 street_names.json 核對：命中則回 (chi, eng)，否則 (None, None)。
+
+    除完整相等外，亦支援 nested 中文地址尾碼命中
+    （例: 新界粉嶺沙頭角公路－龍躍頭段 → 沙頭角公路－龍躍頭段）。
+    """
     chi_cand = _strip_chi_street_no(caddress, street_no)
     eng_cand = _strip_en_street_no(eaddress, street_no)
 
@@ -775,11 +779,97 @@ def _lookup_street_names(caddress, eaddress, street_no, street_index):
         key = _normalize_street_key(cand)
         if key and key in street_index:
             return street_index[key]
+
+    # 中文：用街名表後綴比對（nested 常帶 新界/粉嶺 前綴）
+    chi_key = _normalize_street_key(chi_cand)
+    if chi_key:
+        best = None
+        best_len = 0
+        for key, pair in street_index.items():
+            # 只比對中文 key（含 CJK）
+            if not re.search(r'[\u4e00-\u9fff]', key):
+                continue
+            if chi_key.endswith(key) and len(key) > best_len:
+                best = pair
+                best_len = len(key)
+        if best:
+            return best
+
     return None, None
 
 
+def _find_nested_facility_addresses(info):
+    """從 facility[].addressInfo 找第一組非空 caddress/eaddress。"""
+    facilities = info.get('facility') or []
+    if not isinstance(facilities, list):
+        return None, None
+    for faci in facilities:
+        if not isinstance(faci, dict):
+            continue
+        for nested in faci.get('addressInfo') or []:
+            if not isinstance(nested, dict):
+                continue
+            caddr = _clean(nested.get('caddress'))
+            eaddr = _clean(nested.get('eaddress'))
+            if caddr or eaddr:
+                return caddr, eaddr
+    return None, None
+
+
+def _strip_region_district_suffix_eng(eaddress, en_district=None, en_region=None):
+    """去掉 nested 英文地址尾部 district/region。
+
+    例: 2 Sha Tau Kok Road - Lung Yeuk Tau, Fanling, New Territories
+      → 2 Sha Tau Kok Road - Lung Yeuk Tau
+    """
+    text = _clean(eaddress)
+    if text is None:
+        return None
+    parts = [p.strip() for p in text.split(',') if p.strip()]
+    drop_keys = {
+        'new territories', 'kowloon', 'hong kong',
+        'fanling', 'sheung shui', 'tai po', 'yuen long', 'tuen mun',
+        'tsuen wan', 'sai kung', 'sha tin', 'tseung kwan o',
+    }
+    for p in (en_district, en_region):
+        if p:
+            drop_keys.add(p.casefold())
+    while len(parts) > 1 and parts[-1].casefold() in drop_keys:
+        parts.pop()
+    return _clean(', '.join(parts)) or _clean(eaddress)
+
+
+def _enrich_identify_addresses(info, entry):
+    """補齊 caddress/eaddress：頂層優先，否則用 facility nested。"""
+    caddress = _clean(info.get('caddress'))
+    eaddress = _clean(info.get('eaddress'))
+    if caddress and eaddress:
+        return caddress, eaddress
+
+    nested_c, nested_e = _find_nested_facility_addresses(info)
+    if not caddress and nested_c:
+        # 保留完整 nested 字串，街名比對用後綴命中
+        caddress = nested_c
+    if not eaddress and nested_e:
+        en_region = None
+        tc_region = _clean(entry.get('tc_region'))
+        for code, name in TC_REGION.items():
+            if name == tc_region:
+                en_region = EN_REGION.get(code)
+                break
+        eaddress = _strip_region_district_suffix_eng(
+            nested_e,
+            _clean(entry.get('en_district')),
+            en_region,
+        )
+    return caddress, eaddress
+
+
 def _build_identify_update_row(entry, first_info, street_index):
-    """依街名表核對結果，組出 Address_Flattened 更新內容。"""
+    """依街名表核對結果，組出 Address_Flattened 更新內容。
+
+    回傳 None 表示不更新（避免覆寫成只剩區）。
+    """
     row_id = entry.get('id')
     ref_csuid = _clean(entry.get('ref_csuid'))
     tc_district = _clean(entry.get('tc_district'))
@@ -792,10 +882,13 @@ def _build_identify_update_row(entry, first_info, street_index):
             break
 
     street_no = _clean(entry.get('tc_street_no')) or _clean(entry.get('en_street_no'))
-    caddress = _clean(first_info.get('caddress'))
-    eaddress = _clean(first_info.get('eaddress'))
     cname = _clean(first_info.get('cname'))
     ename = _clean(first_info.get('ename'))
+    caddress, eaddress = _enrich_identify_addresses(first_info, entry)
+
+    # caddress / cname 都無 → 唔更新（避免寫成只剩區）
+    if not caddress and not cname and not eaddress and not ename:
+        return None
 
     matched_chi, matched_eng = _lookup_street_names(
         caddress, eaddress, street_no, street_index,
@@ -826,8 +919,8 @@ def _build_identify_update_row(entry, first_info, street_index):
         en_label = ', '.join(p for p in [ename, en_street_and_no] if p) or None
         tc_full = ''.join(p for p in [tc_district, tc_label] if p) or None
         en_full = ', '.join(p for p in [en_label, en_district, en_region] if p) or None
-    else:
-        # 不在街名表 → 不當 street，整段當 building
+    elif caddress or eaddress:
+        # 有地址字串但不在街名表 → 不當 street，整段當 building
         tc_street = None
         en_street = None
         out_street_no = None
@@ -838,6 +931,23 @@ def _build_identify_update_row(entry, first_info, street_index):
         en_value = eaddress
         tc_full = ''.join(p for p in [tc_district, tc_label] if p) or None
         en_full = ', '.join(p for p in [en_label, en_district, en_region] if p) or None
+    else:
+        # 無 caddress/eaddress，只有 cname/ename
+        # label/value = 樓宇名；保留原 street_no；不填 street_name
+        tc_street = None
+        en_street = None
+        out_street_no = street_no
+
+        tc_label = cname
+        en_label = ename
+        tc_value = cname
+        en_value = ename
+        tc_full = ''.join(p for p in [tc_district, tc_label] if p) or None
+        en_full = ', '.join(p for p in [en_label, en_district, en_region] if p) or None
+
+        # 仍只剩區 → 唔更新
+        if tc_full == tc_district and (en_full in (None, en_district, f'{en_district}, {en_region}')):
+            return None
 
     return {
         'id': row_id,
@@ -867,9 +977,11 @@ def apply_identify_json_to_address_table(engine, json_path=None):
     規則:
     1) identify.results 為空 → 刪除該列
     2) bdcsuid == ref_csuid 時：
-       - 先用 street_names.json 核對 caddress/eaddress（去掉門牌後）
-       - 命中街名 → 填 street_name/street_no；cname/ename 填 building
-       - 未命中 → 不填 street；caddress/eaddress 填 building
+       - 頂層 caddress/eaddress 為空時，從 facility nested 補
+       - 用 street_names.json 核對；命中 → 填 street；cname/ename 填 building
+       - 未命中但有 caddress → 當 building
+       - 無 caddress 但有 cname → label/value=cname，保留 street_no
+       - caddress 與 cname 都無 → 不更新
     """
     path = Path(json_path or IDENTIFY_RESULT_JSON)
     if not path.is_file():
@@ -882,6 +994,7 @@ def apply_identify_json_to_address_table(engine, json_path=None):
     update_rows = []
     matched_n = 0
     building_n = 0
+    skipped_n = 0
 
     for entry in data:
         row_id = entry.get('id')
@@ -901,6 +1014,9 @@ def apply_identify_json_to_address_table(engine, json_path=None):
             continue
 
         row = _build_identify_update_row(entry, first_info, street_index)
+        if row is None:
+            skipped_n += 1
+            continue
         if row.pop('_matched_street', False):
             matched_n += 1
         else:
@@ -947,7 +1063,7 @@ def apply_identify_json_to_address_table(engine, json_path=None):
     print(
         f'✅ Identify 回填完成：刪除 {len(delete_rows)} 筆，'
         f'更新 {len(update_rows)} 筆'
-        f'（街名命中 {matched_n}，當 building {building_n}）。'
+        f'（街名命中 {matched_n}，當 building {building_n}，略過 {skipped_n}）。'
     )
 
 
