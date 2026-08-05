@@ -951,6 +951,67 @@ def apply_identify_json_to_address_table(engine, json_path=None):
     )
 
 
+def clear_street_only_building_labels(engine):
+    """若 building_field_label 只是 street_name + street_no，且 value 為空 → label 清成 NULL。
+
+    中文例: label = 彌敦道12號、value IS NULL → label = NULL
+    英文例: label = 12 NATHAN ROAD、value IS NULL → label = NULL
+    """
+    with engine.begin() as conn:
+        tc_n = conn.execute(text("""
+            UPDATE Address_Flattened
+            SET tc_building_field_label = NULL
+            WHERE (tc_building_field_value IS NULL OR tc_building_field_value = '')
+              AND tc_building_field_label IS NOT NULL
+              AND tc_building_field_label = CASE
+                    WHEN tc_street_name IS NOT NULL AND tc_street_no IS NOT NULL
+                      THEN tc_street_name || tc_street_no || '號'
+                    WHEN tc_street_name IS NOT NULL
+                      THEN tc_street_name
+                    WHEN tc_street_no IS NOT NULL
+                      THEN tc_street_no || '號'
+                    ELSE NULL
+                  END
+        """)).rowcount
+
+        sc_n = conn.execute(text("""
+            UPDATE Address_Flattened
+            SET sc_building_field_label = NULL
+            WHERE (sc_building_field_value IS NULL OR sc_building_field_value = '')
+              AND sc_building_field_label IS NOT NULL
+              AND sc_building_field_label = CASE
+                    WHEN sc_street_name IS NOT NULL AND sc_street_no IS NOT NULL
+                      THEN sc_street_name || sc_street_no || '号'
+                    WHEN sc_street_name IS NOT NULL
+                      THEN sc_street_name
+                    WHEN sc_street_no IS NOT NULL
+                      THEN sc_street_no || '号'
+                    ELSE NULL
+                  END
+        """)).rowcount
+
+        en_n = conn.execute(text("""
+            UPDATE Address_Flattened
+            SET en_building_field_label = NULL
+            WHERE (en_building_field_value IS NULL OR en_building_field_value = '')
+              AND en_building_field_label IS NOT NULL
+              AND en_building_field_label = CASE
+                    WHEN en_street_name IS NOT NULL AND en_street_no IS NOT NULL
+                      THEN en_street_no || ' ' || en_street_name
+                    WHEN en_street_name IS NOT NULL
+                      THEN en_street_name
+                    WHEN en_street_no IS NOT NULL
+                      THEN en_street_no
+                    ELSE NULL
+                  END
+        """)).rowcount
+
+    print(
+        f'✅ 已清空「僅街名+門牌」的 building_field_label：'
+        f'tc={tc_n}, sc={sc_n}, en={en_n}'
+    )
+
+
 def transform_to_output_schema(df: pd.DataFrame) -> pd.DataFrame:
     """把 MySQL 扁平結果轉成目標輸出欄位。"""
     rows = []
@@ -1434,7 +1495,7 @@ def verify_sqlite_db(engine, expect_rows=None):
     return all_ok
 
 
-def run_sync_and_verify():
+def run_sync_and_verify(skip_identify_api: bool = False):
     print("🔄 正在連接 MySQL 並執行複雜查詢，這可能需要幾分鐘 (取決於資料量)...")
     raw_df = pd.read_sql(sql_query, mysql_engine)
     print(f"✅ 成功從 MySQL 讀取 {len(raw_df)} 筆地址資料！")
@@ -1454,8 +1515,21 @@ def run_sync_and_verify():
 
     # 有門牌、無街名 → Identify API，結果寫獨立 JSON
     identify_targets = df.attrs.get('identify_targets') or []
-    fetch_identify_for_missing_streets(identify_targets, IDENTIFY_RESULT_JSON)
+    if skip_identify_api:
+        if IDENTIFY_RESULT_JSON.is_file():
+            print(
+                f'⏭️ 已指定跳過 Identify API，沿用現有 {IDENTIFY_RESULT_JSON.name}'
+            )
+        else:
+            print(
+                f'⚠️ 已指定跳過 Identify API，但找不到 {IDENTIFY_RESULT_JSON.name}，'
+                f'將略過回填。'
+            )
+    else:
+        fetch_identify_for_missing_streets(identify_targets, IDENTIFY_RESULT_JSON)
+
     apply_identify_json_to_address_table(sqlite_engine, IDENTIFY_RESULT_JSON)
+    clear_street_only_building_labels(sqlite_engine)
 
     print("🔍 正在建立 FTS5 虛擬表 Address_FTS...")
     build_fts5_index(sqlite_engine)
@@ -1495,7 +1569,16 @@ def run_sync_and_verify():
 if __name__ == '__main__':
     import sys
 
-    if len(sys.argv) > 1 and sys.argv[1] in ('--verify', '--verify-only'):
+    args = set(sys.argv[1:])
+    if args & {'--verify', '--verify-only'}:
         raise SystemExit(0 if verify_sqlite_db(sqlite_engine) else 1)
 
-    raise SystemExit(0 if run_sync_and_verify() else 1)
+    skip_identify_api = bool(
+        args & {'--skip-identify-api', '--skip-identify'}
+    )
+    if skip_identify_api:
+        print('ℹ️ 參數：--skip-identify-api（不呼叫 Identify API）')
+
+    raise SystemExit(
+        0 if run_sync_and_verify(skip_identify_api=skip_identify_api) else 1
+    )
