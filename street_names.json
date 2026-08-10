@@ -16242,5 +16242,1457 @@
   {
     "chi_street_name": "泄蘭街",
     "eng_street_name": "ZETLAND STREET"
+  },
+  {
+    "chi_street_name": "七姊妺道",
+    "eng_street_name": "TSAT TSZ MUI RD"
+  },
+  {
+    "chi_street_name": "三星道",
+    "eng_street_name": "TRISTAR AVENUE"
+  },
+  {
+    "chi_street_name": "上北村第一巷",
+    "eng_street_name": "SHEUNG PAK TSUEN LANE NO.1"
+  },
+  {
+    "chi_street_name": "上北村第三巷",
+    "eng_street_name": "SHEUNG PAK TSUEN LANE NO.3"
+  },
+  {
+    "chi_street_name": "上北村第四巷",
+    "eng_street_name": "SHEUNG PAK TSUEN LANE NO. 4"
+  },
+  {
+    "chi_street_name": "下北村第一巷",
+    "eng_street_name": "HA PAK TSUEN LANE NO.1"
+  },
+  {
+    "chi_street_name": "下北村第三巷",
+    "eng_street_name": "HA PAK TSUEN LANE NO.3"
+  },
+  {
+    "chi_street_name": "下北村第四巷",
+    "eng_street_name": "HA PAK TSUEN LANE NO.4"
+  },
+  {
+    "chi_street_name": "中心村第七巷",
+    "eng_street_name": "CHUNG SUM TSUEN LANE NO.7"
+  },
+  {
+    "chi_street_name": "中心村第六巷",
+    "eng_street_name": "CHUNG SUM TSUEN LANE NO.6"
+  },
+  {
+    "chi_street_name": "中興半山路",
+    "eng_street_name": "CHUNG HING PUN SHAN RD"
+  },
+  {
+    "chi_street_name": "中興海傍街",
+    "eng_street_name": "CHUNG HING PRAYA STREET"
+  },
+  {
+    "chi_street_name": "中興海傍街",
+    "eng_street_name": "CHUNG HING PRAYA ST"
+  },
+  {
+    "chi_street_name": "井後街",
+    "eng_street_name": "TSENG HAU ST"
+  },
+  {
+    "chi_street_name": "光復街",
+    "eng_street_name": "KWONG FUK ST"
+  },
+  {
+    "chi_street_name": "公園路",
+    "eng_street_name": "TOWN PARK RD"
+  },
+  {
+    "chi_street_name": "利源街",
+    "eng_street_name": "LI YUEN ST"
+  },
+  {
+    "chi_street_name": "北帝廟橫街",
+    "eng_street_name": "PAK TAI MIU WANG ST"
+  },
+  {
+    "chi_street_name": "半山路",
+    "eng_street_name": "MIDDLE HILL ROAD"
+  },
+  {
+    "chi_street_name": "半山路",
+    "eng_street_name": "MIDDLE HILL RD"
+  },
+  {
+    "chi_street_name": "半山道",
+    "eng_street_name": "PUN SHAN ROAD"
+  },
+  {
+    "chi_street_name": "南邊圍一里",
+    "eng_street_name": "NAM PIN WAI 1ST LANE"
+  },
+  {
+    "chi_street_name": "南邊圍九里",
+    "eng_street_name": "NAM PIN WAI 9TH LANE"
+  },
+  {
+    "chi_street_name": "南邊圍八里",
+    "eng_street_name": "NAM PIN WAI 8TH LANE"
+  },
+  {
+    "chi_street_name": "南邊圍六里",
+    "eng_street_name": "NAM PIN WAI 6TH LANE"
+  },
+  {
+    "chi_street_name": "南邊圍十里",
+    "eng_street_name": "NAM PIN WAI 10TH LANE"
+  },
+  {
+    "chi_street_name": "南邊圍東巷",
+    "eng_street_name": "NAM PIN WAI EASTERN LANE"
+  },
+  {
+    "chi_street_name": "南邊圍西巷",
+    "eng_street_name": "NAM PIN WAI WESTERN LANE"
+  },
+  {
+    "chi_street_name": "告士打道",
+    "eng_street_name": "GLOUCESTER ROAD"
+  },
+  {
+    "chi_street_name": "告士打道",
+    "eng_street_name": "GLOUCESTER RD"
+  },
+  {
+    "chi_street_name": "嘉和里",
+    "eng_street_name": "KAR WO LEI"
+  },
+  {
+    "chi_street_name": "圍內村第一巷",
+    "eng_street_name": "WAI LOI TSUEN LANE 1"
+  },
+  {
+    "chi_street_name": "圍內村第三巷",
+    "eng_street_name": "WAI LOI TSUEN LANE 3"
+  },
+  {
+    "chi_street_name": "圍內村第九巷",
+    "eng_street_name": "WAI LOI TSUEN LANE 9"
+  },
+  {
+    "chi_street_name": "圍內村第五巷",
+    "eng_street_name": "WAI LOI TSUEN LANE 5"
+  },
+  {
+    "chi_street_name": "圍內村第八巷",
+    "eng_street_name": "WAI LOI TSUEN LANE 8"
+  },
+  {
+    "chi_street_name": "圍內村第六巷",
+    "eng_street_name": "WAI LOI TSUEN LANE 6"
+  },
+  {
+    "chi_street_name": "圍內村第十一巷",
+    "eng_street_name": "WAI LOI TSUEN LANE 11"
+  },
+  {
+    "chi_street_name": "圍內村第十二巷",
+    "eng_street_name": "WAI LOI TSUEN LANE 12"
+  },
+  {
+    "chi_street_name": "圍內村第十巷",
+    "eng_street_name": "WAI LOI TSUEN LANE 10"
+  },
+  {
+    "chi_street_name": "坑口正街",
+    "eng_street_name": "HANG HAU MAIN ST"
+  },
+  {
+    "chi_street_name": "坳背灣街",
+    "eng_street_name": "AU PUI WAN ST"
+  },
+  {
+    "chi_street_name": "大元村第一巷",
+    "eng_street_name": "TAI YUEN TSUEN LANE NO.1"
+  },
+  {
+    "chi_street_name": "大元村第七巷",
+    "eng_street_name": "TAI YUEN TSUEN LANE NO.7"
+  },
+  {
+    "chi_street_name": "大元村第三巷",
+    "eng_street_name": "TAI YUEN TSUEN LANE NO.3"
+  },
+  {
+    "chi_street_name": "大元村第九巷",
+    "eng_street_name": "TAI YUEN TSUEN LANE NO. 9"
+  },
+  {
+    "chi_street_name": "大元村第八巷",
+    "eng_street_name": "TAI YUEN TSUEN LANE NO.8"
+  },
+  {
+    "chi_street_name": "大元村第六巷",
+    "eng_street_name": "TAI YUEN TSUEN LANE NO.6"
+  },
+  {
+    "chi_street_name": "大新橫街",
+    "eng_street_name": "TAI SAN SIDE ST"
+  },
+  {
+    "chi_street_name": "大樹下路",
+    "eng_street_name": "TAI SHU HA RD"
+  },
+  {
+    "chi_street_name": "大王街",
+    "eng_street_name": "TAI WONG ST"
+  },
+  {
+    "chi_street_name": "大王里",
+    "eng_street_name": "TAI WONG LANE"
+  },
+  {
+    "chi_street_name": "大窩支路",
+    "eng_street_name": "TAI WO SERVICE RD"
+  },
+  {
+    "chi_street_name": "大頭嶺第一巷",
+    "eng_street_name": "1ST LANE TAI TAU LENG"
+  },
+  {
+    "chi_street_name": "大頭嶺第七巷",
+    "eng_street_name": "7TH LANE TAI TAU LENG"
+  },
+  {
+    "chi_street_name": "大頭嶺第三巷",
+    "eng_street_name": "TAI TAU LENG 3RD LANE"
+  },
+  {
+    "chi_street_name": "大頭嶺第三巷",
+    "eng_street_name": "3RD LANE TAI TAU LENG"
+  },
+  {
+    "chi_street_name": "大頭嶺第二巷",
+    "eng_street_name": "TAI TAU LENG 2ND LANE"
+  },
+  {
+    "chi_street_name": "大頭嶺第二巷",
+    "eng_street_name": "2ND LANE TAI TAU LENG"
+  },
+  {
+    "chi_street_name": "大頭嶺第五巷",
+    "eng_street_name": "5TH LANE TAI TAU LENG"
+  },
+  {
+    "chi_street_name": "大頭嶺第六巷",
+    "eng_street_name": "TAI TAU LENG 6TH LANE"
+  },
+  {
+    "chi_street_name": "大頭嶺第六巷",
+    "eng_street_name": "6TH LANE TAI TAU LENG"
+  },
+  {
+    "chi_street_name": "大頭嶺第四巷",
+    "eng_street_name": "TAI TAU LENG 4TH LANE"
+  },
+  {
+    "chi_street_name": "大頭嶺第四巷",
+    "eng_street_name": "4TH LANE TAI TAU LENG"
+  },
+  {
+    "chi_street_name": "太平街",
+    "eng_street_name": "TAI PING ST"
+  },
+  {
+    "chi_street_name": "奕園路",
+    "eng_street_name": "YICK YUEN RD"
+  },
+  {
+    "chi_street_name": "安樂路",
+    "eng_street_name": "ON LOK RD"
+  },
+  {
+    "chi_street_name": "宏業街",
+    "eng_street_name": "WANG YIP ST"
+  },
+  {
+    "chi_street_name": "富茂街",
+    "eng_street_name": "FU MOU ST"
+  },
+  {
+    "chi_street_name": "小瀝源第一巷",
+    "eng_street_name": "SIU LEK YUEN FIRST LANE"
+  },
+  {
+    "chi_street_name": "小瀝源第一巷",
+    "eng_street_name": "1ST LANE SIU LEK YUEN"
+  },
+  {
+    "chi_street_name": "小瀝源第三巷",
+    "eng_street_name": "3RD LANE SIU LEK YUEN"
+  },
+  {
+    "chi_street_name": "小瀝源第二巷",
+    "eng_street_name": "SIU LEK YUEN SECOND LANE"
+  },
+  {
+    "chi_street_name": "小瀝源第二巷",
+    "eng_street_name": "2ND LANE SIU LEK YUEN"
+  },
+  {
+    "chi_street_name": "小瀝源第五巷",
+    "eng_street_name": "5TH LANE SIU LEK YUEN"
+  },
+  {
+    "chi_street_name": "小瀝源第六巷",
+    "eng_street_name": "SIU LEK YUEN SIXTH LANE"
+  },
+  {
+    "chi_street_name": "小瀝源第六巷",
+    "eng_street_name": "6TH LANE SIU LEK YUEN"
+  },
+  {
+    "chi_street_name": "小瀝源第四巷",
+    "eng_street_name": "SIU LEK YUEN FOURTH LANE"
+  },
+  {
+    "chi_street_name": "小瀝源第四巷",
+    "eng_street_name": "4TH LANE SIU LEK YUEN"
+  },
+  {
+    "chi_street_name": "屈尾巷",
+    "eng_street_name": "KWAT MEI LANE"
+  },
+  {
+    "chi_street_name": "屏唐街",
+    "eng_street_name": "PING TONG ST"
+  },
+  {
+    "chi_street_name": "山邊街",
+    "eng_street_name": "SHAN PIN ST"
+  },
+  {
+    "chi_street_name": "康樂路",
+    "eng_street_name": "HONG LOK RD"
+  },
+  {
+    "chi_street_name": "建文街",
+    "eng_street_name": "KIN MAN STREET"
+  },
+  {
+    "chi_street_name": "忠信里",
+    "eng_street_name": "CHUNG SHUN LANE"
+  },
+  {
+    "chi_street_name": "恒富街",
+    "eng_street_name": "HANG FU ST"
+  },
+  {
+    "chi_street_name": "恒柏道",
+    "eng_street_name": "HUMBERT ST"
+  },
+  {
+    "chi_street_name": "恒貴街",
+    "eng_street_name": "HANG KWAI ST"
+  },
+  {
+    "chi_street_name": "文咸街",
+    "eng_street_name": "BONHAM STRAND"
+  },
+  {
+    "chi_street_name": "料壆第一巷",
+    "eng_street_name": "LIU POK 1ST LANE"
+  },
+  {
+    "chi_street_name": "料壆第一巷",
+    "eng_street_name": "1ST LANE LIU POK"
+  },
+  {
+    "chi_street_name": "料壆第七巷",
+    "eng_street_name": "LIU POK 7TH LANE"
+  },
+  {
+    "chi_street_name": "料壆第七巷",
+    "eng_street_name": "7TH LANE LIU POK"
+  },
+  {
+    "chi_street_name": "料壆第三巷",
+    "eng_street_name": "LIU POK 3RD LANE"
+  },
+  {
+    "chi_street_name": "料壆第三巷",
+    "eng_street_name": "3RD LANE LIU POK"
+  },
+  {
+    "chi_street_name": "料壆第九巷",
+    "eng_street_name": "LIU POK 9TH LANE"
+  },
+  {
+    "chi_street_name": "料壆第九巷",
+    "eng_street_name": "9TH LANE LIU POK"
+  },
+  {
+    "chi_street_name": "料壆第二巷",
+    "eng_street_name": "LIU POK 2ND LANE"
+  },
+  {
+    "chi_street_name": "料壆第二巷",
+    "eng_street_name": "2ND LANE LIU POK"
+  },
+  {
+    "chi_street_name": "料壆第五巷",
+    "eng_street_name": "LIU POK 5TH LANE"
+  },
+  {
+    "chi_street_name": "料壆第五巷",
+    "eng_street_name": "5TH LANE LIU POK"
+  },
+  {
+    "chi_street_name": "料壆第八巷",
+    "eng_street_name": "LIU POK 8TH LANE"
+  },
+  {
+    "chi_street_name": "料壆第八巷",
+    "eng_street_name": "8TH LANE LIU POK"
+  },
+  {
+    "chi_street_name": "料壆第六巷",
+    "eng_street_name": "LIU POK 6TH LANE"
+  },
+  {
+    "chi_street_name": "料壆第六巷",
+    "eng_street_name": "6TH LANE LIU POK"
+  },
+  {
+    "chi_street_name": "料壆第十一巷",
+    "eng_street_name": "11TH LANE LIU POK"
+  },
+  {
+    "chi_street_name": "料壆第十二巷",
+    "eng_street_name": "LIU POK 12TH LANE"
+  },
+  {
+    "chi_street_name": "料壆第十二巷",
+    "eng_street_name": "12TH LANE LIU POK"
+  },
+  {
+    "chi_street_name": "料壆第十巷",
+    "eng_street_name": "LIU POK 10TH LANE"
+  },
+  {
+    "chi_street_name": "料壆第十巷",
+    "eng_street_name": "10TH LANE LIU POK"
+  },
+  {
+    "chi_street_name": "料壆第四巷",
+    "eng_street_name": "LIU POK 4TH LANE"
+  },
+  {
+    "chi_street_name": "料壆第四巷",
+    "eng_street_name": "4TH LANE LIU POK"
+  },
+  {
+    "chi_street_name": "新屋嶺第一巷",
+    "eng_street_name": "SAN UK LING 1ST LANE"
+  },
+  {
+    "chi_street_name": "新屋嶺第一巷",
+    "eng_street_name": "1ST LANE SAN UK LING"
+  },
+  {
+    "chi_street_name": "新屋嶺第七巷",
+    "eng_street_name": "7TH LANE SAN UK LING"
+  },
+  {
+    "chi_street_name": "新屋嶺第三巷",
+    "eng_street_name": "SAN UK LING 3RD LANE"
+  },
+  {
+    "chi_street_name": "新屋嶺第三巷",
+    "eng_street_name": "3RD LANE SAN UK LING"
+  },
+  {
+    "chi_street_name": "新屋嶺第二巷",
+    "eng_street_name": "SAN UK LING 2ND LANE"
+  },
+  {
+    "chi_street_name": "新屋嶺第二巷",
+    "eng_street_name": "2ND LANE SAN UK LING"
+  },
+  {
+    "chi_street_name": "新屋嶺第五巷",
+    "eng_street_name": "5TH LANE SAN UK LING"
+  },
+  {
+    "chi_street_name": "新屋嶺第六巷",
+    "eng_street_name": "SAN UK LING 6TH LANE"
+  },
+  {
+    "chi_street_name": "新屋嶺第六巷",
+    "eng_street_name": "6TH LANE SAN UK LING"
+  },
+  {
+    "chi_street_name": "新屋嶺第四巷",
+    "eng_street_name": "SAN UK LING 4TH LANE"
+  },
+  {
+    "chi_street_name": "新屋嶺第四巷",
+    "eng_street_name": "4TH LANE SAN UK LING"
+  },
+  {
+    "chi_street_name": "新樓橫街",
+    "eng_street_name": "SAN LAU WANG ST"
+  },
+  {
+    "chi_street_name": "新海旁街",
+    "eng_street_name": "NEW PRAYA, KENNEDY TOWN"
+  },
+  {
+    "chi_street_name": "新興海傍路",
+    "eng_street_name": "SAN HING PRAYA RD"
+  },
+  {
+    "chi_street_name": "東堤南路",
+    "eng_street_name": "TUNG TAI NAM RD"
+  },
+  {
+    "chi_street_name": "東慶路",
+    "eng_street_name": "TUNG HING RD"
+  },
+  {
+    "chi_street_name": "東成里",
+    "eng_street_name": "TUNG SHING LEI"
+  },
+  {
+    "chi_street_name": "東永安路",
+    "eng_street_name": "TUNG WING ON ROAD"
+  },
+  {
+    "chi_street_name": "松濤路",
+    "eng_street_name": "PINERY RD"
+  },
+  {
+    "chi_street_name": "機利士路",
+    "eng_street_name": "GILLIES AVE"
+  },
+  {
+    "chi_street_name": "橫台山永寧里",
+    "eng_street_name": "WANG TOI SHAN WING NING LEI"
+  },
+  {
+    "chi_street_name": "正大街",
+    "eng_street_name": "CHING TAI STREET"
+  },
+  {
+    "chi_street_name": "水塘路",
+    "eng_street_name": "RESERVOIR RD"
+  },
+  {
+    "chi_street_name": "永光街",
+    "eng_street_name": "WING KWONG ST"
+  },
+  {
+    "chi_street_name": "永安後街",
+    "eng_street_name": "WING ON BACK ST"
+  },
+  {
+    "chi_street_name": "沙咀道",
+    "eng_street_name": "SHA TSUI ROAD"
+  },
+  {
+    "chi_street_name": "沙田坳道",
+    "eng_street_name": "SHATIN PASS RD"
+  },
+  {
+    "chi_street_name": "沙田坳道",
+    "eng_street_name": "SHA TIN PASS RD"
+  },
+  {
+    "chi_street_name": "沙螺灣村第一街",
+    "eng_street_name": "SHA LO WAN TSUEN 1ST LANE"
+  },
+  {
+    "chi_street_name": "沙螺灣村第三街",
+    "eng_street_name": "SHA LO WAN TSUEN 3RD LANE"
+  },
+  {
+    "chi_street_name": "沙螺灣村第二街",
+    "eng_street_name": "SHA LO WAN TSUEN 2ND LANE"
+  },
+  {
+    "chi_street_name": "沙螺灣村第五街",
+    "eng_street_name": "SHA LO WAN TSUEN 5TH LANE"
+  },
+  {
+    "chi_street_name": "沙螺灣村第四街",
+    "eng_street_name": "SHA LO WAN TSUEN 4TH LANE"
+  },
+  {
+    "chi_street_name": "沙角尾村七巷",
+    "eng_street_name": "SHA KOK MEI SEVENTH LANE"
+  },
+  {
+    "chi_street_name": "沙角尾村九巷",
+    "eng_street_name": "SHA KOK MEI NINTH LANE"
+  },
+  {
+    "chi_street_name": "沙角尾村八巷",
+    "eng_street_name": "SHA KOK MEI EIGHTH LANE"
+  },
+  {
+    "chi_street_name": "沙角尾村六巷",
+    "eng_street_name": "SHA KOK MEI SIXTH LANE"
+  },
+  {
+    "chi_street_name": "沙角尾村十一巷",
+    "eng_street_name": "SHA KOK MEI ELEVENTH LANE"
+  },
+  {
+    "chi_street_name": "沙角尾村十二巷",
+    "eng_street_name": "SHA KOK MEI TWELFTH LANE"
+  },
+  {
+    "chi_street_name": "沙角尾村十巷",
+    "eng_street_name": "SHA KOK MEI TENTH LANE"
+  },
+  {
+    "chi_street_name": "沙角尾第一巷",
+    "eng_street_name": "1ST LANE SHA KOK MEI"
+  },
+  {
+    "chi_street_name": "沙角尾第七巷",
+    "eng_street_name": "7TH LANE SHA KOK MEI"
+  },
+  {
+    "chi_street_name": "沙角尾第三巷",
+    "eng_street_name": "3RD LANE SHA KOK MEI"
+  },
+  {
+    "chi_street_name": "沙角尾第九巷",
+    "eng_street_name": "9TH LANE SHA KOK MEI"
+  },
+  {
+    "chi_street_name": "沙角尾第二巷",
+    "eng_street_name": "2ND LANE SHA KOK MEI"
+  },
+  {
+    "chi_street_name": "沙角尾第五巷",
+    "eng_street_name": "5TH LANE SHA KOK MEI"
+  },
+  {
+    "chi_street_name": "沙角尾第八巷",
+    "eng_street_name": "8TH LANE SHA KOK MEI"
+  },
+  {
+    "chi_street_name": "沙角尾第六巷",
+    "eng_street_name": "6TH LANE SHA KOK MEI"
+  },
+  {
+    "chi_street_name": "沙角尾第十一巷",
+    "eng_street_name": "11TH LANE SHA KOK MEI"
+  },
+  {
+    "chi_street_name": "沙角尾第十二巷",
+    "eng_street_name": "12TH LANE SHA KOK MEI"
+  },
+  {
+    "chi_street_name": "沙角尾第十巷",
+    "eng_street_name": "10TH LANE SHA KOK MEI"
+  },
+  {
+    "chi_street_name": "沙角尾第四巷",
+    "eng_street_name": "4TH LANE SHA KOK MEI"
+  },
+  {
+    "chi_street_name": "泉源道",
+    "eng_street_name": "CHUEN YUEN RD"
+  },
+  {
+    "chi_street_name": "海傍道",
+    "eng_street_name": "HOI PONG RD"
+  },
+  {
+    "chi_street_name": "海旁大街",
+    "eng_street_name": "HOI PON MAIN ST"
+  },
+  {
+    "chi_street_name": "海旁街",
+    "eng_street_name": "HOI PON ST"
+  },
+  {
+    "chi_street_name": "海旁街",
+    "eng_street_name": "HOI PONG ST"
+  },
+  {
+    "chi_street_name": "海港道",
+    "eng_street_name": "HARBOUR PARADE"
+  },
+  {
+    "chi_street_name": "涌海道",
+    "eng_street_name": "CHUN HOI RD"
+  },
+  {
+    "chi_street_name": "深井大街",
+    "eng_street_name": "SHAM TSENG MAIN ST"
+  },
+  {
+    "chi_street_name": "灰業街",
+    "eng_street_name": "FUI YIP STREET"
+  },
+  {
+    "chi_street_name": "灰業街",
+    "eng_street_name": "FUI YIP ST"
+  },
+  {
+    "chi_street_name": "烏溪沙村第六巷",
+    "eng_street_name": "WU KAI SHA VILLAGE SIXTH LANE"
+  },
+  {
+    "chi_street_name": "烏溪沙村第四巷",
+    "eng_street_name": "WU KAI SHA VILLAGE FOURTH LANE"
+  },
+  {
+    "chi_street_name": "烟廠街",
+    "eng_street_name": "YIN CHONG ST"
+  },
+  {
+    "chi_street_name": "燕崗村第一巷",
+    "eng_street_name": "YIN KONG FIRST LANE"
+  },
+  {
+    "chi_street_name": "燕崗村第三巷",
+    "eng_street_name": "YIN KONG THIRD LANE"
+  },
+  {
+    "chi_street_name": "燕崗村第二巷",
+    "eng_street_name": "YIN KONG SECOND LANE"
+  },
+  {
+    "chi_street_name": "燕崗村第四巷",
+    "eng_street_name": "YIN KONG FOURTH LANE"
+  },
+  {
+    "chi_street_name": "燕崗第一巷",
+    "eng_street_name": "1ST LANE YIN KONG"
+  },
+  {
+    "chi_street_name": "燕崗第三巷",
+    "eng_street_name": "3RD LANE YIN KONG"
+  },
+  {
+    "chi_street_name": "燕崗第二巷",
+    "eng_street_name": "2ND LANE YIN KONG"
+  },
+  {
+    "chi_street_name": "燕崗第五巷",
+    "eng_street_name": "5TH LANE YIN KONG"
+  },
+  {
+    "chi_street_name": "燕崗第四巷",
+    "eng_street_name": "4TH LANE YIN KONG"
+  },
+  {
+    "chi_street_name": "球前街",
+    "eng_street_name": "KAU CHIN STREET"
+  },
+  {
+    "chi_street_name": "球前街",
+    "eng_street_name": "KAU CHIN ST"
+  },
+  {
+    "chi_street_name": "球南街",
+    "eng_street_name": "KAU NAM STREET"
+  },
+  {
+    "chi_street_name": "球南街",
+    "eng_street_name": "KAU NAM ST"
+  },
+  {
+    "chi_street_name": "球東街",
+    "eng_street_name": "KAU TUNG STREET"
+  },
+  {
+    "chi_street_name": "球東街",
+    "eng_street_name": "KAU TUNG ST"
+  },
+  {
+    "chi_street_name": "球西街",
+    "eng_street_name": "KAU SAI STREET"
+  },
+  {
+    "chi_street_name": "球西街",
+    "eng_street_name": "KAU SAI ST"
+  },
+  {
+    "chi_street_name": "環景街",
+    "eng_street_name": "WAN KING STREET"
+  },
+  {
+    "chi_street_name": "環樂街",
+    "eng_street_name": "WAN LOK STREET"
+  },
+  {
+    "chi_street_name": "環發街",
+    "eng_street_name": "WAN FAT STREET"
+  },
+  {
+    "chi_street_name": "環福街",
+    "eng_street_name": "WAN FUK STREET"
+  },
+  {
+    "chi_street_name": "環興街",
+    "eng_street_name": "WAN HING STREET"
+  },
+  {
+    "chi_street_name": "環達街",
+    "eng_street_name": "WAN TAT STREET"
+  },
+  {
+    "chi_street_name": "環順街",
+    "eng_street_name": "WAN SHUN STREET"
+  },
+  {
+    "chi_street_name": "瓊園路",
+    "eng_street_name": "KING YUEN ROAD"
+  },
+  {
+    "chi_street_name": "甘雨路",
+    "eng_street_name": "KAM YUE ROAD"
+  },
+  {
+    "chi_street_name": "田灣新街",
+    "eng_street_name": "TIN WAN NEW ST"
+  },
+  {
+    "chi_street_name": "百福村道",
+    "eng_street_name": "PAK FUK TSUEN RD"
+  },
+  {
+    "chi_street_name": "百花路",
+    "eng_street_name": "PAK FA ROAD"
+  },
+  {
+    "chi_street_name": "福恒街",
+    "eng_street_name": "FUK HANG ST"
+  },
+  {
+    "chi_street_name": "禮信街",
+    "eng_street_name": "NATION STREET"
+  },
+  {
+    "chi_street_name": "筲箕灣大街",
+    "eng_street_name": "SHAU KEI WAN MAIN ST"
+  },
+  {
+    "chi_street_name": "紫荊路",
+    "eng_street_name": "BAUHINIA RD"
+  },
+  {
+    "chi_street_name": "繼園上里",
+    "eng_street_name": "UPPER KAI YUEN LANE"
+  },
+  {
+    "chi_street_name": "羅湖軍營路",
+    "eng_street_name": "LO WU CAMP RD"
+  },
+  {
+    "chi_street_name": "美華街",
+    "eng_street_name": "MEI WA STREET"
+  },
+  {
+    "chi_street_name": "翠柏路",
+    "eng_street_name": "CHUI PAK ROAD"
+  },
+  {
+    "chi_street_name": "翠柏路",
+    "eng_street_name": "CHUI PAK RD"
+  },
+  {
+    "chi_street_name": "興仁村第四巷",
+    "eng_street_name": "HING YAN TSUEN LANE NO.4"
+  },
+  {
+    "chi_street_name": "航膳路",
+    "eng_street_name": "CATERING RD"
+  },
+  {
+    "chi_street_name": "芝蔴灣道",
+    "eng_street_name": "CHI MA WAN RD"
+  },
+  {
+    "chi_street_name": "荔枝路",
+    "eng_street_name": "LYCHEE RD"
+  },
+  {
+    "chi_street_name": "莆上村第七巷",
+    "eng_street_name": "PO SHEUNG TSUEN LANE NO.7"
+  },
+  {
+    "chi_street_name": "莆上村第九巷",
+    "eng_street_name": "PO SHEUNG TSUEN LANE NO.9"
+  },
+  {
+    "chi_street_name": "莆上村第二巷",
+    "eng_street_name": "PO SHEUNG TSUEN LANE NO.2"
+  },
+  {
+    "chi_street_name": "莆上村第八巷",
+    "eng_street_name": "PO SHEUNG TSUEN LANE NO.8"
+  },
+  {
+    "chi_street_name": "莆上村第六巷",
+    "eng_street_name": "PO SHEUNG TSUEN LANE NO.6"
+  },
+  {
+    "chi_street_name": "莆上村第十二巷",
+    "eng_street_name": "PO SHEUNG TSUEN LANE NO.12"
+  },
+  {
+    "chi_street_name": "莆上村第十巷",
+    "eng_street_name": "PO SHEUNG TSUEN LANE NO.10"
+  },
+  {
+    "chi_street_name": "萊洞第三巷",
+    "eng_street_name": "LOI TUNG THIRD LANE"
+  },
+  {
+    "chi_street_name": "萊洞第二巷",
+    "eng_street_name": "LOI TUNG SECOND LANE"
+  },
+  {
+    "chi_street_name": "萊洞第五巷",
+    "eng_street_name": "LOI TUNG FIFTH LANE"
+  },
+  {
+    "chi_street_name": "萊洞第四巷",
+    "eng_street_name": "LOI TUNG FOURTH LANE"
+  },
+  {
+    "chi_street_name": "蓮花宮街",
+    "eng_street_name": "LIN FA KUNG ST"
+  },
+  {
+    "chi_street_name": "虎地坳道",
+    "eng_street_name": "FU TEI AU RD"
+  },
+  {
+    "chi_street_name": "蠔涌村三巷",
+    "eng_street_name": "HO CHUNG THIRD LANE"
+  },
+  {
+    "chi_street_name": "蠔涌村九巷",
+    "eng_street_name": "HO CHUNG NINTH LANE"
+  },
+  {
+    "chi_street_name": "蠔涌村二巷",
+    "eng_street_name": "HO CHUNG SECOND LANE"
+  },
+  {
+    "chi_street_name": "蠔涌村五巷",
+    "eng_street_name": "HO CHUNG FIFTH LANE"
+  },
+  {
+    "chi_street_name": "蠔涌村八巷",
+    "eng_street_name": "HO CHUNG EIGHTH LANE"
+  },
+  {
+    "chi_street_name": "蠔涌村四巷",
+    "eng_street_name": "HO CHUNG FOURTH LANE"
+  },
+  {
+    "chi_street_name": "蠔涌第一巷",
+    "eng_street_name": "1ST LANE HO CHUNG"
+  },
+  {
+    "chi_street_name": "蠔涌第七巷",
+    "eng_street_name": "7TH LANE HO CHUNG"
+  },
+  {
+    "chi_street_name": "蠔涌第三巷",
+    "eng_street_name": "3RD LANE HO CHUNG"
+  },
+  {
+    "chi_street_name": "蠔涌第九巷",
+    "eng_street_name": "9TH LANE HO CHUNG"
+  },
+  {
+    "chi_street_name": "蠔涌第二巷",
+    "eng_street_name": "2ND LANE HO CHUNG"
+  },
+  {
+    "chi_street_name": "蠔涌第五巷",
+    "eng_street_name": "5TH LANE HO CHUNG"
+  },
+  {
+    "chi_street_name": "蠔涌第六巷",
+    "eng_street_name": "6TH LANE HO CHUNG"
+  },
+  {
+    "chi_street_name": "蠔涌第四巷",
+    "eng_street_name": "4TH LANE HO CHUNG"
+  },
+  {
+    "chi_street_name": "衛信道",
+    "eng_street_name": "WILSON RD"
+  },
+  {
+    "chi_street_name": "衛和街",
+    "eng_street_name": "WAI WO STREET"
+  },
+  {
+    "chi_street_name": "衛城坊",
+    "eng_street_name": "CASTLE STEPS"
+  },
+  {
+    "chi_street_name": "衛城道",
+    "eng_street_name": "CASTLE ROAD"
+  },
+  {
+    "chi_street_name": "衛城道",
+    "eng_street_name": "CASTLE RD"
+  },
+  {
+    "chi_street_name": "衛城里",
+    "eng_street_name": "CASTLE LANE"
+  },
+  {
+    "chi_street_name": "衛理徑",
+    "eng_street_name": "WYLIE PATH"
+  },
+  {
+    "chi_street_name": "衛理道",
+    "eng_street_name": "WYLIE ROAD"
+  },
+  {
+    "chi_street_name": "衛理道",
+    "eng_street_name": "WYLIE RD"
+  },
+  {
+    "chi_street_name": "衛環里",
+    "eng_street_name": "WAI WAN LANE"
+  },
+  {
+    "chi_street_name": "西樓街",
+    "eng_street_name": "SAI LAU STREET"
+  },
+  {
+    "chi_street_name": "西洋菜街",
+    "eng_street_name": "SAI YEUNG CHOI ST"
+  },
+  {
+    "chi_street_name": "豔馬道",
+    "eng_street_name": "EMMA AVE"
+  },
+  {
+    "chi_street_name": "貨運道",
+    "eng_street_name": "CARGO CIRCUIT"
+  },
+  {
+    "chi_street_name": "邊界道路",
+    "eng_street_name": "BORDER RD"
+  },
+  {
+    "chi_street_name": "金竹路",
+    "eng_street_name": "GOLDEN BAMBOO RD"
+  },
+  {
+    "chi_street_name": "金錢第一巷",
+    "eng_street_name": "KAM TSIN 1ST LANE"
+  },
+  {
+    "chi_street_name": "金錢第一巷",
+    "eng_street_name": "1ST LANE KAM TSIN"
+  },
+  {
+    "chi_street_name": "金錢第七巷",
+    "eng_street_name": "KAM TSIN 7TH LANE"
+  },
+  {
+    "chi_street_name": "金錢第七巷",
+    "eng_street_name": "7TH LANE KAM TSIN"
+  },
+  {
+    "chi_street_name": "金錢第三巷",
+    "eng_street_name": "KAM TSIN 3RD LANE"
+  },
+  {
+    "chi_street_name": "金錢第三巷",
+    "eng_street_name": "3RD LANE KAM TSIN"
+  },
+  {
+    "chi_street_name": "金錢第九巷",
+    "eng_street_name": "KAM TSIN 9TH LANE"
+  },
+  {
+    "chi_street_name": "金錢第九巷",
+    "eng_street_name": "9TH LANE KAM TSIN"
+  },
+  {
+    "chi_street_name": "金錢第二巷",
+    "eng_street_name": "KAM TSIN 2ND LANE"
+  },
+  {
+    "chi_street_name": "金錢第二巷",
+    "eng_street_name": "2ND LANE KAM TSIN"
+  },
+  {
+    "chi_street_name": "金錢第五巷",
+    "eng_street_name": "KAM TSIN 5TH LANE"
+  },
+  {
+    "chi_street_name": "金錢第五巷",
+    "eng_street_name": "5TH LANE KAM TSIN"
+  },
+  {
+    "chi_street_name": "金錢第八巷",
+    "eng_street_name": "KAM TSIN 8TH LANE"
+  },
+  {
+    "chi_street_name": "金錢第八巷",
+    "eng_street_name": "8TH LANE KAM TSIN"
+  },
+  {
+    "chi_street_name": "金錢第六巷",
+    "eng_street_name": "KAM TSIN 6TH LANE"
+  },
+  {
+    "chi_street_name": "金錢第六巷",
+    "eng_street_name": "6TH LANE KAM TSIN"
+  },
+  {
+    "chi_street_name": "金錢第十一巷",
+    "eng_street_name": "11TH LANE KAM TSIN"
+  },
+  {
+    "chi_street_name": "金錢第十三巷",
+    "eng_street_name": "13TH LANE KAM TSIN"
+  },
+  {
+    "chi_street_name": "金錢第十二巷",
+    "eng_street_name": "12TH LANE KAM TSIN"
+  },
+  {
+    "chi_street_name": "金錢第十四巷",
+    "eng_street_name": "14TH LANE KAM TSIN"
+  },
+  {
+    "chi_street_name": "金錢第十巷",
+    "eng_street_name": "KAM TSIN 10TH LANE"
+  },
+  {
+    "chi_street_name": "金錢第十巷",
+    "eng_street_name": "10TH LANE KAM TSIN"
+  },
+  {
+    "chi_street_name": "金錢第四巷",
+    "eng_street_name": "4TH LANE KAM TSIN"
+  },
+  {
+    "chi_street_name": "鉛礦坳道",
+    "eng_street_name": "LEAD MINE PASS RD"
+  },
+  {
+    "chi_street_name": "錦綉花園B段第一街",
+    "eng_street_name": "FAIRVIEW PARK SECT B 1ST"
+  },
+  {
+    "chi_street_name": "錦綉花園B段第七街",
+    "eng_street_name": "FAIRVIEW PARK SECT B 7TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園B段第三街",
+    "eng_street_name": "FAIRVIEW PARK SECT B 3RD ST"
+  },
+  {
+    "chi_street_name": "錦綉花園B段第二街",
+    "eng_street_name": "FAIRVIEW PARK SECT B 2ND ST"
+  },
+  {
+    "chi_street_name": "錦綉花園B段第五街",
+    "eng_street_name": "FAIRVIEW PARK SECT B 5TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園B段第六街",
+    "eng_street_name": "FAIRVIEW PARK SECT B 6TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園B段第四街",
+    "eng_street_name": "FAIRVIEW PARK SECT B 4TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園C段第九街",
+    "eng_street_name": "FAIRVIEW PARK SECT C 9TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園C段第八街",
+    "eng_street_name": "FAIRVIEW PARK SECT C 8TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園E段第一街",
+    "eng_street_name": "FAIRVIEW PARK SECT E 1ST"
+  },
+  {
+    "chi_street_name": "錦綉花園E段第三街",
+    "eng_street_name": "FAIRVIEW PARK SECT E 3RD ST"
+  },
+  {
+    "chi_street_name": "錦綉花園E段第二街",
+    "eng_street_name": "FAIRVIEW PARK SECT E 2ND ST"
+  },
+  {
+    "chi_street_name": "錦綉花園E段第四街",
+    "eng_street_name": "FAIRVIEW PARK SECT E 4TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園F段第一街",
+    "eng_street_name": "FAIRVIEW PARK SECT F 1ST"
+  },
+  {
+    "chi_street_name": "錦綉花園F段第七街",
+    "eng_street_name": "FAIRVIEW PARK SECT F 7TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園F段第九街",
+    "eng_street_name": "FAIRVIEW PARK SECT F 9TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園F段第二街",
+    "eng_street_name": "FAIRVIEW PARK SECT F 2ND ST"
+  },
+  {
+    "chi_street_name": "錦綉花園F段第五街",
+    "eng_street_name": "FAIRVIEW PARK SECT F 5TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園F段第八街",
+    "eng_street_name": "FAIRVIEW PARK SECT F 8TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園F段第六街",
+    "eng_street_name": "FAIRVIEW PARK SECT F 6TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園F段第十街",
+    "eng_street_name": "FAIRVIEW PARK SECT F 10TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園F段第四街",
+    "eng_street_name": "FAIRVIEW PARK SECT F 4TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園河北第一街",
+    "eng_street_name": "FAIRVIEW PARK RIVER NORTH 1ST"
+  },
+  {
+    "chi_street_name": "錦綉花園河北第七街",
+    "eng_street_name": "FAIRVIEW PARK RIVER NORTH 7TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園河北第三街",
+    "eng_street_name": "FAIRVIEW PARK RIVER NORTH 3RD ST"
+  },
+  {
+    "chi_street_name": "錦綉花園河北第九街",
+    "eng_street_name": "FAIRVIEW PARK RIVER NORTH 9TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園河北第二街",
+    "eng_street_name": "FAIRVIEW PARK RIVER NORTH 2ND ST"
+  },
+  {
+    "chi_street_name": "錦綉花園河北第五街",
+    "eng_street_name": "FAIRVIEW PARK RIVER NORTH 5TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園河北第八街",
+    "eng_street_name": "FAIRVIEW PARK RIVER NORTH 8TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園河北第六街",
+    "eng_street_name": "FAIRVIEW PARK RIVER NORTH 6TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園河北第十一街",
+    "eng_street_name": "FAIRVIEW PARK RIVER NORTH 11TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園河北第十二街",
+    "eng_street_name": "FAIRVIEW PARK RIVER NORTH 12TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園河北第十街",
+    "eng_street_name": "FAIRVIEW PARK RIVER NORTH 10TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園河北第四街",
+    "eng_street_name": "FAIRVIEW PARK RIVER NORTH 4TH ST"
+  },
+  {
+    "chi_street_name": "錦綉花園河北里",
+    "eng_street_name": "FAIRVIEW PARK RIVER NORTH LANE"
+  },
+  {
+    "chi_street_name": "鎮海路",
+    "eng_street_name": "CHUN HOI ROAD"
+  },
+  {
+    "chi_street_name": "長盛右街",
+    "eng_street_name": "CHEUNG SHING RIGHT ST"
+  },
+  {
+    "chi_street_name": "門口村第一巷",
+    "eng_street_name": "MUN HAU TSUEN LANE NO.1"
+  },
+  {
+    "chi_street_name": "門口村第七巷",
+    "eng_street_name": "MUN HAU TSUEN LANE NO.7"
+  },
+  {
+    "chi_street_name": "門口村第三巷",
+    "eng_street_name": "MUN HAU TSUEN LANE NO.3"
+  },
+  {
+    "chi_street_name": "門口村第九巷",
+    "eng_street_name": "MUN HAU TSUEN LANE NO.9"
+  },
+  {
+    "chi_street_name": "門口村第二巷",
+    "eng_street_name": "MUN HAU TSUEN LANE NO.2"
+  },
+  {
+    "chi_street_name": "門口村第五巷",
+    "eng_street_name": "MUN HAU TSUEN LANE NO.5"
+  },
+  {
+    "chi_street_name": "門口村第六巷",
+    "eng_street_name": "MUN HAU TSUEN LANE NO.6"
+  },
+  {
+    "chi_street_name": "門口村第十一巷",
+    "eng_street_name": "MUN HAU TSUEN LANE NO.11"
+  },
+  {
+    "chi_street_name": "隔田南軒路",
+    "eng_street_name": "NAM HIN RD KAK TIN"
+  },
+  {
+    "chi_street_name": "隔田叢林徑",
+    "eng_street_name": "CHUNG LAM PATH KAK TIN"
+  },
+  {
+    "chi_street_name": "隔田叢林徑",
+    "eng_street_name": "PINE PATH KAK TIN"
+  },
+  {
+    "chi_street_name": "隔田村南滘路",
+    "eng_street_name": "KAK TIN VILLAGE NAM KAU ROAD"
+  },
+  {
+    "chi_street_name": "隔田村南軒路",
+    "eng_street_name": "KAK TIN VILLAGE NAM HIN ROAD"
+  },
+  {
+    "chi_street_name": "隔田村松林徑",
+    "eng_street_name": "KAK TIN VILLAGE PINE PATH"
+  },
+  {
+    "chi_street_name": "隔田村正街",
+    "eng_street_name": "KAK TIN VILLAGE MAIN STREET"
+  },
+  {
+    "chi_street_name": "隔田村第三街",
+    "eng_street_name": "KAK TIN VILLAGE 3RD STREET"
+  },
+  {
+    "chi_street_name": "隔田村第二街",
+    "eng_street_name": "KAK TIN VILLAGE 2ND STREET"
+  },
+  {
+    "chi_street_name": "隔田村第五街",
+    "eng_street_name": "KAK TIN VILLAGE 5TH STREET"
+  },
+  {
+    "chi_street_name": "隔田村第四街",
+    "eng_street_name": "KAK TIN VILLAGE 4TH STREET"
+  },
+  {
+    "chi_street_name": "隔田村高街",
+    "eng_street_name": "KAK TIN VILLAGE HIGH STREET"
+  },
+  {
+    "chi_street_name": "隔田正街",
+    "eng_street_name": "MAIN ST KAK TIN"
+  },
+  {
+    "chi_street_name": "隔田第三街",
+    "eng_street_name": "THIRD ST KAK TIN"
+  },
+  {
+    "chi_street_name": "隔田第二街",
+    "eng_street_name": "SECOND ST KAK TIN"
+  },
+  {
+    "chi_street_name": "隔田第五街",
+    "eng_street_name": "FIFTH ST KAK TIN"
+  },
+  {
+    "chi_street_name": "隔田第六街",
+    "eng_street_name": "SIXTH ST KAK TIN"
+  },
+  {
+    "chi_street_name": "隔田第四街",
+    "eng_street_name": "FOURTH ST KAK TIN"
+  },
+  {
+    "chi_street_name": "隔田高街",
+    "eng_street_name": "HIGH STREET KAK TIN"
+  },
+  {
+    "chi_street_name": "霎街",
+    "eng_street_name": "SHARP ST"
+  },
+  {
+    "chi_street_name": "靈山村第三街",
+    "eng_street_name": "THIRD STREET LING SHAN"
+  },
+  {
+    "chi_street_name": "馬灣體育路",
+    "eng_street_name": "TAI YUK RD"
+  },
+  {
+    "chi_street_name": "體育路",
+    "eng_street_name": "TAI YUK ROAD"
+  },
+  {
+    "chi_street_name": "鳳攸街",
+    "eng_street_name": "FUNG YAU ST"
+  },
+  {
+    "chi_street_name": "黃竹洋第一巷",
+    "eng_street_name": "1ST LANE WONG CHUK YEUNG"
+  },
+  {
+    "chi_street_name": "黃竹洋第三巷",
+    "eng_street_name": "WONG CHUK YEUNG 3RD LANE"
+  },
+  {
+    "chi_street_name": "黃竹洋第三巷",
+    "eng_street_name": "3RD LANE WONG CHUK YEUNG"
+  },
+  {
+    "chi_street_name": "黃竹洋第二巷",
+    "eng_street_name": "WONG CHUK YEUNG 2ND LANE"
+  },
+  {
+    "chi_street_name": "黃竹洋第二巷",
+    "eng_street_name": "2ND LANE WONG CHUK YEUNG"
+  },
+  {
+    "chi_street_name": "黃竹洋第四巷",
+    "eng_street_name": "WONG CHUK YEUNG 4TH LANE"
+  },
+  {
+    "chi_street_name": "黃竹洋第四巷",
+    "eng_street_name": "4TH LANE WONG CHUK YEUNG"
   }
 ]

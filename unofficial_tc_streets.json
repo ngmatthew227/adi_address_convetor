@@ -1,0 +1,3982 @@
+[
+  {
+    "tc_street_name": "荔枝路",
+    "count": 916
+  },
+  {
+    "tc_street_name": "紫荊路",
+    "count": 786
+  },
+  {
+    "tc_street_name": "汀角",
+    "count": 683
+  },
+  {
+    "tc_street_name": "康樂路",
+    "count": 632
+  },
+  {
+    "tc_street_name": "大旗嶺",
+    "count": 598
+  },
+  {
+    "tc_street_name": "坑頭",
+    "count": 512
+  },
+  {
+    "tc_street_name": "蓮花地",
+    "count": 493
+  },
+  {
+    "tc_street_name": "橫台山永寧里",
+    "count": 442
+  },
+  {
+    "tc_street_name": "元嶺",
+    "count": 425
+  },
+  {
+    "tc_street_name": "石湖塘",
+    "count": 411
+  },
+  {
+    "tc_street_name": "河上鄉",
+    "count": 394
+  },
+  {
+    "tc_street_name": "大埔頭",
+    "count": 390
+  },
+  {
+    "tc_street_name": "水頭",
+    "count": 388
+  },
+  {
+    "tc_street_name": "龍尾",
+    "count": 378
+  },
+  {
+    "tc_street_name": "井欄樹",
+    "count": 372
+  },
+  {
+    "tc_street_name": "大埔仔",
+    "count": 362
+  },
+  {
+    "tc_street_name": "松柏朗",
+    "count": 362
+  },
+  {
+    "tc_street_name": "下輋",
+    "count": 338
+  },
+  {
+    "tc_street_name": "坪洋",
+    "count": 328
+  },
+  {
+    "tc_street_name": "大窩",
+    "count": 322
+  },
+  {
+    "tc_street_name": "坪朗",
+    "count": 319
+  },
+  {
+    "tc_street_name": "井頭",
+    "count": 317
+  },
+  {
+    "tc_street_name": "河背",
+    "count": 317
+  },
+  {
+    "tc_street_name": "大江埔",
+    "count": 313
+  },
+  {
+    "tc_street_name": "牛徑",
+    "count": 294
+  },
+  {
+    "tc_street_name": "元崗",
+    "count": 292
+  },
+  {
+    "tc_street_name": "布心排",
+    "count": 278
+  },
+  {
+    "tc_street_name": "西徑",
+    "count": 274
+  },
+  {
+    "tc_street_name": "馬游塘",
+    "count": 274
+  },
+  {
+    "tc_street_name": "西洋菜街",
+    "count": 263
+  },
+  {
+    "tc_street_name": "南華莆",
+    "count": 260
+  },
+  {
+    "tc_street_name": "沙埔崗",
+    "count": 250
+  },
+  {
+    "tc_street_name": "鳳園",
+    "count": 250
+  },
+  {
+    "tc_street_name": "北港",
+    "count": 247
+  },
+  {
+    "tc_street_name": "錦山",
+    "count": 245
+  },
+  {
+    "tc_street_name": "坑下莆",
+    "count": 244
+  },
+  {
+    "tc_street_name": "南山",
+    "count": 243
+  },
+  {
+    "tc_street_name": "大美督",
+    "count": 241
+  },
+  {
+    "tc_street_name": "水流田",
+    "count": 241
+  },
+  {
+    "tc_street_name": "蘆慈田",
+    "count": 240
+  },
+  {
+    "tc_street_name": "䃟頭角",
+    "count": 237
+  },
+  {
+    "tc_street_name": "新屋家",
+    "count": 235
+  },
+  {
+    "tc_street_name": "泮涌",
+    "count": 234
+  },
+  {
+    "tc_street_name": "北朗",
+    "count": 230
+  },
+  {
+    "tc_street_name": "廈村市",
+    "count": 230
+  },
+  {
+    "tc_street_name": "楊小坑",
+    "count": 223
+  },
+  {
+    "tc_street_name": "松濤路",
+    "count": 220
+  },
+  {
+    "tc_street_name": "瓦窰頭",
+    "count": 214
+  },
+  {
+    "tc_street_name": "摩星嶺平房區",
+    "count": 211
+  },
+  {
+    "tc_street_name": "相思灣",
+    "count": 211
+  },
+  {
+    "tc_street_name": "金竹路",
+    "count": 209
+  },
+  {
+    "tc_street_name": "樟樹灘",
+    "count": 208
+  },
+  {
+    "tc_street_name": "軍地",
+    "count": 207
+  },
+  {
+    "tc_street_name": "新屋仔",
+    "count": 205
+  },
+  {
+    "tc_street_name": "上輋",
+    "count": 204
+  },
+  {
+    "tc_street_name": "水盞田",
+    "count": 200
+  },
+  {
+    "tc_street_name": "孔嶺",
+    "count": 198
+  },
+  {
+    "tc_street_name": "沙嶺",
+    "count": 195
+  },
+  {
+    "tc_street_name": "田心",
+    "count": 195
+  },
+  {
+    "tc_street_name": "洲頭",
+    "count": 194
+  },
+  {
+    "tc_street_name": "水尾",
+    "count": 192
+  },
+  {
+    "tc_street_name": "下黃宜坳",
+    "count": 187
+  },
+  {
+    "tc_street_name": "大水坑",
+    "count": 185
+  },
+  {
+    "tc_street_name": "排頭",
+    "count": 185
+  },
+  {
+    "tc_street_name": "沙角尾",
+    "count": 185
+  },
+  {
+    "tc_street_name": "船灣詹屋",
+    "count": 185
+  },
+  {
+    "tc_street_name": "金錢",
+    "count": 185
+  },
+  {
+    "tc_street_name": "輋下",
+    "count": 181
+  },
+  {
+    "tc_street_name": "馬屎埔",
+    "count": 180
+  },
+  {
+    "tc_street_name": "掃管笏村第一區",
+    "count": 175
+  },
+  {
+    "tc_street_name": "石古壟",
+    "count": 174
+  },
+  {
+    "tc_street_name": "半山洲",
+    "count": 173
+  },
+  {
+    "tc_street_name": "南灣",
+    "count": 173
+  },
+  {
+    "tc_street_name": "山貝",
+    "count": 173
+  },
+  {
+    "tc_street_name": "下坑",
+    "count": 172
+  },
+  {
+    "tc_street_name": "塘福",
+    "count": 172
+  },
+  {
+    "tc_street_name": "南坑",
+    "count": 171
+  },
+  {
+    "tc_street_name": "沙田頭",
+    "count": 170
+  },
+  {
+    "tc_street_name": "圍頭村輋地",
+    "count": 167
+  },
+  {
+    "tc_street_name": "大坑口",
+    "count": 167
+  },
+  {
+    "tc_street_name": "蓮麻坑",
+    "count": 167
+  },
+  {
+    "tc_street_name": "坪輋",
+    "count": 164
+  },
+  {
+    "tc_street_name": "嶺仔",
+    "count": 163
+  },
+  {
+    "tc_street_name": "鰲磡",
+    "count": 163
+  },
+  {
+    "tc_street_name": "甲邊朗",
+    "count": 161
+  },
+  {
+    "tc_street_name": "九華徑",
+    "count": 160
+  },
+  {
+    "tc_street_name": "營盤",
+    "count": 158
+  },
+  {
+    "tc_street_name": "上嶺皮",
+    "count": 156
+  },
+  {
+    "tc_street_name": "馬鞍崗",
+    "count": 156
+  },
+  {
+    "tc_street_name": "九龍坑",
+    "count": 152
+  },
+  {
+    "tc_street_name": "下禾輋",
+    "count": 151
+  },
+  {
+    "tc_street_name": "丙崗",
+    "count": 148
+  },
+  {
+    "tc_street_name": "錦綉花園河北第八街",
+    "count": 148
+  },
+  {
+    "tc_street_name": "下担水坑",
+    "count": 147
+  },
+  {
+    "tc_street_name": "掃管笏村第二區",
+    "count": 147
+  },
+  {
+    "tc_street_name": "粉嶺樓",
+    "count": 146
+  },
+  {
+    "tc_street_name": "水口",
+    "count": 144
+  },
+  {
+    "tc_street_name": "西澳",
+    "count": 142
+  },
+  {
+    "tc_street_name": "鹿地塘",
+    "count": 142
+  },
+  {
+    "tc_street_name": "上禾輋",
+    "count": 141
+  },
+  {
+    "tc_street_name": "大坪",
+    "count": 141
+  },
+  {
+    "tc_street_name": "荔枝窩",
+    "count": 141
+  },
+  {
+    "tc_street_name": "上竹園",
+    "count": 138
+  },
+  {
+    "tc_street_name": "木湖",
+    "count": 137
+  },
+  {
+    "tc_street_name": "顯田",
+    "count": 137
+  },
+  {
+    "tc_street_name": "上禾坑",
+    "count": 136
+  },
+  {
+    "tc_street_name": "寶塘下",
+    "count": 136
+  },
+  {
+    "tc_street_name": "錦綉花園河北第九街",
+    "count": 136
+  },
+  {
+    "tc_street_name": "大環",
+    "count": 135
+  },
+  {
+    "tc_street_name": "逢吉鄉",
+    "count": 134
+  },
+  {
+    "tc_street_name": "橫塘",
+    "count": 133
+  },
+  {
+    "tc_street_name": "獅頭嶺",
+    "count": 133
+  },
+  {
+    "tc_street_name": "圍下",
+    "count": 132
+  },
+  {
+    "tc_street_name": "下洋",
+    "count": 131
+  },
+  {
+    "tc_street_name": "塘坑",
+    "count": 131
+  },
+  {
+    "tc_street_name": "樟木頭",
+    "count": 130
+  },
+  {
+    "tc_street_name": "下徑口",
+    "count": 129
+  },
+  {
+    "tc_street_name": "筲箕灣大街",
+    "count": 129
+  },
+  {
+    "tc_street_name": "虎地排",
+    "count": 128
+  },
+  {
+    "tc_street_name": "大塘湖",
+    "count": 125
+  },
+  {
+    "tc_street_name": "沙欄",
+    "count": 125
+  },
+  {
+    "tc_street_name": "萊洞",
+    "count": 125
+  },
+  {
+    "tc_street_name": "馬田壆",
+    "count": 125
+  },
+  {
+    "tc_street_name": "上徑口",
+    "count": 124
+  },
+  {
+    "tc_street_name": "窩美",
+    "count": 124
+  },
+  {
+    "tc_street_name": "大網仔",
+    "count": 123
+  },
+  {
+    "tc_street_name": "萬屋邊",
+    "count": 123
+  },
+  {
+    "tc_street_name": "大地塘",
+    "count": 122
+  },
+  {
+    "tc_street_name": "模範鄉",
+    "count": 122
+  },
+  {
+    "tc_street_name": "麻雀嶺",
+    "count": 122
+  },
+  {
+    "tc_street_name": "山咀",
+    "count": 120
+  },
+  {
+    "tc_street_name": "慶徑石",
+    "count": 119
+  },
+  {
+    "tc_street_name": "早禾坑",
+    "count": 119
+  },
+  {
+    "tc_street_name": "榕樹澳",
+    "count": 119
+  },
+  {
+    "tc_street_name": "上洋",
+    "count": 118
+  },
+  {
+    "tc_street_name": "錦綉花園E段第三街",
+    "count": 118
+  },
+  {
+    "tc_street_name": "黃竹灣",
+    "count": 117
+  },
+  {
+    "tc_street_name": "大埔尾",
+    "count": 116
+  },
+  {
+    "tc_street_name": "寨乪",
+    "count": 114
+  },
+  {
+    "tc_street_name": "白沙灣",
+    "count": 114
+  },
+  {
+    "tc_street_name": "告士打道",
+    "count": 112
+  },
+  {
+    "tc_street_name": "大橋",
+    "count": 112
+  },
+  {
+    "tc_street_name": "橫州擴展新區",
+    "count": 111
+  },
+  {
+    "tc_street_name": "竹園",
+    "count": 110
+  },
+  {
+    "tc_street_name": "長莆",
+    "count": 110
+  },
+  {
+    "tc_street_name": "黃魚灘",
+    "count": 109
+  },
+  {
+    "tc_street_name": "大菴",
+    "count": 108
+  },
+  {
+    "tc_street_name": "竹坑",
+    "count": 108
+  },
+  {
+    "tc_street_name": "錦綉花園河北第十一街",
+    "count": 108
+  },
+  {
+    "tc_street_name": "大陽輋",
+    "count": 106
+  },
+  {
+    "tc_street_name": "雞嶺",
+    "count": 106
+  },
+  {
+    "tc_street_name": "茅莆",
+    "count": 105
+  },
+  {
+    "tc_street_name": "寶華園",
+    "count": 104
+  },
+  {
+    "tc_street_name": "錦綉花園E段第二街",
+    "count": 104
+  },
+  {
+    "tc_street_name": "錦綉花園河北第十街",
+    "count": 104
+  },
+  {
+    "tc_street_name": "梧桐寨",
+    "count": 103
+  },
+  {
+    "tc_street_name": "莫遮輋",
+    "count": 103
+  },
+  {
+    "tc_street_name": "躉場",
+    "count": 101
+  },
+  {
+    "tc_street_name": "南坑排",
+    "count": 100
+  },
+  {
+    "tc_street_name": "馬牯纜",
+    "count": 100
+  },
+  {
+    "tc_street_name": "崇謙堂",
+    "count": 99
+  },
+  {
+    "tc_street_name": "檳榔灣",
+    "count": 99
+  },
+  {
+    "tc_street_name": "白銀鄉",
+    "count": 98
+  },
+  {
+    "tc_street_name": "李屋",
+    "count": 97
+  },
+  {
+    "tc_street_name": "較寮下",
+    "count": 97
+  },
+  {
+    "tc_street_name": "七姊妺道",
+    "count": 95
+  },
+  {
+    "tc_street_name": "荔枝山",
+    "count": 94
+  },
+  {
+    "tc_street_name": "軍地北",
+    "count": 94
+  },
+  {
+    "tc_street_name": "新圍仔",
+    "count": 93
+  },
+  {
+    "tc_street_name": "船灣陳屋",
+    "count": 93
+  },
+  {
+    "tc_street_name": "赤泥坪",
+    "count": 93
+  },
+  {
+    "tc_street_name": "多石",
+    "count": 92
+  },
+  {
+    "tc_street_name": "鹿頸",
+    "count": 92
+  },
+  {
+    "tc_street_name": "石門甲",
+    "count": 91
+  },
+  {
+    "tc_street_name": "泥涌",
+    "count": 90
+  },
+  {
+    "tc_street_name": "北港㘭",
+    "count": 88
+  },
+  {
+    "tc_street_name": "錦綉花園E段第一街",
+    "count": 88
+  },
+  {
+    "tc_street_name": "崗下",
+    "count": 86
+  },
+  {
+    "tc_street_name": "忠信里",
+    "count": 86
+  },
+  {
+    "tc_street_name": "田寮",
+    "count": 86
+  },
+  {
+    "tc_street_name": "石榴埔",
+    "count": 86
+  },
+  {
+    "tc_street_name": "牛寮",
+    "count": 85
+  },
+  {
+    "tc_street_name": "魷魚灣",
+    "count": 85
+  },
+  {
+    "tc_street_name": "上碗窰",
+    "count": 84
+  },
+  {
+    "tc_street_name": "山下",
+    "count": 84
+  },
+  {
+    "tc_street_name": "新塘",
+    "count": 84
+  },
+  {
+    "tc_street_name": "蓮塘尾",
+    "count": 83
+  },
+  {
+    "tc_street_name": "圍仔",
+    "count": 82
+  },
+  {
+    "tc_street_name": "斬竹灣",
+    "count": 82
+  },
+  {
+    "tc_street_name": "陳屋埔",
+    "count": 82
+  },
+  {
+    "tc_street_name": "橫台山紅毛潭",
+    "count": 81
+  },
+  {
+    "tc_street_name": "洞梓",
+    "count": 81
+  },
+  {
+    "tc_street_name": "馬尾下",
+    "count": 81
+  },
+  {
+    "tc_street_name": "白石臺",
+    "count": 80
+  },
+  {
+    "tc_street_name": "錦田市",
+    "count": 80
+  },
+  {
+    "tc_street_name": "大涌口",
+    "count": 79
+  },
+  {
+    "tc_street_name": "布袋澳",
+    "count": 79
+  },
+  {
+    "tc_street_name": "東成里",
+    "count": 79
+  },
+  {
+    "tc_street_name": "白芒",
+    "count": 78
+  },
+  {
+    "tc_street_name": "下嶺皮",
+    "count": 77
+  },
+  {
+    "tc_street_name": "田寮下",
+    "count": 77
+  },
+  {
+    "tc_street_name": "七星崗",
+    "count": 76
+  },
+  {
+    "tc_street_name": "大藍寮",
+    "count": 76
+  },
+  {
+    "tc_street_name": "泰湖閣",
+    "count": 76
+  },
+  {
+    "tc_street_name": "錦綉花園C段第九街",
+    "count": 76
+  },
+  {
+    "tc_street_name": "上山雞乙",
+    "count": 75
+  },
+  {
+    "tc_street_name": "東堤小築",
+    "count": 75
+  },
+  {
+    "tc_street_name": "落馬洲",
+    "count": 74
+  },
+  {
+    "tc_street_name": "五塊田",
+    "count": 73
+  },
+  {
+    "tc_street_name": "官坑",
+    "count": 72
+  },
+  {
+    "tc_street_name": "油渣埔",
+    "count": 72
+  },
+  {
+    "tc_street_name": "錦綉花園B段第三街",
+    "count": 72
+  },
+  {
+    "tc_street_name": "錦綉花園B段第四街",
+    "count": 72
+  },
+  {
+    "tc_street_name": "錦綉花園F段第七街",
+    "count": 72
+  },
+  {
+    "tc_street_name": "隔田村南滘",
+    "count": 72
+  },
+  {
+    "tc_street_name": "大埔田",
+    "count": 71
+  },
+  {
+    "tc_street_name": "上担水坑",
+    "count": 70
+  },
+  {
+    "tc_street_name": "牛潭尾",
+    "count": 69
+  },
+  {
+    "tc_street_name": "二陂圳",
+    "count": 68
+  },
+  {
+    "tc_street_name": "禾塘崗",
+    "count": 68
+  },
+  {
+    "tc_street_name": "錦綉花園C段第八街",
+    "count": 68
+  },
+  {
+    "tc_street_name": "小坑口",
+    "count": 67
+  },
+  {
+    "tc_street_name": "橫塱",
+    "count": 67
+  },
+  {
+    "tc_street_name": "文咸街",
+    "count": 66
+  },
+  {
+    "tc_street_name": "河瀝背",
+    "count": 66
+  },
+  {
+    "tc_street_name": "魚角",
+    "count": 65
+  },
+  {
+    "tc_street_name": "麻雀嶺新屋下",
+    "count": 65
+  },
+  {
+    "tc_street_name": "放馬莆",
+    "count": 64
+  },
+  {
+    "tc_street_name": "松園下",
+    "count": 64
+  },
+  {
+    "tc_street_name": "錦綉花園B段第二街",
+    "count": 64
+  },
+  {
+    "tc_street_name": "錦綉花園B段第五街",
+    "count": 64
+  },
+  {
+    "tc_street_name": "茅湖仔",
+    "count": 63
+  },
+  {
+    "tc_street_name": "青衣墟",
+    "count": 63
+  },
+  {
+    "tc_street_name": "高流灣",
+    "count": 63
+  },
+  {
+    "tc_street_name": "心朗",
+    "count": 62
+  },
+  {
+    "tc_street_name": "橫台山河瀝背",
+    "count": 62
+  },
+  {
+    "tc_street_name": "泰亨",
+    "count": 62
+  },
+  {
+    "tc_street_name": "洪屋",
+    "count": 62
+  },
+  {
+    "tc_street_name": "蠔涌",
+    "count": 62
+  },
+  {
+    "tc_street_name": "錦綉花園B段第一街",
+    "count": 62
+  },
+  {
+    "tc_street_name": "和宜合",
+    "count": 61
+  },
+  {
+    "tc_street_name": "石澳山仔",
+    "count": 61
+  },
+  {
+    "tc_street_name": "雷公田",
+    "count": 61
+  },
+  {
+    "tc_street_name": "下山雞乙",
+    "count": 60
+  },
+  {
+    "tc_street_name": "錦綉花園B段第六街",
+    "count": 60
+  },
+  {
+    "tc_street_name": "兩塊田",
+    "count": 59
+  },
+  {
+    "tc_street_name": "大洞",
+    "count": 59
+  },
+  {
+    "tc_street_name": "掃管笏村第三區",
+    "count": 59
+  },
+  {
+    "tc_street_name": "水澗石",
+    "count": 59
+  },
+  {
+    "tc_street_name": "鳳凰湖",
+    "count": 59
+  },
+  {
+    "tc_street_name": "鹹田",
+    "count": 59
+  },
+  {
+    "tc_street_name": "上水華山",
+    "count": 58
+  },
+  {
+    "tc_street_name": "壁屋",
+    "count": 58
+  },
+  {
+    "tc_street_name": "插桅杆",
+    "count": 58
+  },
+  {
+    "tc_street_name": "汀九",
+    "count": 58
+  },
+  {
+    "tc_street_name": "界咸",
+    "count": 58
+  },
+  {
+    "tc_street_name": "高塘",
+    "count": 58
+  },
+  {
+    "tc_street_name": "大坳門",
+    "count": 57
+  },
+  {
+    "tc_street_name": "油柑頭村擴展區",
+    "count": 57
+  },
+  {
+    "tc_street_name": "禾寮坑",
+    "count": 57
+  },
+  {
+    "tc_street_name": "馬灣大街村南",
+    "count": 57
+  },
+  {
+    "tc_street_name": "錦綉花園河北第一街",
+    "count": 56
+  },
+  {
+    "tc_street_name": "馬灣大街村中",
+    "count": 56
+  },
+  {
+    "tc_street_name": "唐公嶺",
+    "count": 55
+  },
+  {
+    "tc_street_name": "大浪",
+    "count": 55
+  },
+  {
+    "tc_street_name": "蓮澳",
+    "count": 55
+  },
+  {
+    "tc_street_name": "對面海",
+    "count": 54
+  },
+  {
+    "tc_street_name": "掃管埔",
+    "count": 54
+  },
+  {
+    "tc_street_name": "馬尾下嶺咀",
+    "count": 54
+  },
+  {
+    "tc_street_name": "南涌鄭屋",
+    "count": 53
+  },
+  {
+    "tc_street_name": "羅湖軍營路",
+    "count": 53
+  },
+  {
+    "tc_street_name": "錦綉花園河北第二街",
+    "count": 52
+  },
+  {
+    "tc_street_name": "雞谷樹下",
+    "count": 52
+  },
+  {
+    "tc_street_name": "黃麖地",
+    "count": 52
+  },
+  {
+    "tc_street_name": "半山路",
+    "count": 51
+  },
+  {
+    "tc_street_name": "上葵涌",
+    "count": 50
+  },
+  {
+    "tc_street_name": "大洞禾寮",
+    "count": 50
+  },
+  {
+    "tc_street_name": "打鐵屻",
+    "count": 50
+  },
+  {
+    "tc_street_name": "水窩",
+    "count": 50
+  },
+  {
+    "tc_street_name": "白田崗",
+    "count": 50
+  },
+  {
+    "tc_street_name": "石橋頭",
+    "count": 50
+  },
+  {
+    "tc_street_name": "馬灣涌",
+    "count": 50
+  },
+  {
+    "tc_street_name": "利源街",
+    "count": 49
+  },
+  {
+    "tc_street_name": "大乪",
+    "count": 49
+  },
+  {
+    "tc_street_name": "泉源道東",
+    "count": 49
+  },
+  {
+    "tc_street_name": "胡屋",
+    "count": 49
+  },
+  {
+    "tc_street_name": "蘆鬚城",
+    "count": 49
+  },
+  {
+    "tc_street_name": "馬窩",
+    "count": 49
+  },
+  {
+    "tc_street_name": "高塱",
+    "count": 49
+  },
+  {
+    "tc_street_name": "錦綉花園F段第八街",
+    "count": 48
+  },
+  {
+    "tc_street_name": "錦綉花園河北第十二街",
+    "count": 48
+  },
+  {
+    "tc_street_name": "掃桿埔平房區",
+    "count": 47
+  },
+  {
+    "tc_street_name": "新景台",
+    "count": 47
+  },
+  {
+    "tc_street_name": "機利士路",
+    "count": 47
+  },
+  {
+    "tc_street_name": "灰業街",
+    "count": 47
+  },
+  {
+    "tc_street_name": "牛牯塱",
+    "count": 47
+  },
+  {
+    "tc_street_name": "藍地",
+    "count": 47
+  },
+  {
+    "tc_street_name": "衛信道",
+    "count": 46
+  },
+  {
+    "tc_street_name": "長瀝",
+    "count": 46
+  },
+  {
+    "tc_street_name": "馬灣大街村北",
+    "count": 46
+  },
+  {
+    "tc_street_name": "南蛇塘",
+    "count": 45
+  },
+  {
+    "tc_street_name": "大山",
+    "count": 45
+  },
+  {
+    "tc_street_name": "西灣",
+    "count": 45
+  },
+  {
+    "tc_street_name": "莫家",
+    "count": 44
+  },
+  {
+    "tc_street_name": "蕉徑彭屋",
+    "count": 44
+  },
+  {
+    "tc_street_name": "錦綉花園河北第三街",
+    "count": 44
+  },
+  {
+    "tc_street_name": "黃竹園",
+    "count": 44
+  },
+  {
+    "tc_street_name": "三叠潭",
+    "count": 43
+  },
+  {
+    "tc_street_name": "下禾坑",
+    "count": 43
+  },
+  {
+    "tc_street_name": "安樂路",
+    "count": 43
+  },
+  {
+    "tc_street_name": "洪聖爺",
+    "count": 43
+  },
+  {
+    "tc_street_name": "大環頭",
+    "count": 42
+  },
+  {
+    "tc_street_name": "山寮",
+    "count": 42
+  },
+  {
+    "tc_street_name": "竹角",
+    "count": 42
+  },
+  {
+    "tc_street_name": "沙欄小築",
+    "count": 41
+  },
+  {
+    "tc_street_name": "蠔涌第一巷",
+    "count": 41
+  },
+  {
+    "tc_street_name": "頌皇台",
+    "count": 41
+  },
+  {
+    "tc_street_name": "嘉和里",
+    "count": 40
+  },
+  {
+    "tc_street_name": "落路下",
+    "count": 40
+  },
+  {
+    "tc_street_name": "錦綉花園B段第七街",
+    "count": 40
+  },
+  {
+    "tc_street_name": "錦綉花園F段第十街",
+    "count": 40
+  },
+  {
+    "tc_street_name": "高塘下洋",
+    "count": 40
+  },
+  {
+    "tc_street_name": "南朗",
+    "count": 39
+  },
+  {
+    "tc_street_name": "大輋",
+    "count": 39
+  },
+  {
+    "tc_street_name": "涌尾",
+    "count": 39
+  },
+  {
+    "tc_street_name": "燕崗",
+    "count": 38
+  },
+  {
+    "tc_street_name": "蕉林",
+    "count": 38
+  },
+  {
+    "tc_street_name": "蠔涌第六巷",
+    "count": 38
+  },
+  {
+    "tc_street_name": "鳳坑",
+    "count": 38
+  },
+  {
+    "tc_street_name": "大頭嶺",
+    "count": 37
+  },
+  {
+    "tc_street_name": "東灣頭",
+    "count": 37
+  },
+  {
+    "tc_street_name": "船灣李屋",
+    "count": 37
+  },
+  {
+    "tc_street_name": "黃竹洋",
+    "count": 37
+  },
+  {
+    "tc_street_name": "烏蛟騰第三段",
+    "count": 36
+  },
+  {
+    "tc_street_name": "金錢第五巷",
+    "count": 36
+  },
+  {
+    "tc_street_name": "錦綉花園河北第四街",
+    "count": 36
+  },
+  {
+    "tc_street_name": "鍾山臺",
+    "count": 36
+  },
+  {
+    "tc_street_name": "祖麻湖",
+    "count": 35
+  },
+  {
+    "tc_street_name": "金錢第七巷",
+    "count": 35
+  },
+  {
+    "tc_street_name": "塘坊",
+    "count": 34
+  },
+  {
+    "tc_street_name": "大埗仔",
+    "count": 34
+  },
+  {
+    "tc_street_name": "海壩村南台",
+    "count": 34
+  },
+  {
+    "tc_street_name": "牛凹",
+    "count": 34
+  },
+  {
+    "tc_street_name": "荔枝園",
+    "count": 34
+  },
+  {
+    "tc_street_name": "上水華山中段",
+    "count": 33
+  },
+  {
+    "tc_street_name": "大藍湖",
+    "count": 33
+  },
+  {
+    "tc_street_name": "打石湖",
+    "count": 33
+  },
+  {
+    "tc_street_name": "海下",
+    "count": 33
+  },
+  {
+    "tc_street_name": "金錢第六巷",
+    "count": 33
+  },
+  {
+    "tc_street_name": "金錢第四巷",
+    "count": 33
+  },
+  {
+    "tc_street_name": "鐵尾仔",
+    "count": 33
+  },
+  {
+    "tc_street_name": "公園路",
+    "count": 32
+  },
+  {
+    "tc_street_name": "大王街",
+    "count": 32
+  },
+  {
+    "tc_street_name": "孟公窩",
+    "count": 32
+  },
+  {
+    "tc_street_name": "永光街",
+    "count": 32
+  },
+  {
+    "tc_street_name": "花心坑",
+    "count": 32
+  },
+  {
+    "tc_street_name": "蠔涌第七巷",
+    "count": 32
+  },
+  {
+    "tc_street_name": "蠔涌第二巷",
+    "count": 32
+  },
+  {
+    "tc_street_name": "衛城道",
+    "count": 32
+  },
+  {
+    "tc_street_name": "錦綉花園F段第九街",
+    "count": 32
+  },
+  {
+    "tc_street_name": "鹽灶下",
+    "count": 32
+  },
+  {
+    "tc_street_name": "黃泥頭",
+    "count": 32
+  },
+  {
+    "tc_street_name": "䃟石灣",
+    "count": 31
+  },
+  {
+    "tc_street_name": "大灘",
+    "count": 31
+  },
+  {
+    "tc_street_name": "金錢第三巷",
+    "count": 31
+  },
+  {
+    "tc_street_name": "金錢第八巷",
+    "count": 31
+  },
+  {
+    "tc_street_name": "霎街",
+    "count": 31
+  },
+  {
+    "tc_street_name": "塘肚",
+    "count": 30
+  },
+  {
+    "tc_street_name": "小瀝源北約",
+    "count": 30
+  },
+  {
+    "tc_street_name": "橫輋",
+    "count": 30
+  },
+  {
+    "tc_street_name": "渡頭",
+    "count": 30
+  },
+  {
+    "tc_street_name": "炭山",
+    "count": 30
+  },
+  {
+    "tc_street_name": "銅鑼灣",
+    "count": 30
+  },
+  {
+    "tc_street_name": "隔田",
+    "count": 30
+  },
+  {
+    "tc_street_name": "麻布尾",
+    "count": 30
+  },
+  {
+    "tc_street_name": "木棉山",
+    "count": 29
+  },
+  {
+    "tc_street_name": "沙壩",
+    "count": 29
+  },
+  {
+    "tc_street_name": "海壩村東北台",
+    "count": 29
+  },
+  {
+    "tc_street_name": "白橋仔",
+    "count": 29
+  },
+  {
+    "tc_street_name": "鹿頸黃屋",
+    "count": 29
+  },
+  {
+    "tc_street_name": "黃屋",
+    "count": 29
+  },
+  {
+    "tc_street_name": "龍井頭",
+    "count": 29
+  },
+  {
+    "tc_street_name": "下田寮下",
+    "count": 28
+  },
+  {
+    "tc_street_name": "川龍",
+    "count": 28
+  },
+  {
+    "tc_street_name": "沙角尾第十二巷",
+    "count": 28
+  },
+  {
+    "tc_street_name": "烏石角",
+    "count": 28
+  },
+  {
+    "tc_street_name": "白石窩",
+    "count": 28
+  },
+  {
+    "tc_street_name": "石澳",
+    "count": 28
+  },
+  {
+    "tc_street_name": "紅棗田",
+    "count": 28
+  },
+  {
+    "tc_street_name": "錦綉花園F段第一街",
+    "count": 28
+  },
+  {
+    "tc_street_name": "錦綉花園河北第五街",
+    "count": 28
+  },
+  {
+    "tc_street_name": "隔田正街",
+    "count": 28
+  },
+  {
+    "tc_street_name": "靈恩台",
+    "count": 28
+  },
+  {
+    "tc_street_name": "沙田坳道",
+    "count": 27
+  },
+  {
+    "tc_street_name": "澳頭",
+    "count": 27
+  },
+  {
+    "tc_street_name": "烏蛟騰第二段",
+    "count": 27
+  },
+  {
+    "tc_street_name": "環順街",
+    "count": 27
+  },
+  {
+    "tc_street_name": "蕉坑",
+    "count": 27
+  },
+  {
+    "tc_street_name": "隔田第三街",
+    "count": 27
+  },
+  {
+    "tc_street_name": "鴨洲",
+    "count": 27
+  },
+  {
+    "tc_street_name": "鹽田仔",
+    "count": 27
+  },
+  {
+    "tc_street_name": "下碗窰",
+    "count": 26
+  },
+  {
+    "tc_street_name": "十塱涌口",
+    "count": 26
+  },
+  {
+    "tc_street_name": "坳背灣街",
+    "count": 26
+  },
+  {
+    "tc_street_name": "球西街",
+    "count": 26
+  },
+  {
+    "tc_street_name": "禮信街",
+    "count": 26
+  },
+  {
+    "tc_street_name": "茶果嶺",
+    "count": 26
+  },
+  {
+    "tc_street_name": "草堆下",
+    "count": 26
+  },
+  {
+    "tc_street_name": "黃毛應",
+    "count": 26
+  },
+  {
+    "tc_street_name": "井欄樹騰龍臺",
+    "count": 25
+  },
+  {
+    "tc_street_name": "凹下",
+    "count": 25
+  },
+  {
+    "tc_street_name": "大灣南",
+    "count": 25
+  },
+  {
+    "tc_street_name": "張屋地",
+    "count": 25
+  },
+  {
+    "tc_street_name": "木棉頭",
+    "count": 25
+  },
+  {
+    "tc_street_name": "澳仔",
+    "count": 25
+  },
+  {
+    "tc_street_name": "白沙澳",
+    "count": 25
+  },
+  {
+    "tc_street_name": "白腊",
+    "count": 25
+  },
+  {
+    "tc_street_name": "谷埔新屋下",
+    "count": 25
+  },
+  {
+    "tc_street_name": "金錢第九巷",
+    "count": 25
+  },
+  {
+    "tc_street_name": "長沙",
+    "count": 25
+  },
+  {
+    "tc_street_name": "鯽魚湖",
+    "count": 25
+  },
+  {
+    "tc_street_name": "南涌李屋",
+    "count": 24
+  },
+  {
+    "tc_street_name": "小瀝源南約",
+    "count": 24
+  },
+  {
+    "tc_street_name": "梅子林",
+    "count": 24
+  },
+  {
+    "tc_street_name": "榕樹下",
+    "count": 24
+  },
+  {
+    "tc_street_name": "模達灣",
+    "count": 24
+  },
+  {
+    "tc_street_name": "沙角尾第八巷",
+    "count": 24
+  },
+  {
+    "tc_street_name": "牙較灣",
+    "count": 24
+  },
+  {
+    "tc_street_name": "羅湖",
+    "count": 24
+  },
+  {
+    "tc_street_name": "蠔涌第三巷",
+    "count": 24
+  },
+  {
+    "tc_street_name": "錦綉花園E段第四街",
+    "count": 24
+  },
+  {
+    "tc_street_name": "大頭嶺第二巷",
+    "count": 23
+  },
+  {
+    "tc_street_name": "宏業街",
+    "count": 23
+  },
+  {
+    "tc_street_name": "小瀝源第五巷",
+    "count": 23
+  },
+  {
+    "tc_street_name": "涌仔",
+    "count": 23
+  },
+  {
+    "tc_street_name": "烏蛟騰第一段",
+    "count": 23
+  },
+  {
+    "tc_street_name": "萬景台",
+    "count": 23
+  },
+  {
+    "tc_street_name": "蠔涌第四巷",
+    "count": 23
+  },
+  {
+    "tc_street_name": "長江",
+    "count": 23
+  },
+  {
+    "tc_street_name": "隔田第四街",
+    "count": 23
+  },
+  {
+    "tc_street_name": "馬灣大街村東",
+    "count": 23
+  },
+  {
+    "tc_street_name": "北丫",
+    "count": 22
+  },
+  {
+    "tc_street_name": "北潭涌",
+    "count": 22
+  },
+  {
+    "tc_street_name": "大頭嶺第三巷",
+    "count": 22
+  },
+  {
+    "tc_street_name": "大頭嶺第四巷",
+    "count": 22
+  },
+  {
+    "tc_street_name": "沙下",
+    "count": 22
+  },
+  {
+    "tc_street_name": "烟廠街",
+    "count": 22
+  },
+  {
+    "tc_street_name": "觀音山",
+    "count": 22
+  },
+  {
+    "tc_street_name": "高莆",
+    "count": 22
+  },
+  {
+    "tc_street_name": "鯉魚門海傍道中",
+    "count": 22
+  },
+  {
+    "tc_street_name": "上白泥",
+    "count": 21
+  },
+  {
+    "tc_street_name": "下白泥",
+    "count": 21
+  },
+  {
+    "tc_street_name": "卑利瑪臺",
+    "count": 21
+  },
+  {
+    "tc_street_name": "小貴灣",
+    "count": 21
+  },
+  {
+    "tc_street_name": "新塘莆",
+    "count": 21
+  },
+  {
+    "tc_street_name": "新田新樓",
+    "count": 21
+  },
+  {
+    "tc_street_name": "朗尾",
+    "count": 21
+  },
+  {
+    "tc_street_name": "沙角尾第七巷",
+    "count": 21
+  },
+  {
+    "tc_street_name": "沙角尾第五巷",
+    "count": 21
+  },
+  {
+    "tc_street_name": "蘆荻灣",
+    "count": 21
+  },
+  {
+    "tc_street_name": "蠔涌第八巷",
+    "count": 21
+  },
+  {
+    "tc_street_name": "赤徑",
+    "count": 21
+  },
+  {
+    "tc_street_name": "輋徑篤",
+    "count": 21
+  },
+  {
+    "tc_street_name": "錦綉花園F段第四街",
+    "count": 21
+  },
+  {
+    "tc_street_name": "上水華山南部",
+    "count": 20
+  },
+  {
+    "tc_street_name": "丹竹坑",
+    "count": 20
+  },
+  {
+    "tc_street_name": "欖口欖口園",
+    "count": 20
+  },
+  {
+    "tc_street_name": "滘西",
+    "count": 20
+  },
+  {
+    "tc_street_name": "環樂街",
+    "count": 20
+  },
+  {
+    "tc_street_name": "環興街",
+    "count": 20
+  },
+  {
+    "tc_street_name": "石仔嶺",
+    "count": 20
+  },
+  {
+    "tc_street_name": "菜園角",
+    "count": 20
+  },
+  {
+    "tc_street_name": "錦綉花園F段第六街",
+    "count": 20
+  },
+  {
+    "tc_street_name": "錦綉花園河北第六街",
+    "count": 20
+  },
+  {
+    "tc_street_name": "響鐘",
+    "count": 20
+  },
+  {
+    "tc_street_name": "南涌羅屋",
+    "count": 19
+  },
+  {
+    "tc_street_name": "屏唐街",
+    "count": 19
+  },
+  {
+    "tc_street_name": "得月樓",
+    "count": 19
+  },
+  {
+    "tc_street_name": "永安台",
+    "count": 19
+  },
+  {
+    "tc_street_name": "氹笏",
+    "count": 19
+  },
+  {
+    "tc_street_name": "沙角尾第九巷",
+    "count": 19
+  },
+  {
+    "tc_street_name": "深涌",
+    "count": 19
+  },
+  {
+    "tc_street_name": "禾坑大朗",
+    "count": 19
+  },
+  {
+    "tc_street_name": "舒安台",
+    "count": 19
+  },
+  {
+    "tc_street_name": "衛理道",
+    "count": 19
+  },
+  {
+    "tc_street_name": "金錢第二巷",
+    "count": 19
+  },
+  {
+    "tc_street_name": "龍丫排",
+    "count": 19
+  },
+  {
+    "tc_street_name": "凹頭",
+    "count": 18
+  },
+  {
+    "tc_street_name": "太白臺",
+    "count": 18
+  },
+  {
+    "tc_street_name": "小瀝源第一巷",
+    "count": 18
+  },
+  {
+    "tc_street_name": "嶺咀頭",
+    "count": 18
+  },
+  {
+    "tc_street_name": "料壆第二巷",
+    "count": 18
+  },
+  {
+    "tc_street_name": "東澳",
+    "count": 18
+  },
+  {
+    "tc_street_name": "沙咀道",
+    "count": 18
+  },
+  {
+    "tc_street_name": "沙角尾第二巷",
+    "count": 18
+  },
+  {
+    "tc_street_name": "沙角尾第六巷",
+    "count": 18
+  },
+  {
+    "tc_street_name": "浪徑",
+    "count": 18
+  },
+  {
+    "tc_street_name": "球南街",
+    "count": 18
+  },
+  {
+    "tc_street_name": "禾徑山",
+    "count": 18
+  },
+  {
+    "tc_street_name": "蝦地下",
+    "count": 18
+  },
+  {
+    "tc_street_name": "鳳攸街",
+    "count": 18
+  },
+  {
+    "tc_street_name": "企壁山",
+    "count": 17
+  },
+  {
+    "tc_street_name": "南涌楊屋",
+    "count": 17
+  },
+  {
+    "tc_street_name": "大頭嶺第五巷",
+    "count": 17
+  },
+  {
+    "tc_street_name": "大頭嶺第六巷",
+    "count": 17
+  },
+  {
+    "tc_street_name": "小瀝源第六巷",
+    "count": 17
+  },
+  {
+    "tc_street_name": "小瀝源第四巷",
+    "count": 17
+  },
+  {
+    "tc_street_name": "屋頭",
+    "count": 17
+  },
+  {
+    "tc_street_name": "新屋嶺第一巷",
+    "count": 17
+  },
+  {
+    "tc_street_name": "東丫",
+    "count": 17
+  },
+  {
+    "tc_street_name": "白田第五區",
+    "count": 17
+  },
+  {
+    "tc_street_name": "窩田",
+    "count": 17
+  },
+  {
+    "tc_street_name": "翠柏路",
+    "count": 17
+  },
+  {
+    "tc_street_name": "蠔涌第五巷",
+    "count": 17
+  },
+  {
+    "tc_street_name": "金錢第十一巷",
+    "count": 17
+  },
+  {
+    "tc_street_name": "隔田村松林徑",
+    "count": 17
+  },
+  {
+    "tc_street_name": "鹿湖",
+    "count": 17
+  },
+  {
+    "tc_street_name": "龍躍頭",
+    "count": 17
+  },
+  {
+    "tc_street_name": "太子臺",
+    "count": 16
+  },
+  {
+    "tc_street_name": "小瀝源第三巷",
+    "count": 16
+  },
+  {
+    "tc_street_name": "打石湖石塘",
+    "count": 16
+  },
+  {
+    "tc_street_name": "料壆第四巷",
+    "count": 16
+  },
+  {
+    "tc_street_name": "沙橋頭",
+    "count": 16
+  },
+  {
+    "tc_street_name": "海傍道",
+    "count": 16
+  },
+  {
+    "tc_street_name": "球東街",
+    "count": 16
+  },
+  {
+    "tc_street_name": "金錢第十巷",
+    "count": 16
+  },
+  {
+    "tc_street_name": "錦綉花園F段第二街",
+    "count": 16
+  },
+  {
+    "tc_street_name": "錦綉花園F段第五街",
+    "count": 16
+  },
+  {
+    "tc_street_name": "錦綉花園河北第七街",
+    "count": 16
+  },
+  {
+    "tc_street_name": "大尾督",
+    "count": 15
+  },
+  {
+    "tc_street_name": "小瀝源第二巷",
+    "count": 15
+  },
+  {
+    "tc_street_name": "恒柏道",
+    "count": 15
+  },
+  {
+    "tc_street_name": "教堂里",
+    "count": 15
+  },
+  {
+    "tc_street_name": "料壆第三巷",
+    "count": 15
+  },
+  {
+    "tc_street_name": "新屋排",
+    "count": 15
+  },
+  {
+    "tc_street_name": "新東方台",
+    "count": 15
+  },
+  {
+    "tc_street_name": "東頭園",
+    "count": 15
+  },
+  {
+    "tc_street_name": "沙角尾第十巷",
+    "count": 15
+  },
+  {
+    "tc_street_name": "沙角尾第四巷",
+    "count": 15
+  },
+  {
+    "tc_street_name": "燕崗第二巷",
+    "count": 15
+  },
+  {
+    "tc_street_name": "甲龍",
+    "count": 15
+  },
+  {
+    "tc_street_name": "畫眉山",
+    "count": 15
+  },
+  {
+    "tc_street_name": "陂頭",
+    "count": 15
+  },
+  {
+    "tc_street_name": "十二笏",
+    "count": 14
+  },
+  {
+    "tc_street_name": "大湖角",
+    "count": 14
+  },
+  {
+    "tc_street_name": "大石口半山",
+    "count": 14
+  },
+  {
+    "tc_street_name": "大菴山",
+    "count": 14
+  },
+  {
+    "tc_street_name": "料壆第七巷",
+    "count": 14
+  },
+  {
+    "tc_street_name": "沙螺灣涌口",
+    "count": 14
+  },
+  {
+    "tc_street_name": "泉源道西",
+    "count": 14
+  },
+  {
+    "tc_street_name": "烏蛟騰村第三段",
+    "count": 14
+  },
+  {
+    "tc_street_name": "番鬼塘",
+    "count": 14
+  },
+  {
+    "tc_street_name": "阿公岩",
+    "count": 14
+  },
+  {
+    "tc_street_name": "隔田第二街",
+    "count": 14
+  },
+  {
+    "tc_street_name": "馬尿",
+    "count": 14
+  },
+  {
+    "tc_street_name": "上水華山南段",
+    "count": 13
+  },
+  {
+    "tc_street_name": "富剛山",
+    "count": 13
+  },
+  {
+    "tc_street_name": "料壆第五巷",
+    "count": 13
+  },
+  {
+    "tc_street_name": "料壆第八巷",
+    "count": 13
+  },
+  {
+    "tc_street_name": "料壆第六巷",
+    "count": 13
+  },
+  {
+    "tc_street_name": "曲徑山",
+    "count": 13
+  },
+  {
+    "tc_street_name": "東山下",
+    "count": 13
+  },
+  {
+    "tc_street_name": "東心淇",
+    "count": 13
+  },
+  {
+    "tc_street_name": "東門口",
+    "count": 13
+  },
+  {
+    "tc_street_name": "沙角尾第一巷",
+    "count": 13
+  },
+  {
+    "tc_street_name": "灰窰下",
+    "count": 13
+  },
+  {
+    "tc_street_name": "燕崗第一巷",
+    "count": 13
+  },
+  {
+    "tc_street_name": "營盤下",
+    "count": 13
+  },
+  {
+    "tc_street_name": "牛牯嶺",
+    "count": 13
+  },
+  {
+    "tc_street_name": "球前街",
+    "count": 13
+  },
+  {
+    "tc_street_name": "環福街",
+    "count": 13
+  },
+  {
+    "tc_street_name": "莆上村第十巷",
+    "count": 13
+  },
+  {
+    "tc_street_name": "金錢第一巷",
+    "count": 13
+  },
+  {
+    "tc_street_name": "錦山台",
+    "count": 13
+  },
+  {
+    "tc_street_name": "長庚",
+    "count": 13
+  },
+  {
+    "tc_street_name": "香港警務處洞梓度假屋",
+    "count": 13
+  },
+  {
+    "tc_street_name": "北潭",
+    "count": 12
+  },
+  {
+    "tc_street_name": "南坑排義立園",
+    "count": 12
+  },
+  {
+    "tc_street_name": "土瓜坪",
+    "count": 12
+  },
+  {
+    "tc_street_name": "威利麻街",
+    "count": 12
+  },
+  {
+    "tc_street_name": "小欖",
+    "count": 12
+  },
+  {
+    "tc_street_name": "掃管灘",
+    "count": 12
+  },
+  {
+    "tc_street_name": "料壆第九巷",
+    "count": 12
+  },
+  {
+    "tc_street_name": "木湖瓦窰",
+    "count": 12
+  },
+  {
+    "tc_street_name": "東方",
+    "count": 12
+  },
+  {
+    "tc_street_name": "正大街",
+    "count": 12
+  },
+  {
+    "tc_street_name": "沙角尾第三巷",
+    "count": 12
+  },
+  {
+    "tc_street_name": "涌口",
+    "count": 12
+  },
+  {
+    "tc_street_name": "烏蛟騰村第一段",
+    "count": 12
+  },
+  {
+    "tc_street_name": "燕崗第三巷",
+    "count": 12
+  },
+  {
+    "tc_street_name": "環景街",
+    "count": 12
+  },
+  {
+    "tc_street_name": "羲皇臺",
+    "count": 12
+  },
+  {
+    "tc_street_name": "隔田第六街",
+    "count": 12
+  },
+  {
+    "tc_street_name": "黃宜洲",
+    "count": 12
+  },
+  {
+    "tc_street_name": "上田寮下",
+    "count": 11
+  },
+  {
+    "tc_street_name": "下香園",
+    "count": 11
+  },
+  {
+    "tc_street_name": "二肚",
+    "count": 11
+  },
+  {
+    "tc_street_name": "啟芳園",
+    "count": 11
+  },
+  {
+    "tc_street_name": "大棠",
+    "count": 11
+  },
+  {
+    "tc_street_name": "料壆第一巷",
+    "count": 11
+  },
+  {
+    "tc_street_name": "新屋嶺第二巷",
+    "count": 11
+  },
+  {
+    "tc_street_name": "新興海傍路",
+    "count": 11
+  },
+  {
+    "tc_street_name": "灣仔",
+    "count": 11
+  },
+  {
+    "tc_street_name": "環發街",
+    "count": 11
+  },
+  {
+    "tc_street_name": "茂草岩",
+    "count": 11
+  },
+  {
+    "tc_street_name": "荔枝莊",
+    "count": 11
+  },
+  {
+    "tc_street_name": "蕉徑",
+    "count": 11
+  },
+  {
+    "tc_street_name": "蠔涌第九巷",
+    "count": 11
+  },
+  {
+    "tc_street_name": "馬草壟",
+    "count": 11
+  },
+  {
+    "tc_street_name": "體育路",
+    "count": 11
+  },
+  {
+    "tc_street_name": "麥屋",
+    "count": 11
+  },
+  {
+    "tc_street_name": "上水華山北段",
+    "count": 10
+  },
+  {
+    "tc_street_name": "九担租",
+    "count": 10
+  },
+  {
+    "tc_street_name": "半山道",
+    "count": 10
+  },
+  {
+    "tc_street_name": "坪墩",
+    "count": 10
+  },
+  {
+    "tc_street_name": "大貴灣",
+    "count": 10
+  },
+  {
+    "tc_street_name": "張屋",
+    "count": 10
+  },
+  {
+    "tc_street_name": "恒富街",
+    "count": 10
+  },
+  {
+    "tc_street_name": "料壆第十巷",
+    "count": 10
+  },
+  {
+    "tc_street_name": "新屋嶺第三巷",
+    "count": 10
+  },
+  {
+    "tc_street_name": "沙角尾第十一巷",
+    "count": 10
+  },
+  {
+    "tc_street_name": "流水響",
+    "count": 10
+  },
+  {
+    "tc_street_name": "深屈",
+    "count": 10
+  },
+  {
+    "tc_street_name": "燕崗第四巷",
+    "count": 10
+  },
+  {
+    "tc_street_name": "白田第二段",
+    "count": 10
+  },
+  {
+    "tc_street_name": "粉嶺",
+    "count": 10
+  },
+  {
+    "tc_street_name": "虎崗山",
+    "count": 10
+  },
+  {
+    "tc_street_name": "隔田第五街",
+    "count": 10
+  },
+  {
+    "tc_street_name": "鹿州",
+    "count": 10
+  },
+  {
+    "tc_street_name": "出水灣",
+    "count": 9
+  },
+  {
+    "tc_street_name": "大山東",
+    "count": 9
+  },
+  {
+    "tc_street_name": "大窩支路",
+    "count": 9
+  },
+  {
+    "tc_street_name": "掃管笏",
+    "count": 9
+  },
+  {
+    "tc_street_name": "新屋嶺第四巷",
+    "count": 9
+  },
+  {
+    "tc_street_name": "新海旁街",
+    "count": 9
+  },
+  {
+    "tc_street_name": "沙埔仔",
+    "count": 9
+  },
+  {
+    "tc_street_name": "百花路",
+    "count": 9
+  },
+  {
+    "tc_street_name": "美華街",
+    "count": 9
+  },
+  {
+    "tc_street_name": "衛理徑",
+    "count": 9
+  },
+  {
+    "tc_street_name": "西樓街",
+    "count": 9
+  },
+  {
+    "tc_street_name": "較寮",
+    "count": 9
+  },
+  {
+    "tc_street_name": "鉛礦坳道",
+    "count": 9
+  },
+  {
+    "tc_street_name": "高田磡",
+    "count": 9
+  },
+  {
+    "tc_street_name": "鹿頸陳屋",
+    "count": 9
+  },
+  {
+    "tc_street_name": "麻南笏",
+    "count": 9
+  },
+  {
+    "tc_street_name": "中興海傍街",
+    "count": 8
+  },
+  {
+    "tc_street_name": "九肚",
+    "count": 8
+  },
+  {
+    "tc_street_name": "僑光台",
+    "count": 8
+  },
+  {
+    "tc_street_name": "冠峰臺",
+    "count": 8
+  },
+  {
+    "tc_street_name": "南坊",
+    "count": 8
+  },
+  {
+    "tc_street_name": "塘角",
+    "count": 8
+  },
+  {
+    "tc_street_name": "大澳沙仔面",
+    "count": 8
+  },
+  {
+    "tc_street_name": "大頭嶺第一巷",
+    "count": 8
+  },
+  {
+    "tc_street_name": "大頭嶺第七巷",
+    "count": 8
+  },
+  {
+    "tc_street_name": "安圃",
+    "count": 8
+  },
+  {
+    "tc_street_name": "將軍澳",
+    "count": 8
+  },
+  {
+    "tc_street_name": "料壆第十一巷",
+    "count": 8
+  },
+  {
+    "tc_street_name": "春三園",
+    "count": 8
+  },
+  {
+    "tc_street_name": "松園",
+    "count": 8
+  },
+  {
+    "tc_street_name": "永安後街",
+    "count": 8
+  },
+  {
+    "tc_street_name": "沙洲里",
+    "count": 8
+  },
+  {
+    "tc_street_name": "牛皮沙",
+    "count": 8
+  },
+  {
+    "tc_street_name": "田心路",
+    "count": 8
+  },
+  {
+    "tc_street_name": "白田第四區",
+    "count": 8
+  },
+  {
+    "tc_street_name": "繼園下里",
+    "count": 8
+  },
+  {
+    "tc_street_name": "羅湖懲教所",
+    "count": 8
+  },
+  {
+    "tc_street_name": "翁華台",
+    "count": 8
+  },
+  {
+    "tc_street_name": "荔枝坑",
+    "count": 8
+  },
+  {
+    "tc_street_name": "荔枝里",
+    "count": 8
+  },
+  {
+    "tc_street_name": "萬壽新村第三台",
+    "count": 8
+  },
+  {
+    "tc_street_name": "萬興台",
+    "count": 8
+  },
+  {
+    "tc_street_name": "金錢第十三巷",
+    "count": 8
+  },
+  {
+    "tc_street_name": "錦綉花園河北里",
+    "count": 8
+  },
+  {
+    "tc_street_name": "長沙欄",
+    "count": 8
+  },
+  {
+    "tc_street_name": "高行",
+    "count": 8
+  },
+  {
+    "tc_street_name": "黃泥屋",
+    "count": 8
+  },
+  {
+    "tc_street_name": "黃竹洋第二巷",
+    "count": 8
+  },
+  {
+    "tc_street_name": "黎頭咀",
+    "count": 8
+  },
+  {
+    "tc_street_name": "元嶺仔",
+    "count": 7
+  },
+  {
+    "tc_street_name": "南丫",
+    "count": 7
+  },
+  {
+    "tc_street_name": "大山中",
+    "count": 7
+  },
+  {
+    "tc_street_name": "大山西",
+    "count": 7
+  },
+  {
+    "tc_street_name": "大灣肚",
+    "count": 7
+  },
+  {
+    "tc_street_name": "屈尾巷",
+    "count": 7
+  },
+  {
+    "tc_street_name": "打水灣",
+    "count": 7
+  },
+  {
+    "tc_street_name": "桑園區",
+    "count": 7
+  },
+  {
+    "tc_street_name": "沙咀頭",
+    "count": 7
+  },
+  {
+    "tc_street_name": "燕崗第五巷",
+    "count": 7
+  },
+  {
+    "tc_street_name": "石涌凹",
+    "count": 7
+  },
+  {
+    "tc_street_name": "稔園",
+    "count": 7
+  },
+  {
+    "tc_street_name": "第六街",
+    "count": 7
+  },
+  {
+    "tc_street_name": "豔馬道",
+    "count": 7
+  },
+  {
+    "tc_street_name": "金錢第十二巷",
+    "count": 7
+  },
+  {
+    "tc_street_name": "鯉魚門海傍道東",
+    "count": 7
+  },
+  {
+    "tc_street_name": "鴉山",
+    "count": 7
+  },
+  {
+    "tc_street_name": "龍鼓灘",
+    "count": 7
+  },
+  {
+    "tc_street_name": "五肚",
+    "count": 6
+  },
+  {
+    "tc_street_name": "南邊圍八里",
+    "count": 6
+  },
+  {
+    "tc_street_name": "南邊圍東巷",
+    "count": 6
+  },
+  {
+    "tc_street_name": "南門口",
+    "count": 6
+  },
+  {
+    "tc_street_name": "圍內村第十二巷",
+    "count": 6
+  },
+  {
+    "tc_street_name": "坑尾",
+    "count": 6
+  },
+  {
+    "tc_street_name": "大元村第七巷",
+    "count": 6
+  },
+  {
+    "tc_street_name": "大埔滘",
+    "count": 6
+  },
+  {
+    "tc_street_name": "大澳新沙",
+    "count": 6
+  },
+  {
+    "tc_street_name": "天光莆",
+    "count": 6
+  },
+  {
+    "tc_street_name": "好景台",
+    "count": 6
+  },
+  {
+    "tc_street_name": "小瀝源東約",
+    "count": 6
+  },
+  {
+    "tc_street_name": "建文街",
+    "count": 6
+  },
+  {
+    "tc_street_name": "斧頭洲",
+    "count": 6
+  },
+  {
+    "tc_street_name": "榮華台",
+    "count": 6
+  },
+  {
+    "tc_street_name": "橋頭",
+    "count": 6
+  },
+  {
+    "tc_street_name": "橫洲",
+    "count": 6
+  },
+  {
+    "tc_street_name": "沙螺灣村第二街",
+    "count": 6
+  },
+  {
+    "tc_street_name": "泰亨坳仔",
+    "count": 6
+  },
+  {
+    "tc_street_name": "海旁街",
+    "count": 6
+  },
+  {
+    "tc_street_name": "深井大街",
+    "count": 6
+  },
+  {
+    "tc_street_name": "白田第五段",
+    "count": 6
+  },
+  {
+    "tc_street_name": "禾塘江",
+    "count": 6
+  },
+  {
+    "tc_street_name": "莆上村第九巷",
+    "count": 6
+  },
+  {
+    "tc_street_name": "蛇頭",
+    "count": 6
+  },
+  {
+    "tc_street_name": "西尾臺",
+    "count": 6
+  },
+  {
+    "tc_street_name": "貝澳㘭",
+    "count": 6
+  },
+  {
+    "tc_street_name": "邊界道路",
+    "count": 6
+  },
+  {
+    "tc_street_name": "鐵鉗坑",
+    "count": 6
+  },
+  {
+    "tc_street_name": "隔田叢林徑",
+    "count": 6
+  },
+  {
+    "tc_street_name": "黃竹洋第三巷",
+    "count": 6
+  },
+  {
+    "tc_street_name": "龍窩",
+    "count": 6
+  },
+  {
+    "tc_street_name": "丁貴坊",
+    "count": 5
+  },
+  {
+    "tc_street_name": "下黃宜凹",
+    "count": 5
+  },
+  {
+    "tc_street_name": "力士堂",
+    "count": 5
+  },
+  {
+    "tc_street_name": "北潭凹",
+    "count": 5
+  },
+  {
+    "tc_street_name": "南涌張屋",
+    "count": 5
+  },
+  {
+    "tc_street_name": "南邊圍九里",
+    "count": 5
+  },
+  {
+    "tc_street_name": "南邊圍六里",
+    "count": 5
+  },
+  {
+    "tc_street_name": "大樹下路",
+    "count": 5
+  },
+  {
+    "tc_street_name": "大王里",
+    "count": 5
+  },
+  {
+    "tc_street_name": "恒貴街",
+    "count": 5
+  },
+  {
+    "tc_street_name": "料壆",
+    "count": 5
+  },
+  {
+    "tc_street_name": "料壆第十二巷",
+    "count": 5
+  },
+  {
+    "tc_street_name": "新屋嶺第五巷",
+    "count": 5
+  },
+  {
+    "tc_street_name": "新屋嶺第六巷",
+    "count": 5
+  },
+  {
+    "tc_street_name": "新村樓",
+    "count": 5
+  },
+  {
+    "tc_street_name": "昇平台",
+    "count": 5
+  },
+  {
+    "tc_street_name": "欖口欖口壆",
+    "count": 5
+  },
+  {
+    "tc_street_name": "沙江圍仔",
+    "count": 5
+  },
+  {
+    "tc_street_name": "沙螺灣村第五街",
+    "count": 5
+  },
+  {
+    "tc_street_name": "沙角尾村九巷",
+    "count": 5
+  },
+  {
+    "tc_street_name": "膊頭下",
+    "count": 5
+  },
+  {
+    "tc_street_name": "航膳路",
+    "count": 5
+  },
+  {
+    "tc_street_name": "茅笪",
+    "count": 5
+  },
+  {
+    "tc_street_name": "蓮花宮街",
+    "count": 5
+  },
+  {
+    "tc_street_name": "蛇嶺",
+    "count": 5
+  },
+  {
+    "tc_street_name": "蠻窩",
+    "count": 5
+  },
+  {
+    "tc_street_name": "衛城里",
+    "count": 5
+  },
+  {
+    "tc_street_name": "隔田村高街",
+    "count": 5
+  },
+  {
+    "tc_street_name": "鹿洲灣",
+    "count": 5
+  },
+  {
+    "tc_street_name": "下北村第一巷",
+    "count": 4
+  },
+  {
+    "tc_street_name": "中興半山路",
+    "count": 4
+  },
+  {
+    "tc_street_name": "元墩山",
+    "count": 4
+  },
+  {
+    "tc_street_name": "半春園",
+    "count": 4
+  },
+  {
+    "tc_street_name": "南丫（南亞）",
+    "count": 4
+  },
+  {
+    "tc_street_name": "南邊圍二里",
+    "count": 4
+  },
+  {
+    "tc_street_name": "古洞",
+    "count": 4
+  },
+  {
+    "tc_street_name": "圍內村第一巷",
+    "count": 4
+  },
+  {
+    "tc_street_name": "大元村第八巷",
+    "count": 4
+  },
+  {
+    "tc_street_name": "大學徑",
+    "count": 4
+  },
+  {
+    "tc_street_name": "大灣",
+    "count": 4
+  },
+  {
+    "tc_street_name": "新橋",
+    "count": 4
+  },
+  {
+    "tc_street_name": "新開田",
+    "count": 4
+  },
+  {
+    "tc_street_name": "東堤南路",
+    "count": 4
+  },
+  {
+    "tc_street_name": "東慶路",
+    "count": 4
+  },
+  {
+    "tc_street_name": "橫洲擴展新區",
+    "count": 4
+  },
+  {
+    "tc_street_name": "沙角尾村六巷",
+    "count": 4
+  },
+  {
+    "tc_street_name": "泉源道",
+    "count": 4
+  },
+  {
+    "tc_street_name": "烏溪沙村第六巷",
+    "count": 4
+  },
+  {
+    "tc_street_name": "烏溪沙村第四巷",
+    "count": 4
+  },
+  {
+    "tc_street_name": "烏蛟騰村第二段",
+    "count": 4
+  },
+  {
+    "tc_street_name": "煙寮",
+    "count": 4
+  },
+  {
+    "tc_street_name": "牛背窩",
+    "count": 4
+  },
+  {
+    "tc_street_name": "瓦窰下",
+    "count": 4
+  },
+  {
+    "tc_street_name": "英輝臺",
+    "count": 4
+  },
+  {
+    "tc_street_name": "莆上村第八巷",
+    "count": 4
+  },
+  {
+    "tc_street_name": "萊洞第四巷",
+    "count": 4
+  },
+  {
+    "tc_street_name": "萬壽新村第二台",
+    "count": 4
+  },
+  {
+    "tc_street_name": "萬壽新村第四台",
+    "count": 4
+  },
+  {
+    "tc_street_name": "藍輋",
+    "count": 4
+  },
+  {
+    "tc_street_name": "鎮海路",
+    "count": 4
+  },
+  {
+    "tc_street_name": "門口村第二巷",
+    "count": 4
+  },
+  {
+    "tc_street_name": "隔田村公廟",
+    "count": 4
+  },
+  {
+    "tc_street_name": "隔田村南軒路",
+    "count": 4
+  },
+  {
+    "tc_street_name": "鹹坑尾",
+    "count": 4
+  },
+  {
+    "tc_street_name": "上北村第一巷",
+    "count": 3
+  },
+  {
+    "tc_street_name": "上北村第三巷",
+    "count": 3
+  },
+  {
+    "tc_street_name": "下北村第三巷",
+    "count": 3
+  },
+  {
+    "tc_street_name": "下村朗",
+    "count": 3
+  },
+  {
+    "tc_street_name": "下花山",
+    "count": 3
+  },
+  {
+    "tc_street_name": "元墩下",
+    "count": 3
+  },
+  {
+    "tc_street_name": "南邊圍四里",
+    "count": 3
+  },
+  {
+    "tc_street_name": "圍內村第十一巷",
+    "count": 3
+  },
+  {
+    "tc_street_name": "圍內村第十巷",
+    "count": 3
+  },
+  {
+    "tc_street_name": "大元村第九巷",
+    "count": 3
+  },
+  {
+    "tc_street_name": "大元村第六巷",
+    "count": 3
+  },
+  {
+    "tc_street_name": "奕園路",
+    "count": 3
+  },
+  {
+    "tc_street_name": "安定臺",
+    "count": 3
+  },
+  {
+    "tc_street_name": "布吉仔",
+    "count": 3
+  },
+  {
+    "tc_street_name": "打蠔墩",
+    "count": 3
+  },
+  {
+    "tc_street_name": "新樓橫街",
+    "count": 3
+  },
+  {
+    "tc_street_name": "望東灣",
+    "count": 3
+  },
+  {
+    "tc_street_name": "東慶",
+    "count": 3
+  },
+  {
+    "tc_street_name": "桃源洞",
+    "count": 3
+  },
+  {
+    "tc_street_name": "梅樹坑",
+    "count": 3
+  },
+  {
+    "tc_street_name": "榕樹嶺",
+    "count": 3
+  },
+  {
+    "tc_street_name": "橫坑",
+    "count": 3
+  },
+  {
+    "tc_street_name": "水塘路",
+    "count": 3
+  },
+  {
+    "tc_street_name": "永安居",
+    "count": 3
+  },
+  {
+    "tc_street_name": "沙螺灣村第一街",
+    "count": 3
+  },
+  {
+    "tc_street_name": "燕崗村第三巷",
+    "count": 3
+  },
+  {
+    "tc_street_name": "田灣新街",
+    "count": 3
+  },
+  {
+    "tc_street_name": "第五街",
+    "count": 3
+  },
+  {
+    "tc_street_name": "第四街",
+    "count": 3
+  },
+  {
+    "tc_street_name": "老青山",
+    "count": 3
+  },
+  {
+    "tc_street_name": "莆上村第二巷",
+    "count": 3
+  },
+  {
+    "tc_street_name": "萊洞第二巷",
+    "count": 3
+  },
+  {
+    "tc_street_name": "萊洞第五巷",
+    "count": 3
+  },
+  {
+    "tc_street_name": "萬壽新村第一台",
+    "count": 3
+  },
+  {
+    "tc_street_name": "虎地坳道",
+    "count": 3
+  },
+  {
+    "tc_street_name": "蚊坑",
+    "count": 3
+  },
+  {
+    "tc_street_name": "蠔涌村二巷",
+    "count": 3
+  },
+  {
+    "tc_street_name": "長盛右街",
+    "count": 3
+  },
+  {
+    "tc_street_name": "隔坑墩",
+    "count": 3
+  },
+  {
+    "tc_street_name": "隔田南軒路",
+    "count": 3
+  },
+  {
+    "tc_street_name": "隔田村正街",
+    "count": 3
+  },
+  {
+    "tc_street_name": "馬灣體育路",
+    "count": 3
+  },
+  {
+    "tc_street_name": "黃竹洋第一巷",
+    "count": 3
+  },
+  {
+    "tc_street_name": "黃竹洋第四巷",
+    "count": 3
+  },
+  {
+    "tc_street_name": "上北村第四巷",
+    "count": 2
+  },
+  {
+    "tc_street_name": "上黃宜坳",
+    "count": 2
+  },
+  {
+    "tc_street_name": "下北村第四巷",
+    "count": 2
+  },
+  {
+    "tc_street_name": "仁信里",
+    "count": 2
+  },
+  {
+    "tc_street_name": "仙人井",
+    "count": 2
+  },
+  {
+    "tc_street_name": "光復街",
+    "count": 2
+  },
+  {
+    "tc_street_name": "北帝廟橫街",
+    "count": 2
+  },
+  {
+    "tc_street_name": "南邊圍一里",
+    "count": 2
+  },
+  {
+    "tc_street_name": "南邊圍十里",
+    "count": 2
+  },
+  {
+    "tc_street_name": "南邊圍西巷",
+    "count": 2
+  },
+  {
+    "tc_street_name": "和風台",
+    "count": 2
+  },
+  {
+    "tc_street_name": "圍內村第三巷",
+    "count": 2
+  },
+  {
+    "tc_street_name": "圍內村第八巷",
+    "count": 2
+  },
+  {
+    "tc_street_name": "圍內村第六巷",
+    "count": 2
+  },
+  {
+    "tc_street_name": "地塘仔",
+    "count": 2
+  },
+  {
+    "tc_street_name": "壽山台",
+    "count": 2
+  },
+  {
+    "tc_street_name": "大元村第一巷",
+    "count": 2
+  },
+  {
+    "tc_street_name": "大新橫街",
+    "count": 2
+  },
+  {
+    "tc_street_name": "大涌橋",
+    "count": 2
+  },
+  {
+    "tc_street_name": "大轉",
+    "count": 2
+  },
+  {
+    "tc_street_name": "大隴",
+    "count": 2
+  },
+  {
+    "tc_street_name": "大頭嶺第八巷",
+    "count": 2
+  },
+  {
+    "tc_street_name": "天祥台",
+    "count": 2
+  },
+  {
+    "tc_street_name": "太平街",
+    "count": 2
+  },
+  {
+    "tc_street_name": "小欖普園",
+    "count": 2
+  },
+  {
+    "tc_street_name": "小瀝源",
+    "count": 2
+  },
+  {
+    "tc_street_name": "小秀",
+    "count": 2
+  },
+  {
+    "tc_street_name": "山薯窩",
+    "count": 2
+  },
+  {
+    "tc_street_name": "山邊街",
+    "count": 2
+  },
+  {
+    "tc_street_name": "川背龍",
+    "count": 2
+  },
+  {
+    "tc_street_name": "新屋嶺",
+    "count": 2
+  },
+  {
+    "tc_street_name": "東坑尾",
+    "count": 2
+  },
+  {
+    "tc_street_name": "橫台山",
+    "count": 2
+  },
+  {
+    "tc_street_name": "水流坑",
+    "count": 2
+  },
+  {
+    "tc_street_name": "沙螺灣村第三街",
+    "count": 2
+  },
+  {
+    "tc_street_name": "沙螺灣村第四街",
+    "count": 2
+  },
+  {
+    "tc_street_name": "沙角尾村七巷",
+    "count": 2
+  },
+  {
+    "tc_street_name": "沙角尾村十一巷",
+    "count": 2
+  },
+  {
+    "tc_street_name": "沙角尾村十二巷",
+    "count": 2
+  },
+  {
+    "tc_street_name": "沙角尾村十巷",
+    "count": 2
+  },
+  {
+    "tc_street_name": "油柑頭",
+    "count": 2
+  },
+  {
+    "tc_street_name": "泉水井",
+    "count": 2
+  },
+  {
+    "tc_street_name": "流浮山",
+    "count": 2
+  },
+  {
+    "tc_street_name": "海旁大街",
+    "count": 2
+  },
+  {
+    "tc_street_name": "清快塘",
+    "count": 2
+  },
+  {
+    "tc_street_name": "漁仔涌",
+    "count": 2
+  },
+  {
+    "tc_street_name": "烏鴉落陽",
+    "count": 2
+  },
+  {
+    "tc_street_name": "燕崗村第一巷",
+    "count": 2
+  },
+  {
+    "tc_street_name": "燕崗村第四巷",
+    "count": 2
+  },
+  {
+    "tc_street_name": "瓊園路",
+    "count": 2
+  },
+  {
+    "tc_street_name": "甘雨路",
+    "count": 2
+  },
+  {
+    "tc_street_name": "白田第六段",
+    "count": 2
+  },
+  {
+    "tc_street_name": "石坑",
+    "count": 2
+  },
+  {
+    "tc_street_name": "禾堂背",
+    "count": 2
+  },
+  {
+    "tc_street_name": "禾寮",
+    "count": 2
+  },
+  {
+    "tc_street_name": "繼園上里",
+    "count": 2
+  },
+  {
+    "tc_street_name": "芙蓉山",
+    "count": 2
+  },
+  {
+    "tc_street_name": "芝蔴灣道",
+    "count": 2
+  },
+  {
+    "tc_street_name": "菠蘿輋",
+    "count": 2
+  },
+  {
+    "tc_street_name": "萊洞第三巷",
+    "count": 2
+  },
+  {
+    "tc_street_name": "蒲雞嶺",
+    "count": 2
+  },
+  {
+    "tc_street_name": "蛤塘",
+    "count": 2
+  },
+  {
+    "tc_street_name": "衛環里",
+    "count": 2
+  },
+  {
+    "tc_street_name": "門口村第七巷",
+    "count": 2
+  },
+  {
+    "tc_street_name": "門口村第十一巷",
+    "count": 2
+  },
+  {
+    "tc_street_name": "隔田村南滘路",
+    "count": 2
+  },
+  {
+    "tc_street_name": "隔田高街",
+    "count": 2
+  },
+  {
+    "tc_street_name": "馬草壟信義新村Ａ座",
+    "count": 2
+  },
+  {
+    "tc_street_name": "馬草壟信義新村Ｂ座",
+    "count": 2
+  },
+  {
+    "tc_street_name": "馬草壟信義新村Ｃ座",
+    "count": 2
+  },
+  {
+    "tc_street_name": "鳳崗",
+    "count": 2
+  },
+  {
+    "tc_street_name": "䃟頭",
+    "count": 1
+  },
+  {
+    "tc_street_name": "三丫水",
+    "count": 1
+  },
+  {
+    "tc_street_name": "三星道",
+    "count": 1
+  },
+  {
+    "tc_street_name": "三疊潭",
+    "count": 1
+  },
+  {
+    "tc_street_name": "上黃宜凹",
+    "count": 1
+  },
+  {
+    "tc_street_name": "下白牛石",
+    "count": 1
+  },
+  {
+    "tc_street_name": "中心村第七巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "中心村第六巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "井後街",
+    "count": 1
+  },
+  {
+    "tc_street_name": "亞公田",
+    "count": 1
+  },
+  {
+    "tc_street_name": "何東橋",
+    "count": 1
+  },
+  {
+    "tc_street_name": "南慶里",
+    "count": 1
+  },
+  {
+    "tc_street_name": "圍內村第九巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "圍內村第五巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "坑口正街",
+    "count": 1
+  },
+  {
+    "tc_street_name": "塔門",
+    "count": 1
+  },
+  {
+    "tc_street_name": "大元村第三巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "大塘",
+    "count": 1
+  },
+  {
+    "tc_street_name": "大石口",
+    "count": 1
+  },
+  {
+    "tc_street_name": "天后廟",
+    "count": 1
+  },
+  {
+    "tc_street_name": "天平山",
+    "count": 1
+  },
+  {
+    "tc_street_name": "天水圍（一）",
+    "count": 1
+  },
+  {
+    "tc_street_name": "富茂街",
+    "count": 1
+  },
+  {
+    "tc_street_name": "新屋嶺第七巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "東永安路",
+    "count": 1
+  },
+  {
+    "tc_street_name": "榕樹灣",
+    "count": 1
+  },
+  {
+    "tc_street_name": "欖口園",
+    "count": 1
+  },
+  {
+    "tc_street_name": "欖口欖口前",
+    "count": 1
+  },
+  {
+    "tc_street_name": "水渠路",
+    "count": 1
+  },
+  {
+    "tc_street_name": "永寧里",
+    "count": 1
+  },
+  {
+    "tc_street_name": "沙田頭新村二區",
+    "count": 1
+  },
+  {
+    "tc_street_name": "沙螺灣",
+    "count": 1
+  },
+  {
+    "tc_street_name": "沙角尾村八巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "波地",
+    "count": 1
+  },
+  {
+    "tc_street_name": "海港道",
+    "count": 1
+  },
+  {
+    "tc_street_name": "涌海道",
+    "count": 1
+  },
+  {
+    "tc_street_name": "燕崗村第二巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "牛堪排",
+    "count": 1
+  },
+  {
+    "tc_street_name": "環達街",
+    "count": 1
+  },
+  {
+    "tc_street_name": "白山",
+    "count": 1
+  },
+  {
+    "tc_street_name": "白沙澳下洋",
+    "count": 1
+  },
+  {
+    "tc_street_name": "白田第四段",
+    "count": 1
+  },
+  {
+    "tc_street_name": "白鴿坑",
+    "count": 1
+  },
+  {
+    "tc_street_name": "白鶴洲",
+    "count": 1
+  },
+  {
+    "tc_street_name": "百福村道",
+    "count": 1
+  },
+  {
+    "tc_street_name": "石屋仔",
+    "count": 1
+  },
+  {
+    "tc_street_name": "石梨嘉南",
+    "count": 1
+  },
+  {
+    "tc_street_name": "碗窰",
+    "count": 1
+  },
+  {
+    "tc_street_name": "福恒街",
+    "count": 1
+  },
+  {
+    "tc_street_name": "米埔",
+    "count": 1
+  },
+  {
+    "tc_street_name": "索罟灣",
+    "count": 1
+  },
+  {
+    "tc_street_name": "細磡",
+    "count": 1
+  },
+  {
+    "tc_street_name": "興仁村第四巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "花園臺",
+    "count": 1
+  },
+  {
+    "tc_street_name": "草灣",
+    "count": 1
+  },
+  {
+    "tc_street_name": "莆上村第七巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "莆上村第六巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "莆上村第十二巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "菴邊",
+    "count": 1
+  },
+  {
+    "tc_street_name": "蓮塘尾菜園",
+    "count": 1
+  },
+  {
+    "tc_street_name": "蓮澳石屋仔",
+    "count": 1
+  },
+  {
+    "tc_street_name": "藍地交滙處",
+    "count": 1
+  },
+  {
+    "tc_street_name": "蠔涌村三巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "蠔涌村九巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "蠔涌村五巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "蠔涌村八巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "蠔涌村四巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "衛和街",
+    "count": 1
+  },
+  {
+    "tc_street_name": "衛城坊",
+    "count": 1
+  },
+  {
+    "tc_street_name": "貨運道",
+    "count": 1
+  },
+  {
+    "tc_street_name": "起子灣",
+    "count": 1
+  },
+  {
+    "tc_street_name": "金錢第十四巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "銀橋谷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "門仔塘",
+    "count": 1
+  },
+  {
+    "tc_street_name": "門口村第一巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "門口村第三巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "門口村第九巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "門口村第五巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "門口村第六巷",
+    "count": 1
+  },
+  {
+    "tc_street_name": "隔田村第三街",
+    "count": 1
+  },
+  {
+    "tc_street_name": "隔田村第二街",
+    "count": 1
+  },
+  {
+    "tc_street_name": "隔田村第五街",
+    "count": 1
+  },
+  {
+    "tc_street_name": "隔田村第四街",
+    "count": 1
+  },
+  {
+    "tc_street_name": "雞栢嶺",
+    "count": 1
+  },
+  {
+    "tc_street_name": "靈山村第三街",
+    "count": 1
+  },
+  {
+    "tc_street_name": "青山公路凹頭",
+    "count": 1
+  },
+  {
+    "tc_street_name": "飛鵝山莊",
+    "count": 1
+  },
+  {
+    "tc_street_name": "騰龍臺",
+    "count": 1
+  }
+]

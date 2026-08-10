@@ -38,6 +38,7 @@ SUB_DISTRICT_MAP_DATA = SCRIPT_DIR / 'sub_district_map_data.sql'
 IDENTIFY_RESULT_JSON = SCRIPT_DIR / 'missing_street_identify.json'
 STREET_NAMES_JSON = SCRIPT_DIR / 'street_names.json'
 UNOFFICIAL_TC_STREETS_JSON = SCRIPT_DIR / 'unofficial_tc_streets.json'
+UNOFFICIAL_TC_STREETS_CLASSIFIED_JSON = SCRIPT_DIR / 'unofficial_tc_streets_classified.json'
 IDENTIFY_API_URL = 'https://www.map.gov.hk/gs/api/v1.0.0/identify'
 GEODETIC_TRANSFORM_URL = 'https://www.geodetic.gov.hk/transform/v2/'
 IDENTIFY_REQUEST_INTERVAL_SEC = 0.35
@@ -714,15 +715,113 @@ def _load_official_tc_street_keys(path=None):
     return keys
 
 
+def _load_official_tc_street_names(path=None):
+    """street_names.json 官方繁中街名清單（原文）。"""
+    json_path = Path(path or STREET_NAMES_JSON)
+    if not json_path.is_file():
+        return []
+    names = []
+    for row in json.loads(json_path.read_text(encoding='utf-8')):
+        chi = _clean(row.get('chi_street_name'))
+        if chi:
+            names.append(chi)
+    return names
+
+
+# 街／路類型結尾 → 較可能是真街名
+_STREET_TYPE_SUFFIXES = (
+    '交匯處', '迴旋處', '廣場', '大道', '公路', '幹道', '環路', '小路',
+    '村道', '村徑', '村巷', '通道', '隧道',
+    '街', '道', '路', '里', '巷', '徑', '橋', '坊', '園',
+)
+# 地名常見結尾 → 較可能是地方／鄉村名（非街）
+_PLACE_LIKE_SUFFIXES = (
+    '坑', '嶺', '鄉', '塘', '頭', '尾', '地', '圍', '村', '澳', '灣',
+    '山', '田', '埔', '洲', '島', '角', '塱', '滘', '磡', '涌', '壆',
+    '輋', '窰', '窑', '排', '朗', '崗', '家', '市', '仔',
+)
+_STREET_DIR_CHARS = frozenset('中東西南北')
+_STREET_TYPE_AFTER_PLACE = (
+    '路', '街', '道', '徑', '里', '巷', '大道', '公路', '村路', '村道',
+)
+
+
+def _classify_unofficial_tc_street(name: str, official_names: list[str]) -> dict:
+    """粗分非官方 tc_street_name：street_truncated / likely_street / likely_place。
+
+    規則（優先序）:
+    1) 官方名 = 本名前綴 + （－段… 或 單字中/東/西/南/北）
+       → street_truncated（如 青山公路、皇后大道）
+    2) 本身以街類型結尾 → likely_street（如 荔枝路）
+    3) 否則 → likely_place（如 下担水坑、汀角；即使官方有 汀角路）
+    """
+    name = _clean(name) or ''
+    nkey = _normalize_street_key(name) or ''
+    trunc_matches = []
+    place_of_street = []
+
+    for official in official_names:
+        okey = _normalize_street_key(official) or ''
+        if not okey or okey == nkey or not okey.startswith(nkey):
+            continue
+        rest = okey[len(nkey):]
+        # 分段公路：青山公路－荃灣段
+        if rest.startswith('-'):
+            trunc_matches.append(official)
+            continue
+        # 分向大道：皇后大道中／德輔道西（rest 恰為單向字）
+        if len(rest) == 1 and rest in _STREET_DIR_CHARS:
+            trunc_matches.append(official)
+            continue
+        # 本已是街類型，後面再接向／支路：漆咸道北
+        if any(name.endswith(s) for s in _STREET_TYPE_SUFFIXES):
+            if rest and rest[0] in _STREET_DIR_CHARS:
+                trunc_matches.append(official)
+                continue
+        # 地名 + 路／街：汀角→汀角路、大旗嶺→大旗嶺路
+        if any(rest.startswith(_normalize_street_key(s) or s) for s in _STREET_TYPE_AFTER_PLACE):
+            place_of_street.append(official)
+
+    if trunc_matches:
+        return {
+            'class': 'street_truncated',
+            'matched_official': trunc_matches[:10],
+            'matched_official_count': len(trunc_matches),
+        }
+
+    if any(name.endswith(s) for s in _STREET_TYPE_SUFFIXES):
+        return {
+            'class': 'likely_street',
+            'matched_official': [],
+            'matched_official_count': 0,
+        }
+
+    return {
+        'class': 'likely_place',
+        'matched_official': place_of_street[:10],
+        'matched_official_count': len(place_of_street),
+    }
+
+
 def export_tc_streets_not_in_official_list(
-    engine, street_names_path=None, output_path=None,
+    engine, street_names_path=None, output_path=None, classified_path=None,
 ):
-    """列出並匯出 DB 中 tc_street_name 不在 street_names.json 的街名。"""
+    """列出並匯出 DB 中 tc_street_name 不在 street_names.json 的街名。
+
+    street_truncated（官方分段／分向簡稱，如 青山公路）視為官方，不列入。
+    其餘寫入 classified JSON：
+      - likely_street: 有街類型結尾
+      - likely_place: 較像地名／鄉村（下担水坑、汀角）
+    """
     official_path = Path(street_names_path or STREET_NAMES_JSON)
     out_path = Path(output_path or UNOFFICIAL_TC_STREETS_JSON)
+    class_path = Path(classified_path or UNOFFICIAL_TC_STREETS_CLASSIFIED_JSON)
     print('\n🔎 tc_street_name 不在 street_names.json 清單：')
 
-    official_keys = _load_official_tc_street_keys(official_path)
+    official_names = _load_official_tc_street_names(official_path)
+    official_keys = {
+        _normalize_street_key(n) for n in official_names if _normalize_street_key(n)
+    }
     if not official_keys:
         print(f'   ⚠️ 找不到或無法讀取 {official_path.name}')
         return []
@@ -737,33 +836,68 @@ def export_tc_streets_not_in_official_list(
             ORDER BY cnt DESC, tc_street_name
         """)).fetchall()
 
-    missing = [
-        {'tc_street_name': name, 'count': int(cnt)}
-        for name, cnt in rows
-        if _normalize_street_key(name) not in official_keys
-    ]
+    missing = []
+    classified = []
+    truncated_n = 0
+    truncated_rows = 0
+    for name, cnt in rows:
+        if _normalize_street_key(name) in official_keys:
+            continue
+        cls = _classify_unofficial_tc_street(name, official_names)
+        # 官方分段／分向簡稱 → 當官方，不列入非官方清單
+        if cls['class'] == 'street_truncated':
+            truncated_n += 1
+            truncated_rows += int(cnt)
+            continue
+        item = {'tc_street_name': name, 'count': int(cnt)}
+        missing.append(item)
+        classified.append({**item, **cls})
 
     out_path.write_text(
         json.dumps(missing, ensure_ascii=False, indent=2),
         encoding='utf-8',
     )
+    class_path.write_text(
+        json.dumps(classified, ensure_ascii=False, indent=2),
+        encoding='utf-8',
+    )
+
+    if truncated_n:
+        print(
+            f'   ℹ️ 已排除 street_truncated（視為官方）'
+            f'{truncated_n} 種（{truncated_rows} 筆）'
+        )
 
     if not missing:
-        print('   (全部 tc_street_name 都在 street_names.json 內)')
+        print('   (其餘全部視為官方／無待審街名)')
         print(f'   ✅ 已寫入空清單：{out_path}')
+        print(f'   ✅ 已寫入空分類：{class_path}')
         return missing
 
     total_rows = sum(item['count'] for item in missing)
+    by_class = {}
+    for item in classified:
+        by_class.setdefault(item['class'], []).append(item)
+
     print(
-        f'   共 {len(missing)} 種街名不在官方表內'
-        f'（總筆數 {total_rows}）：'
+        f'   共 {len(missing)} 種待審街名'
+        f'（總筆數 {total_rows}）'
     )
-    for item in missing[:20]:
-        print(f"   - {item['tc_street_name']}  ({item['count']})")
-    if len(missing) > 20:
-        print(f'   … 另有 {len(missing) - 20} 種，詳見 {out_path.name}')
+    for cls_name in ('likely_street', 'likely_place'):
+        items = by_class.get(cls_name, [])
+        rows_n = sum(i['count'] for i in items)
+        print(f'   - {cls_name}: {len(items)} 種（{rows_n} 筆）')
+        for item in items[:5]:
+            extra = ''
+            if item.get('matched_official'):
+                extra = f" → {item['matched_official'][0]}"
+            print(f"       · {item['tc_street_name']} ({item['count']}){extra}")
+        if len(items) > 5:
+            print(f'       … 另有 {len(items) - 5} 種')
+
     print(f'   ✅ 已寫入 {out_path}')
-    return missing
+    print(f'   ✅ 已寫入分類 {class_path}')
+    return classified
 
 
 def _strip_chi_street_no(caddress: str | None, street_no: str | None) -> str | None:
@@ -1680,6 +1814,7 @@ def run_sync_and_verify(skip_identify_api: bool = False):
     print("   - sub_district_map  : 分區／小區對照表")
     print(f"   - Identify JSON    : {IDENTIFY_RESULT_JSON.name}")
     print(f"   - 非官方街名清單   : {UNOFFICIAL_TC_STREETS_JSON.name}")
+    print(f"   - 非官方街名分類   : {UNOFFICIAL_TC_STREETS_CLASSIFIED_JSON.name}")
     print("   查詢範例:")
     print("   SELECT a.* FROM Address_FTS f")
     print("   JOIN Address_Flattened a ON a.id = f.id")
