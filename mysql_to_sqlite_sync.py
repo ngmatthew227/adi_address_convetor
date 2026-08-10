@@ -900,6 +900,53 @@ def export_tc_streets_not_in_official_list(
     return classified
 
 
+def clear_unofficial_street_fields(engine, unofficial_items):
+    """非官方街名列：清空 tc/sc/en 的 street_name 與 street_no。
+
+    unofficial_items 應為 export_tc_streets_not_in_official_list 回傳
+    （已排除 street_names.json 內及 street_truncated）。
+    """
+    names = []
+    seen = set()
+    for item in unofficial_items or []:
+        name = _clean(item.get('tc_street_name'))
+        if name and name not in seen:
+            seen.add(name)
+            names.append(name)
+
+    if not names:
+        print('ℹ️ 無需清空非官方 street_name／street_no。')
+        return 0
+
+    updated = 0
+    with engine.begin() as conn:
+        for i in range(0, len(names), 400):
+            batch = names[i:i + 400]
+            params = {f'n{j}': n for j, n in enumerate(batch)}
+            placeholders = ', '.join(f':n{j}' for j in range(len(batch)))
+            result = conn.execute(
+                text(f"""
+                    UPDATE Address_Flattened
+                    SET
+                        tc_street_name = NULL,
+                        tc_street_no = NULL,
+                        sc_street_name = NULL,
+                        sc_street_no = NULL,
+                        en_street_name = NULL,
+                        en_street_no = NULL
+                    WHERE tc_street_name IN ({placeholders})
+                """),
+                params,
+            )
+            updated += result.rowcount or 0
+
+    print(
+        f'✅ 已清空非官方 street_name／street_no：'
+        f'{updated} 筆（{len(names)} 種街名）。'
+    )
+    return updated
+
+
 def _strip_chi_street_no(caddress: str | None, street_no: str | None) -> str | None:
     """從中文地址去掉門牌號，例: 沙頭角公路－龍躍頭段192號 → 沙頭角公路－龍躍頭段。"""
     text = _clean(caddress)
@@ -1804,6 +1851,10 @@ def run_sync_and_verify(skip_identify_api: bool = False):
     apply_identify_json_to_address_table(sqlite_engine, IDENTIFY_RESULT_JSON)
     clear_street_only_building_labels(sqlite_engine)
 
+    # 非官方街名：先匯出清單，再清空 street_name／street_no（street_truncated 除外）
+    unofficial = export_tc_streets_not_in_official_list(sqlite_engine)
+    clear_unofficial_street_fields(sqlite_engine, unofficial)
+
     print("🔍 正在建立 FTS5 虛擬表 Address_FTS...")
     build_fts5_index(sqlite_engine)
 
@@ -1837,7 +1888,6 @@ def run_sync_and_verify(skip_identify_api: bool = False):
             print(f"   - {row[0]}")
 
     print_strange_street_nos(sqlite_engine)
-    export_tc_streets_not_in_official_list(sqlite_engine)
 
     return verified
 
