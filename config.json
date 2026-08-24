@@ -1,0 +1,25 @@
+{
+  "zip_path": "data\\raw\\adi_version\\ADI_MySQL_326.zip",
+  "extract_dir": "data\\raw\\adi_version\\ADI_MySQL_326",
+  "mysql": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "user": "root",
+    "password": "secretP@ssw0rd",
+    "database": "EADI100",
+    "charset": "utf8mb4"
+  },
+  "sqlite": {
+    "path": "data/output/adi_address.sqlite"
+  },
+  "proxy": {
+    "enabled": false,
+    "url": ""
+  },
+  "options": {
+    "extract_zip": true,
+    "run_create_schema": true,
+    "drop_database_first": true,
+    "max_allowed_packet_mb": 64
+  }
+}

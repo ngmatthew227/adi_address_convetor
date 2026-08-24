@@ -152,14 +152,14 @@ def main() -> None:
     parser.add_argument(
         "-i",
         "--input",
-        default="Street_Name_List.md",
-        help="Path to input markdown file (default: Street_Name_List.md)",
+        default="data/raw/Street_Name_List.md",
+        help="Path to input markdown file (default: data/raw/Street_Name_List.md)",
     )
     parser.add_argument(
         "-o",
         "--output",
-        default="street_names.json",
-        help="Path to output JSON file (default: street_names.json)",
+        default="data/reference/street_names.json",
+        help="Path to output JSON file (default: data/reference/street_names.json)",
     )
     parser.add_argument(
         "--pretty",

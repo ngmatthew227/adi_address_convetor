@@ -159,6 +159,12 @@ ENV/
 env.bak/
 venv.bak/
 
+# Generated output (SQLite databases, generated JSON)
+data/output/adi_address.sqlite
+
+# Large raw source archives
+data/raw/adi_version/
+
 # Spyder project settings
 .spyderproject
 .spyproject
