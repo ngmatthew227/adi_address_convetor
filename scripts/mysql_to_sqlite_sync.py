@@ -104,6 +104,7 @@ UNOFFICIAL_TC_STREETS_JSON = OUTPUT_DIR / "unofficial_tc_streets.json"
 UNOFFICIAL_TC_STREETS_CLASSIFIED_JSON = (
     OUTPUT_DIR / "unofficial_tc_streets_classified.json"
 )
+CHARACTERS_TXT = REFERENCE_DIR / "characters.txt"
 IDENTIFY_API_URL = "https://www.map.gov.hk/gs/api/v1.0.0/identify"
 GEODETIC_TRANSFORM_URL = "https://www.geodetic.gov.hk/transform/v2/"
 IDENTIFY_REQUEST_INTERVAL_SEC = 0.35
@@ -202,6 +203,8 @@ OUTPUT_COLUMNS = [
     "en_building_field_label",
     "en_building_field_value",
     "coordinates",
+    "tc_stroke_seq",
+    "sc_stroke_seq",
 ]
 
 _CJK_RE = re.compile(r"([\u4e00-\u9fff])")
@@ -399,6 +402,68 @@ def _to_sc(value):
     return zhconv.convert(text, "zh-cn")
 
 
+# ==========================================
+# Stroke sequence ranking (from generate_stroke_updates.py)
+# ==========================================
+
+def load_stroke_dict(filepath):
+    """Load stroke counts from characters.txt: one 'char <count>' per line."""
+    stroke_dict = {}
+    try:
+        with open(filepath, encoding="utf-8") as f:
+            for line in f:
+                parts = line.strip().split()
+                if len(parts) >= 2:
+                    char = parts[0].strip()
+                    try:
+                        stroke_dict[char] = int(parts[1])
+                    except ValueError:
+                        continue
+    except Exception as e:
+        print(f"Error loading stroke dictionary {filepath}: {e}")
+        return {}
+    return stroke_dict
+
+
+def get_stroke_count(char, stroke_dict):
+    """Stroke count for a character; fall back to its Unicode value if missing."""
+    if char in stroke_dict:
+        return stroke_dict[char]
+    return ord(char)
+
+
+def word_sort_key(word, stroke_dict):
+    """Sort key: group by first char (stroke count + unicode), then remaining strokes/unicodes."""
+    if not word:
+        return ((-1, -1), [], [])
+    strokes = [get_stroke_count(c, stroke_dict) for c in word]
+    unicodes = [ord(c) for c in word]
+    return ((strokes[0], unicodes[0]), strokes[1:], unicodes[1:])
+
+
+def compute_stroke_seq_map(df):
+    """Compute {street_name: rank} from the global stroke sort order (strokes -> unicode)."""
+    stroke_dict = load_stroke_dict(CHARACTERS_TXT)
+    if not stroke_dict:
+        print(
+            f"⚠️ Stroke dictionary not loaded from {CHARACTERS_TXT}; "
+            f"tc_stroke_seq/sc_stroke_seq will be NULL."
+        )
+        return {}
+
+    names = set()
+    for col in ("tc_street_name", "sc_street_name"):
+        for value in df[col].dropna().unique():
+            text = _clean(value)
+            if text:
+                names.add(text)
+
+    sorted_names = sorted(names, key=lambda w: word_sort_key(w, stroke_dict))
+    rank_map = {name: i + 1 for i, name in enumerate(sorted_names)}
+    print(f"✍️ Computed stroke sequence ranks for {len(rank_map)} unique street names.")
+    return rank_map
+
+
 # Based on STREETNAME.CHITYPE / ENGTYPE actual enum: village/array-village type whitelist
 _HK_VILLAGE_TYPES_CHI = frozenset(
     {
@@ -494,6 +559,54 @@ def _is_village(row) -> bool:
     return False
 
 
+# English street-type abbreviations -> full forms (expanded only when the token
+# is a standalone street-type word, e.g. "ALNWICK RD" -> "ALNWICK ROAD").
+# Notes:
+#  - "SECT" (section, e.g. "FAIRVIEW PARK SECT B") is deliberately excluded.
+#  - \b boundaries make sure "ST" does not touch "STAR"/"STREET" and "RD" does
+#    not touch "BLURD"/"ROAD".
+_EN_STREET_TYPE_ABBREV = {
+    "RD": "ROAD",
+    "ST": "STREET",
+    "AVE": "AVENUE",
+    "AV": "AVENUE",
+    "BLVD": "BOULEVARD",
+    "LN": "LANE",
+    "DR": "DRIVE",
+    "CT": "COURT",
+    "PL": "PLACE",
+    "SQ": "SQUARE",
+    "HWY": "HIGHWAY",
+    "PKWY": "PARKWAY",
+    "CIR": "CIRCLE",
+    "TERR": "TERRACE",
+    "CRES": "CRESCENT",
+    "PDE": "PARADE",
+    "GDNS": "GARDENS",
+    "MT": "MOUNT",
+    "JCT": "JUNCTION",
+}
+_EN_STREET_ABBREV_RE = re.compile(
+    r"\b(" + "|".join(_EN_STREET_TYPE_ABBREV.keys()) + r")\b",
+    re.IGNORECASE,
+)
+
+
+def _expand_en_street_abbrev(value: str | None) -> str | None:
+    """Expand English street-type abbreviations, e.g. 'X RD' -> 'X ROAD'.
+
+    Only full standalone tokens are rewritten (word boundaries), so real names
+    like 'STAR', 'STREET', 'GLOUCESTER' are left untouched.
+    """
+    text = _clean(value)
+    if text is None:
+        return None
+    return _EN_STREET_ABBREV_RE.sub(
+        lambda m: _EN_STREET_TYPE_ABBREV[m.group(1).upper()],
+        text,
+    )
+
+
 def _street_display_name_chi(row) -> str | None:
     """Chinese street display name: street name + type (e.g. 坪洋新+村, 彌敦+道); if the type suffix is already present, do not append it again."""
     street = _clean(row.get("Street_Full_Name_Chi"))
@@ -574,7 +687,7 @@ def _build_en_parts(row, en_region, en_district):
     is_village = _is_village(row)
 
     # Always append the type (VILLAGE / ROAD...); villages do not write to the street field
-    display_street = _street_display_name_eng(row)
+    display_street = _expand_en_street_abbrev(_street_display_name_eng(row))
     if is_village:
         out_street = None
         out_street_no = None
@@ -1338,7 +1451,7 @@ def _build_identify_update_row(entry, first_info, street_index):
     if is_street:
         # In the street name table -> fill street_name; building uses cname/ename
         tc_street = matched_chi
-        en_street = matched_eng
+        en_street = _expand_en_street_abbrev(matched_eng)
         out_street_no = street_no
 
         if tc_street and out_street_no:
@@ -1698,6 +1811,11 @@ def transform_to_output_schema(df: pd.DataFrame) -> pd.DataFrame:
     else:
         out.attrs["id_unique"] = True
 
+    # Compute stroke sequence ranks (tc/sc) from the global stroke sort order
+    stroke_seq_map = compute_stroke_seq_map(out)
+    out["tc_stroke_seq"] = out["tc_street_name"].map(stroke_seq_map)
+    out["sc_stroke_seq"] = out["sc_street_name"].map(stroke_seq_map)
+
     return out
 
 
@@ -1762,6 +1880,19 @@ def write_sub_district_map_table(engine):
             if stmt:
                 conn.execute(text(stmt))
 
+        # Read-only usage: add lookup indexes for region / sub-district filters
+        # (getAvailableDistrict, getSubDistrictCoordinates, translateAddressToLang)
+        conn.execute(
+            text(
+                "CREATE INDEX IF NOT EXISTS idx_sdm_region ON sub_district_map(tc_region, sc_region, en_region)"
+            )
+        )
+        conn.execute(
+            text(
+                "CREATE INDEX IF NOT EXISTS idx_sdm_sub_district ON sub_district_map(tc_sub_district, sc_sub_district, en_sub_district)"
+            )
+        )
+
     with engine.connect() as conn:
         n = conn.execute(text("SELECT COUNT(*) FROM sub_district_map")).scalar()
     print(f"✅ sub_district_map written with {n} rows.")
@@ -1802,7 +1933,9 @@ def write_address_table(engine, df: pd.DataFrame):
             en_full_addr TEXT,
             en_building_field_label TEXT,
             en_building_field_value TEXT,
-            coordinates TEXT
+            coordinates TEXT,
+            tc_stroke_seq INTEGER,
+            sc_stroke_seq INTEGER
         )
     """
     with engine.begin() as conn:
@@ -1849,6 +1982,29 @@ def create_address_indexes(engine):
         "CREATE INDEX IF NOT EXISTS idx_af_tc_street_no ON Address_Flattened(tc_street_no)",
         "CREATE INDEX IF NOT EXISTS idx_af_sc_street_no ON Address_Flattened(sc_street_no)",
         "CREATE INDEX IF NOT EXISTS idx_af_en_street_no ON Address_Flattened(en_street_no)",
+        # Street-name dropdown: region + district filter, ordered by stroke_seq (tc/sc) or name (en)
+        "CREATE INDEX IF NOT EXISTS idx_af_tc_streetname_query ON Address_Flattened(tc_region, tc_district, tc_building_field_value, tc_street_name, tc_stroke_seq)",
+        "CREATE INDEX IF NOT EXISTS idx_af_sc_streetname_query ON Address_Flattened(sc_region, sc_district, sc_building_field_value, sc_street_name, sc_stroke_seq)",
+        "CREATE INDEX IF NOT EXISTS idx_af_en_streetname_query ON Address_Flattened(en_region, en_district, en_building_field_value, en_street_name)",
+        # Street-no lookup: region + district + street_name(LIKE) + building + street_no ordering
+        "CREATE INDEX IF NOT EXISTS idx_af_tc_streetno_query ON Address_Flattened(tc_region, tc_district, tc_street_name, tc_building_field_value, tc_street_no)",
+        "CREATE INDEX IF NOT EXISTS idx_af_sc_streetno_query ON Address_Flattened(sc_region, sc_district, sc_street_name, sc_building_field_value, sc_street_no)",
+        "CREATE INDEX IF NOT EXISTS idx_af_en_streetno_query ON Address_Flattened(en_region, en_district, en_street_name, en_building_field_value, en_street_no)",
+        # Building lookup: region + district + street_name + street_no + building value/label ordering
+        "CREATE INDEX IF NOT EXISTS idx_af_tc_building_query ON Address_Flattened(tc_region, tc_district, tc_street_name, tc_street_no, tc_building_field_value, tc_building_field_label)",
+        "CREATE INDEX IF NOT EXISTS idx_af_sc_building_query ON Address_Flattened(sc_region, sc_district, sc_street_name, sc_street_no, sc_building_field_value, sc_building_field_label)",
+        "CREATE INDEX IF NOT EXISTS idx_af_en_building_query ON Address_Flattened(en_region, en_district, en_street_name, en_street_no, en_building_field_value, en_building_field_label)",
+        # Field-unit lookup: region + district + street_name + street_no + building + coordinates
+        "CREATE INDEX IF NOT EXISTS idx_af_tc_fieldunit_query ON Address_Flattened(tc_region, tc_district, tc_street_name, tc_street_no, tc_building_field_value, coordinates)",
+        "CREATE INDEX IF NOT EXISTS idx_af_sc_fieldunit_query ON Address_Flattened(sc_region, sc_district, sc_street_name, sc_street_no, sc_building_field_value, coordinates)",
+        "CREATE INDEX IF NOT EXISTS idx_af_en_fieldunit_query ON Address_Flattened(en_region, en_district, en_street_name, en_street_no, en_building_field_value, coordinates)",
+        # Matched-address API: region + en_district + street/building + ref_csuid ordering
+        "CREATE INDEX IF NOT EXISTS idx_af_match_addr_tc ON Address_Flattened(tc_region, en_district, tc_street_name, tc_building_field_value, ref_csuid)",
+        "CREATE INDEX IF NOT EXISTS idx_af_match_addr_sc ON Address_Flattened(sc_region, en_district, sc_street_name, sc_building_field_value, ref_csuid)",
+        "CREATE INDEX IF NOT EXISTS idx_af_match_addr_en ON Address_Flattened(en_region, en_district, en_street_name, en_building_field_value, ref_csuid)",
+        # Translation OR-predicate helpers (street_name / street_no / building_value across languages)
+        "CREATE INDEX IF NOT EXISTS idx_af_translate_street ON Address_Flattened(tc_street_name, sc_street_name, en_street_name, tc_street_no, sc_street_no, en_street_no)",
+        "CREATE INDEX IF NOT EXISTS idx_af_translate_building ON Address_Flattened(tc_building_field_value, sc_building_field_value, en_building_field_value)",
     ]
 
     with engine.begin() as conn:
